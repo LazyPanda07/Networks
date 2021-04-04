@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <charconv>
 
+#pragma comment (lib, "HTTP.lib")
+#pragma comment (lib, "JSON.lib")
+#pragma comment (lib, "SocketStreams.lib")
+
 using namespace std;
 
 namespace web
