@@ -38,6 +38,6 @@ namespace web
 		/// <exception cref="web::WebException"></exception>
 		int receiveData(std::vector<char>& data) override;
 
-		~HTTPNetwork() = default;
+		virtual ~HTTPNetwork() = default;
 	};
 }
