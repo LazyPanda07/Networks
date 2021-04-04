@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef NETWORKS_DLL
+#define NETWORKS_API __declspec(dllexport)
+#else
+#define NETWORKS_API
+#endif // NETWORKS_DLL
+
 #include "BaseNetwork.h"
 
 namespace web
@@ -7,7 +13,7 @@ namespace web
 	/// <summary>
 	/// Network functions for HTTP
 	/// </summary>
-	class HTTPNetwork : public web::Network
+	class NETWORKS_API HTTPNetwork : public web::Network
 	{
 	public:
 		/// <summary>
