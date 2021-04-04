@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Binaries
+bin/
+
+# VS folder
+.vs/
+
+# .sln file
+Networks.sln
