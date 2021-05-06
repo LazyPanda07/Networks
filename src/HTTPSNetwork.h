@@ -17,14 +17,19 @@ namespace web
 	protected:
 		SSL* ssl;
 		SSL_CTX* context;
+		bool isClientSide;
 
 	public:
 		/// @brief Server side constructor
-		HTTPSNetwork(SOCKET clientSocket);
+		/// @param ssl Result from SSL_new
+		/// @param context Result from SSL_CTX_new
+		/// @exception web::exceptions::SSLException
+		HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context);
 
 		/// @brief Client side constructor
 		/// @param ip Server address
 		/// @param port Server listen socket port
+		/// @exception web::exceptions::SSLException
 		HTTPSNetwork(const std::string& ip, const std::string& port);
 
 		/// @brief Send function for streams::BaseIOSocketStream
