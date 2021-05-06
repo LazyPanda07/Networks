@@ -11,9 +11,8 @@ using namespace std;
 
 namespace web
 {
-	constexpr uint16_t averageHTTPRequestSize = 1500;
-	const string contentLengthHeader = "Content-Length";
-	const string crlfcrlf = "\r\n\r\n";
+	const string HTTPNetwork::contentLengthHeader = "Content-Length";
+	const string HTTPNetwork::crlfcrlf = "\r\n\r\n";
 
 	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
 		Network(clientSocket)

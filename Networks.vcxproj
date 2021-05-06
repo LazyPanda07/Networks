@@ -221,16 +221,20 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProductionRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -383,15 +387,15 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
@@ -401,16 +405,24 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Lib>
+    <CustomBuildStep>
+      <Command>XCOPY $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.dll $(OutDir)</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>output.txt</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -421,7 +433,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -430,9 +442,17 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>
+      </Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <ClCompile>
@@ -443,18 +463,26 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Lib>
+    <CustomBuildStep>
+      <Command>XCOPY $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.dll $(OutDir)</Command>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>output.txt</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ProductionRelease|x64'">
     <ClCompile>
@@ -465,7 +493,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -474,11 +503,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <CustomBuildStep>
-      <Command>COPY /Y $(ProjectDir)src\HTTPNetwork.h $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)src\*.h $(OutDir)
+XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions
+XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
       <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -491,28 +522,37 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)HTTP\src;$(ProjectDir)HTTP\JSON\src;$(ProjectDir)SocketStreams\src;$(ProjectDir)vendor\OpenSSL\include</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
     </Lib>
     <CustomBuildStep>
-      <Command>COPY /Y $(ProjectDir)src\HTTPNetwork.h $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)src\*.h $(OutDir)
+XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions
+XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
       <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Exceptions\SSLException.cpp" />
     <ClCompile Include="src\HTTPNetwork.cpp" />
+    <ClCompile Include="src\HTTPSNetwork.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Exceptions\SSLException.h" />
     <ClInclude Include="src\HTTPNetwork.h" />
+    <ClInclude Include="src\HTTPSNetwork.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="HTTP\HTTP.vcxproj">

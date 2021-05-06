@@ -18,9 +18,21 @@
     <ClCompile Include="src\HTTPNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\HTTPSNetwork.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Exceptions\SSLException.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HTTPNetwork.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HTTPSNetwork.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Exceptions\SSLException.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
