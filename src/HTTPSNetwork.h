@@ -19,12 +19,22 @@ namespace web
 		SSL_CTX* context;
 
 	public:
+		/// @brief Server side constructor
 		HTTPSNetwork(SOCKET clientSocket);
 
+		/// @brief Client side constructor
+		/// @param ip Server address
+		/// @param port Server listen socket port
 		HTTPSNetwork(const std::string& ip, const std::string& port);
 
+		/// @brief Send function for streams::BaseIOSocketStream
+		/// @return Total number of bytes sended
+		/// @exception web::exceptions::SSLException
 		int sendData(const std::vector<char>& data) override;
 
+		/// @brief Specific HTTP receive data function
+		/// @return Total number of bytes received
+		/// @exception web::exceptions::SSLException
 		int receiveData(std::vector<char>& data) override;
 
 		virtual ~HTTPSNetwork();

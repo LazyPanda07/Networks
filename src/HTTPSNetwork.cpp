@@ -10,14 +10,18 @@ using namespace std;
 namespace web
 {
 	HTTPSNetwork::HTTPSNetwork(SOCKET clientSocket) :
-		HTTPNetwork(clientSocket),
-		ssl(nullptr),
-		context(nullptr)
+		HTTPNetwork(clientSocket)
 	{
 		SSL_library_init();
 		SSL_load_error_strings();
 
+		context = SSL_CTX_new(TLS_client_method());
 
+		ssl = SSL_new(context);
+
+		SSL_set_fd(ssl, clientSocket);
+
+		SSL_connect(ssl);
 	}
 
 	HTTPSNetwork::HTTPSNetwork(const string& ip, const string& port) :
