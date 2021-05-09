@@ -74,7 +74,7 @@ namespace web
 
 	int HTTPSNetwork::receiveData(vector<char>& data)
 	{
-		data.resize(1500);
+		data.resize(averageHTTPRequestSize);
 		int totalSize = 0;
 		int lastPacket = 0;
 		int bodySize = -1;
