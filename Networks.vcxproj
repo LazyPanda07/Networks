@@ -216,6 +216,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -227,8 +228,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin\int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <CustomBuildAfterTargets>
-    </CustomBuildAfterTargets>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -397,6 +397,10 @@
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <CustomBuildStep>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+      <Outputs>output.txt</Outputs>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDLL|x64'">
     <ClCompile>
@@ -418,7 +422,7 @@
       </AdditionalDependencies>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.dll $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>output.txt</Outputs>
@@ -446,12 +450,10 @@
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
     <CustomBuildStep>
-      <Command>
-      </Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
-      <Outputs>
-      </Outputs>
+      <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDLL|x64'">
@@ -478,7 +480,7 @@
       </AdditionalDependencies>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.dll $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>output.txt</Outputs>
