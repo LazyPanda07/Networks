@@ -60,9 +60,23 @@ namespace web
 		{
 			lastSend = SSL_write(ssl, data.data() + totalSent, count - totalSent);
 
-			if (lastSend <= 0)
+			if (!lastSend)
 			{
-				throw exceptions::SSLException();
+				throw exceptions::WebException();
+			}
+
+			if (lastSend < 0)
+			{
+				lastSend = SSL_get_error(ssl, lastSend);
+
+				if (lastSend == SSL_ERROR_WANT_WRITE || lastSend == SSL_ERROR_WANT_READ)
+				{
+					break;
+				}
+				else
+				{
+					throw exceptions::SSLException();
+				}
 			}
 
 			totalSent += lastSend;
@@ -89,9 +103,23 @@ namespace web
 
 			lastPacket = SSL_read(ssl, data.data() + totalSize, data.size() - totalSize);
 
-			if (lastPacket <= 0)
+			if (!lastPacket)
 			{
-				throw exceptions::SSLException();
+				throw exceptions::WebException();
+			}
+
+			if (lastPacket < 0)
+			{
+				lastPacket = SSL_get_error(ssl, lastPacket);
+
+				if (lastPacket == SSL_ERROR_WANT_WRITE || lastPacket == SSL_ERROR_WANT_READ)
+				{
+					break;
+				}
+				else
+				{
+					throw exceptions::SSLException();
+				}
 			}
 
 			totalSize += lastPacket;

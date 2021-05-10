@@ -32,7 +32,7 @@ namespace web
 		{
 			return Network::sendBytes(data.data(), data.size());
 		}
-		catch (const WebException&)
+		catch (const exceptions::WebException&)
 		{
 			return -1;
 		}
@@ -57,7 +57,7 @@ namespace web
 
 			if (lastPacket == SOCKET_ERROR || !lastPacket)
 			{
-				throw WebException();
+				throw exceptions::WebException();
 			}
 
 			totalSize += lastPacket;
