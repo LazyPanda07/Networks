@@ -39,7 +39,7 @@ namespace web
 			throw exceptions::SSLException();
 		}
 
-		if (!SSL_set_fd(ssl, clientSocket))
+		if (!SSL_set_fd(ssl, static_cast<int>(clientSocket)))
 		{
 			throw exceptions::SSLException();
 		}
@@ -54,7 +54,7 @@ namespace web
 	{
 		int lastSend = 0;
 		int totalSent = 0;
-		int count = data.size();
+		int count = static_cast<int>(data.size());
 
 		do
 		{
@@ -87,7 +87,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = SSL_read(ssl, data.data() + totalSize, data.size() - totalSize);
+			lastPacket = SSL_read(ssl, data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
 
 			if (lastPacket <= 0)
 			{

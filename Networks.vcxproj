@@ -396,6 +396,7 @@
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
       <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
@@ -416,6 +417,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Lib>
       <AdditionalDependencies>
@@ -448,6 +450,7 @@
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
       <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
@@ -474,6 +477,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Lib>
       <AdditionalDependencies>
@@ -507,6 +511,7 @@
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
       <Command>XCOPY /Y $(ProjectDir)src\*.h $(OutDir)
@@ -534,6 +539,7 @@ XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)<
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Lib>
       <AdditionalDependencies>

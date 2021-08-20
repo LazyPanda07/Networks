@@ -30,7 +30,7 @@ namespace web
 	{
 		try
 		{
-			return Network::sendBytes(data.data(), data.size());
+			return Network::sendBytes(data.data(), static_cast<int>(data.size()));
 		}
 		catch (const exceptions::WebException&)
 		{
@@ -53,7 +53,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = recv(Network::clientSocket, data.data() + totalSize, data.size() - totalSize, NULL);
+			lastPacket = recv(Network::clientSocket, data.data() + totalSize, static_cast<int>(data.size()) - totalSize, NULL);
 
 			if (lastPacket == SOCKET_ERROR || !lastPacket)
 			{
