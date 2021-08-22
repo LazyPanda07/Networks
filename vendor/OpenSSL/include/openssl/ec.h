@@ -84,6 +84,8 @@ typedef enum {
     POINT_CONVERSION_HYBRID = 6
 } point_conversion_form_t;
 
+const char *OSSL_EC_curve_nid2name(int nid);
+
 # ifndef OPENSSL_NO_EC
 #  include <openssl/asn1.h>
 #  include <openssl/symhacks.h>
@@ -1072,7 +1074,7 @@ OSSL_DEPRECATEDIN_3_0 void EC_KEY_set_conv_form(EC_KEY *eckey,
                                                 point_conversion_form_t cform);
 #  endif /*OPENSSL_NO_DEPRECATED_3_0 */
 
-# define EC_KEY_get_ex_new_index(l, p, newf, dupf, freef) \
+#  define EC_KEY_get_ex_new_index(l, p, newf, dupf, freef) \
     CRYPTO_get_ex_new_index(CRYPTO_EX_INDEX_EC_KEY, l, p, newf, dupf, freef)
 
 #  ifndef OPENSSL_NO_DEPRECATED_3_0
@@ -1345,8 +1347,8 @@ const BIGNUM *ECDSA_SIG_get0_s(const ECDSA_SIG *sig);
 
 /** Setter for r and s fields of ECDSA_SIG
  *  \param  sig  pointer to ECDSA_SIG structure
- *  \param  r    pointer to BIGNUM for r (may be NULL)
- *  \param  s    pointer to BIGNUM for s (may be NULL)
+ *  \param  r    pointer to BIGNUM for r
+ *  \param  s    pointer to BIGNUM for s
  */
 int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s);
 
@@ -1544,6 +1546,8 @@ OSSL_DEPRECATEDIN_3_0 void EC_KEY_METHOD_get_verify
                                            EC_KEY *eckey));
 #  endif /* OPENSSL_NO_DEPRECATED_3_0 */
 
+#  define EVP_EC_gen(curve) \
+    EVP_PKEY_Q_keygen(NULL, NULL, "EC", (char *)(strstr(curve, "")))
 #  define ECParameters_dup(x) ASN1_dup_of(EC_KEY, i2d_ECParameters, \
                                           d2i_ECParameters, x)
 
