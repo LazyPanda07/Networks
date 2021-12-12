@@ -21,17 +21,13 @@ namespace web
 		static const std::string crlfcrlf;
 
 	public:
-		/// <summary>
-		/// Server side constructor
-		/// </summary>
-		/// <param name="clientSocket">socket from WSA accept function</param>
+		/// @brief Server side constructor
+		/// @param clientSocket Socket from WSA accept function
 		HTTPNetwork(SOCKET clientSocket);
 
-		/// <summary>
-		/// Client side constructor
-		/// </summary>
-		/// <param name="ip">server address</param>
-		/// <param name="port">server listen socket port</param>
+		/// @brief Client side constructor
+		/// @param ip Remote address to connect to
+		/// @param port Remote port to connect to
 		HTTPNetwork(const std::string& ip, const std::string& port);
 
 		/// <summary>

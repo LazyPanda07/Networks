@@ -27,10 +27,10 @@ namespace web
 		HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context);
 
 		/// @brief Client side constructor
-		/// @param ip Server address
-		/// @param port Server listen socket port
+		/// @param ip Remote address to connect to
+		/// @param port Remote port to connect to
 		/// @exception web::exceptions::SSLException
-		HTTPSNetwork(const std::string& ip, const std::string& port);
+		HTTPSNetwork(const std::string& ip, const std::string& port, const std::string& hostName = "");
 
 		/// @brief Send function for streams::BaseIOSocketStream
 		/// @return Total number of bytes sended

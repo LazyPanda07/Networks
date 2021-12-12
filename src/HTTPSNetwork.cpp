@@ -18,7 +18,7 @@ namespace web
 		
 	}
 
-	HTTPSNetwork::HTTPSNetwork(const string& ip, const string& port) :
+	HTTPSNetwork::HTTPSNetwork(const string& ip, const string& port, const string& hostName) :
 		HTTPNetwork(ip, port),
 		isClientSide(true)
 	{
@@ -43,6 +43,8 @@ namespace web
 		{
 			throw exceptions::SSLException();
 		}
+
+		SSL_set_tlsext_host_name(ssl, (hostName.empty() ? ip.data() : hostName.data()));
 
 		if (SSL_connect(ssl) != 1)
 		{
