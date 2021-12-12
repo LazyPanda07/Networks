@@ -11,8 +11,10 @@ using namespace std;
 
 namespace web
 {
-	const string HTTPNetwork::contentLengthHeader = "Content-Length";
-	const string HTTPNetwork::crlfcrlf = "\r\n\r\n";
+	int HTTPNetwork::receiveDataMethod(char* data, int len)
+	{
+		return recv(clientSocket, data, len, NULL);
+	}
 
 	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
 		Network(clientSocket)
@@ -53,7 +55,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = recv(Network::clientSocket, data.data() + totalSize, static_cast<int>(data.size()) - totalSize, NULL);
+			lastPacket = this->receiveDataMethod(data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
 
 			if (lastPacket == SOCKET_ERROR || !lastPacket)
 			{

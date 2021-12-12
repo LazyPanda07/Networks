@@ -17,8 +17,11 @@ namespace web
 	{
 	protected:
 		static constexpr uint16_t averageHTTPRequestSize = 1500;
-		static const std::string contentLengthHeader;
-		static const std::string crlfcrlf;
+		static constexpr std::string_view contentLengthHeader = "Content-Length";
+		static constexpr std::string_view crlfcrlf = "\r\n\r\n";
+
+	protected:
+		virtual int receiveDataMethod(char* data, int len);
 
 	public:
 		/// @brief Server side constructor

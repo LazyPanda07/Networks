@@ -19,6 +19,9 @@ namespace web
 		SSL_CTX* context;
 		bool isClientSide;
 
+	protected:
+		virtual int receiveDataMethod(char* data, int len) override;
+
 	public:
 		/// @brief Server side constructor
 		/// @param ssl Result from SSL_new
@@ -36,11 +39,6 @@ namespace web
 		/// @return Total number of bytes sended
 		/// @exception web::exceptions::SSLException
 		int sendData(const std::vector<char>& data) override;
-
-		/// @brief Specific HTTP receive data function
-		/// @return Total number of bytes received
-		/// @exception web::exceptions::SSLException
-		int receiveData(std::vector<char>& data) override;
 
 		virtual ~HTTPSNetwork();
 	};
