@@ -9,6 +9,12 @@
 
 using namespace std;
 
+static bool insensetiveSearching(char first, char second);
+
+static bool endsWith(string_view test, string_view suffix);
+
+static string_view getHeaderValue(string_view::const_iterator startHeader, size_t headerSize, string_view http);
+
 namespace web
 {
 	int HTTPNetwork::receiveDataMethod(char* data, int len)
@@ -47,10 +53,11 @@ namespace web
 		int lastPacket = 0;
 		int bodySize = -1;
 		bool isFindEnd = false;
+		bool chunked = false;
 
 		while (!isFindEnd)
 		{
-			if (totalSize >= data.size() - 100)
+			if (totalSize >= data.size() - thresholdSize)
 			{
 				data.resize(data.size() * 2);
 			}
@@ -63,38 +70,65 @@ namespace web
 			}
 
 			totalSize += lastPacket;
+			string_view http(data.data(), totalSize);
 
-			string_view findHeader(data.data(), totalSize);
-			string_view::const_iterator contentLength = search
-			(
-				findHeader.begin(), findHeader.end(), contentLengthHeader.begin(), contentLengthHeader.end(),
-				[](const char& first, const char& second)
-				{
-					return tolower(first) == tolower(second);
-				}
-			);
-
-			if (contentLength == findHeader.end())
+			if (bodySize == -1 && !chunked)
 			{
-				isFindEnd = findHeader.find(crlfcrlf) != string_view::npos;
-			}
-			else
-			{
-				size_t endOfHTTP = findHeader.find(crlfcrlf);
+				string_view::const_iterator contentLength = search
+				(
+					http.begin(), http.end(),
+					contentLengthHeader.begin(), contentLengthHeader.end(),
+					insensetiveSearching
+				);
 
-				if (bodySize == -1)
+				if (contentLength != http.end())
 				{
-					size_t contentLengthHeaderPosition = distance(findHeader.begin(), contentLength) + contentLengthHeader.size() + 2;
-					string_view contentLengthValue = findHeader.substr(contentLengthHeaderPosition, findHeader.find("\r\n", distance(findHeader.begin(), contentLength)) - contentLengthHeaderPosition);
+					string_view contentLengthValue = getHeaderValue(contentLength, contentLengthHeader.size(), http);
 
 					from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
 
-					data.resize(data.size() + bodySize);
+					if (static_cast<size_t>(totalSize + bodySize) > data.size())
+					{
+						data.resize(static_cast<size_t>(totalSize + bodySize));
+					}
 				}
-
-				if (endOfHTTP != string_view::npos)
+				else
 				{
-					isFindEnd = findHeader.size() == (endOfHTTP + crlfcrlf.size() + bodySize);
+					string_view::const_iterator transferEncoding = search
+					(
+						http.begin(), http.end(),
+						transferEncodingHeader.begin(), transferEncodingHeader.end(),
+						insensetiveSearching
+					);
+
+					if (transferEncoding != http.end())
+					{
+						string_view transferEncodingValue = getHeaderValue(transferEncoding, transferEncodingHeader.size(), http);
+
+						chunked = equal
+						(
+							transferEncodingValue.begin(), transferEncodingValue.end(),
+							transferEncodingChunked.begin(), transferEncodingChunked.end(),
+							insensetiveSearching
+						);
+					}
+				}
+			}
+
+			if (endsWith(http, crlfcrlf))
+			{
+				if (chunked)
+				{
+					isFindEnd = endsWith(http, "0"s.append(crlfcrlf));
+				}
+				else if (bodySize != -1)
+				{
+					isFindEnd = (bodySize > 0 && http.find(crlfcrlf) != http.rfind(crlfcrlf)) ||
+						(!bodySize && http.find(crlfcrlf) != string_view::npos);
+				}
+				else
+				{
+					isFindEnd = http.find(crlfcrlf) != string_view::npos;
 				}
 			}
 		}
@@ -103,4 +137,23 @@ namespace web
 
 		return totalSize;
 	}
+}
+
+bool insensetiveSearching(char first, char second)
+{
+	return tolower(first) == tolower(second);
+}
+
+bool endsWith(string_view test, string_view suffix)
+{
+	return test.size() >= suffix.size() &&
+		test.compare(test.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
+string_view getHeaderValue(string_view::const_iterator startHeader, size_t headerSize, string_view http)
+{
+	size_t headerValuePosition = distance(http.begin(), startHeader) + headerSize + web::HTTPNetwork::crlf.size();
+	size_t valueSize = http.find(web::HTTPNetwork::crlf, distance(http.begin(), startHeader)) - headerValuePosition;
+
+	return http.substr(headerValuePosition, valueSize);
 }

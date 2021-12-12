@@ -15,10 +15,14 @@ namespace web
 	/// </summary>
 	class NETWORKS_API HTTPNetwork : public web::Network
 	{
-	protected:
+	public:
 		static constexpr uint16_t averageHTTPRequestSize = 1500;
+		static constexpr uint16_t thresholdSize = 100;
 		static constexpr std::string_view contentLengthHeader = "Content-Length";
+		static constexpr std::string_view transferEncodingHeader = "Transfer-Encoding";
+		static constexpr std::string_view transferEncodingChunked = "Chunked";
 		static constexpr std::string_view crlfcrlf = "\r\n\r\n";
+		static constexpr std::string_view crlf = "\r\n";
 
 	protected:
 		virtual int receiveDataMethod(char* data, int len);
