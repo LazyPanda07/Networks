@@ -40,8 +40,10 @@ namespace web
 		{
 			return Network::sendBytes(data.data(), static_cast<int>(data.size()));
 		}
-		catch (const exceptions::WebException&)
+		catch (const exceptions::WebException& e)
 		{
+			this->log(e.what());
+
 			return -1;
 		}
 	}
