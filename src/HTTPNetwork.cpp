@@ -117,6 +117,16 @@ namespace web
 				}
 			}
 
+			if (bodySize != -1)
+			{
+				size_t position = http.find(crlfcrlf);
+
+				if (position != string_view::npos)
+				{
+					isFindEnd = string_view(http.data() + position).size() == bodySize + crlfcrlf.size();
+				}
+			}
+
 			if (endsWith(http, crlfcrlf))
 			{
 				if (chunked)
