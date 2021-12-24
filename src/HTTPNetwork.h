@@ -24,6 +24,8 @@ namespace web
 		static constexpr std::string_view crlfcrlf = "\r\n\r\n";
 		static constexpr std::string_view crlf = "\r\n";
 
+		static inline const std::string httpPort = "80";
+
 	protected:
 		virtual int receiveDataMethod(char* data, int len);
 
@@ -35,7 +37,7 @@ namespace web
 		/// @brief Client side constructor
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
-		HTTPNetwork(const std::string& ip, const std::string& port);
+		HTTPNetwork(const std::string& ip, const std::string& port = httpPort);
 
 		/// <summary>
 		/// Default send function
