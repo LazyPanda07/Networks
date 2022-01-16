@@ -9,9 +9,9 @@ using namespace std;
 
 namespace web
 {
-	int HTTPSNetwork::receiveDataMethod(char* data, int len)
+	int HTTPSNetwork::receiveDataMethod(char* data, int length)
 	{
-		return SSL_read(ssl, data, len);
+		return SSL_read(ssl, data, length);
 	}
 
 	HTTPSNetwork::HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context) :

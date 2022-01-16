@@ -23,7 +23,7 @@ namespace web
 		bool isClientSide;
 
 	protected:
-		virtual int receiveDataMethod(char* data, int len) override;
+		virtual int receiveDataMethod(char* data, int length) override;
 
 	public:
 		/// @brief Server side constructor

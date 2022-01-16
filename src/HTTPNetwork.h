@@ -27,7 +27,7 @@ namespace web
 		static inline const std::string httpPort = "80";
 
 	protected:
-		virtual int receiveDataMethod(char* data, int len);
+		virtual int receiveDataMethod(char* data, int length);
 
 	public:
 		/// @brief Server side constructor

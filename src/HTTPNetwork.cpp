@@ -17,9 +17,9 @@ static string_view getHeaderValue(string_view::const_iterator startHeader, size_
 
 namespace web
 {
-	int HTTPNetwork::receiveDataMethod(char* data, int len)
+	int HTTPNetwork::receiveDataMethod(char* data, int length)
 	{
-		return recv(clientSocket, data, len, NULL);
+		return recv(clientSocket, data, length, NULL);
 	}
 
 	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
