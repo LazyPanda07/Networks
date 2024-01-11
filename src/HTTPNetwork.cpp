@@ -92,6 +92,8 @@ namespace web
 					if (static_cast<size_t>(totalSize + bodySize) > data.size())
 					{
 						data.resize(static_cast<size_t>(totalSize + bodySize));
+
+						http = string_view(data.data(), totalSize);
 					}
 				}
 				else
