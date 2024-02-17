@@ -37,9 +37,6 @@ bin/
 # VS folder
 .vs/
 
-# .sln file
-Networks.sln
-
 # OpenSSL libs and dlls
 !libcrypto.lib
 !libssl.lib

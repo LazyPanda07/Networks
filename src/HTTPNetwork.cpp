@@ -3,10 +3,6 @@
 #include <algorithm>
 #include <charconv>
 
-#pragma comment (lib, "HTTP.lib")
-#pragma comment (lib, "JSON.lib")
-#pragma comment (lib, "SocketStreams.lib")
-
 using namespace std;
 
 static bool insensetiveSearching(char first, char second);
@@ -50,12 +46,16 @@ namespace web
 
 	int HTTPNetwork::receiveData(vector<char>& data)
 	{
-		data.resize(averageHTTPRequestSize);
 		int totalSize = 0;
 		int lastPacket = 0;
 		int bodySize = -1;
 		bool isFindEnd = false;
 		bool chunked = false;
+
+		if (data.size() < averageHTTPRequestSize)
+		{
+			data.resize(averageHTTPRequestSize);
+		}
 
 		while (!isFindEnd)
 		{

@@ -4,12 +4,6 @@
 
 #include "HTTPNetwork.h"
 
-#ifdef NETWORKS_DLL
-#define NETWORKS_API __declspec(dllexport)
-#else
-#define NETWORKS_API
-#endif // NETWORKS_DLL
-
 namespace web
 {
 	class NETWORKS_API HTTPSNetwork : public HTTPNetwork
