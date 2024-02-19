@@ -149,11 +149,11 @@
     </Link>
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
       <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -169,7 +169,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -178,7 +178,7 @@
       </AdditionalDependencies>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>output.txt</Outputs>
@@ -203,11 +203,11 @@
     </Link>
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>output.txt</Outputs>
@@ -229,7 +229,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -238,7 +238,7 @@
       </AdditionalDependencies>
     </Lib>
     <CustomBuildStep>
-      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+      <Command>XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
     </CustomBuildStep>
     <CustomBuildStep>
       <Outputs>output.txt</Outputs>
@@ -264,13 +264,13 @@
     </Link>
     <Lib>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <CustomBuildStep>
       <Command>XCOPY /Y $(ProjectDir)src\*.h $(OutDir)
 XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions
-XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
       <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
@@ -291,7 +291,7 @@ XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)<
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libssl.lib;libcrypto.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -302,7 +302,7 @@ XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)<
     <CustomBuildStep>
       <Command>XCOPY /Y $(ProjectDir)src\*.h $(OutDir)
 XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions
-XCOPY /Y $(ProjectDir)vendor\OpenSSL\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
+XCOPY /Y $(ProjectDir)vendor\OpenSSL\Windows\$(Configuration)-$(Platform)\*.* $(OutDir)</Command>
       <Outputs>output.txt</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
