@@ -35,7 +35,7 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure --prefix=install-dir/OpenSSL
+          ./Configure --prefix=$(pwd)/install-dir/OpenSSL
           make install
 
     - name: Directory
