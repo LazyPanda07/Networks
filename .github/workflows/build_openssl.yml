@@ -29,5 +29,14 @@ jobs:
         ref: master
         submodules: recursive
 
+    - name: Install Perl
+      run: sudo apt install -y perl
+
+    - name: Build
+      run: |
+          mkdir -p install-dir/OpenSSL
+          ./Configure --prefix install-dir/OpenSSL
+          make install
+
     - name: Directory
       run: ls
