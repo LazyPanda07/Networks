@@ -1,0 +1,33 @@
+name: OpenSSL
+
+
+on: workflow_dispatch
+
+
+jobs:
+  windows-build:
+    runs-on: windows-latests
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: openssl/openssl
+        ref: master
+        submodules: recursive
+
+    - name: Directory
+      run: dir
+
+    
+  linux-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        repository: openssl/openssl
+        ref: master
+        submodules: recursive
+
+    - name: Directory
+      run: ls
