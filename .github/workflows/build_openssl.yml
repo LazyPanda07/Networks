@@ -18,13 +18,23 @@ jobs:
         ref: master
         submodules: recursive
 
+    - name: Enable NMake
+      uses: ilammy/msvc-dev-cmd@v1.13.0
+            
     - name: Build
       run: |
-          perl Configure --prefix="$(pwd)/install-dir/OpenSSL"
+          set CL=/MP
+          perl Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL
           nmake install
 
     - name: Directory
-      run: dir "$(pwd)/install-dir/OpenSSL"
+      run: dir ${{ github.workspace }}/install-dir/OpenSSL
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact
+      with:
+        name: OpenSSL_Windows
+        path: ${{ github.workspace }}/install-dir/OpenSSL
 
     
   linux-build:
@@ -40,8 +50,14 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure --prefix=$(pwd)/install-dir/OpenSSL
-          make install
+          ./Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          make install -j $(nproc)
 
     - name: Directory
-      run: ls $(pwd)/install-dir/OpenSSL
+      run: ls ${{ github.workspace }}/install-dir/OpenSSL
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact
+      with:
+        name: OpenSSL_Linux
+        path: ${{ github.workspace }}/install-dir/OpenSSL
