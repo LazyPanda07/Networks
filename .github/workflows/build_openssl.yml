@@ -9,7 +9,7 @@ on:
 
 jobs:
   windows-build:
-    runs-on: windows-latests
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
