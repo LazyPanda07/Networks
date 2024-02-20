@@ -23,9 +23,9 @@ jobs:
             
     - name: Build
       run: |
-          set CL=/MP
           mkdir ${{ github.workspace }}\install-dir\OpenSSL
           perl Configure --prefix=${{ github.workspace }}\install-dir\OpenSSL
+          nmake
           nmake install
 
     - name: Directory
@@ -52,7 +52,7 @@ jobs:
       run: |
           mkdir -p install-dir/OpenSSL
           ./Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL
-          make install -j $(nproc)
+          make install
 
     - name: Directory
       run: ls ${{ github.workspace }}/install-dir/OpenSSL
