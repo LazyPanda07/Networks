@@ -22,10 +22,10 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1.13.0
             
     - name: Build
+      shell: cmd
       run: |
           mkdir ${{ github.workspace }}\install-dir\OpenSSL
-          perl Configure --prefix=${{ github.workspace }}\install-dir\OpenSSL
-          nmake
+          perl Configure --prefix=${{ github.workspace }}\install-dir\OpenSSL --no-shared
           nmake install
 
     - name: Directory
@@ -51,7 +51,7 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          ./Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL --no-shared
           make install
 
     - name: Directory
