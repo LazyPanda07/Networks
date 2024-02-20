@@ -1,7 +1,10 @@
 name: OpenSSL
 
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
 
 
 jobs:
@@ -15,8 +18,13 @@ jobs:
         ref: master
         submodules: recursive
 
+    - name: Build
+      run: |
+          perl Configure --prefix="$(pwd)/install-dir/OpenSSL"
+          nmake install
+
     - name: Directory
-      run: dir
+      run: dir "$(pwd)/install-dir/OpenSSL"
 
     
   linux-build:
@@ -28,10 +36,7 @@ jobs:
         repository: openssl/openssl
         ref: master
         submodules: recursive
-
-    - name: Install Perl
-      run: sudo apt install -y perl
-
+        
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
@@ -39,4 +44,4 @@ jobs:
           make install
 
     - name: Directory
-      run: ls
+      run: ls $(pwd)/install-dir/OpenSSL
