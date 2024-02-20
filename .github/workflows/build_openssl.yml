@@ -24,11 +24,12 @@ jobs:
     - name: Build
       run: |
           set CL=/MP
-          perl Configure --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          mkdir ${{ github.workspace }}\install-dir\OpenSSL
+          perl Configure --prefix=${{ github.workspace }}\install-dir\OpenSSL
           nmake install
 
     - name: Directory
-      run: dir ${{ github.workspace }}/install-dir/OpenSSL
+      run: dir ${{ github.workspace }}\install-dir\OpenSSL
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
