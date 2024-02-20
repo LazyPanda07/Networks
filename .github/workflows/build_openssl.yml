@@ -31,7 +31,7 @@ jobs:
       run: dir ${{ github.workspace }}/install-dir/OpenSSL
 
     - name: Upload artifacts
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Windows
         path: ${{ github.workspace }}/install-dir/OpenSSL
@@ -57,7 +57,7 @@ jobs:
       run: ls ${{ github.workspace }}/install-dir/OpenSSL
 
     - name: Upload artifacts
-      uses: actions/upload-artifact
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Linux
         path: ${{ github.workspace }}/install-dir/OpenSSL
