@@ -14,11 +14,10 @@ jobs:
       with:
         repository: openssl/openssl
         latest: true
-        tarBall: false
         zipBall: true
         extract: true
-        out-file-path: "."
-
+        tarBall: false
+        
     - name: Directory
       run: dir
         
@@ -53,11 +52,13 @@ jobs:
       with:
         repository: openssl/openssl
         latest: true
-        tarBall: false
         zipBall: true
         extract: true
-        out-file-path: "."
-        
+        tarBall: false
+
+    - name: Directory
+      run: ls
+      
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
