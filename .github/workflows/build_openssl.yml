@@ -1,10 +1,7 @@
 name: OpenSSL
 
 
-on:
-  push:
-    branches: [dev]
-  workflow_dispatch:
+on: workflow_dispatch
 
 
 jobs:
@@ -12,12 +9,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Download latest OpenSSL
+      uses: robinraju/release-downloader@v1.8
       with:
         repository: openssl/openssl
-        ref: master
-        submodules: recursive
-
+        latest: true
+        tarBall: false
+        zipBall: true
+        extract: true
+        
     - name: Enable NMake
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
@@ -44,11 +44,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Download latest OpenSSL
+      uses: robinraju/release-downloader@v1.8
       with:
         repository: openssl/openssl
-        ref: master
-        submodules: recursive
+        latest: true
+        tarBall: false
+        zipBall: true
+        extract: true
         
     - name: Build
       run: |
