@@ -1,10 +1,7 @@
 name: OpenSSL
 
 
-on: 
-  push:
-    branches: [dev]
-  workflow_dispatch:
+on: workflow_dispatch
 
 
 jobs:
@@ -21,8 +18,12 @@ jobs:
         zipBall: false
         tarBall: false
         
-    - name: Directory
-      run: dir
+    - name: Prepare
+      shell: bash
+      run: |
+          rm -f * || true
+          cd */
+          mv * ../
         
     - name: Enable NMake
       uses: ilammy/msvc-dev-cmd@v1.13.0
@@ -59,7 +60,7 @@ jobs:
         zipBall: false
         tarBall: false
 
-    - name: Remove files
+    - name: Prepare
       run: |
           rm -f * || true
           cd */
