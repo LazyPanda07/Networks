@@ -17,6 +17,7 @@ jobs:
         tarBall: false
         zipBall: true
         extract: true
+        out-file-path: "."
 
     - name: Directory
       run: dir
@@ -55,6 +56,7 @@ jobs:
         tarBall: false
         zipBall: true
         extract: true
+        out-file-path: "."
         
     - name: Build
       run: |
