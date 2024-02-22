@@ -60,11 +60,11 @@ jobs:
         tarBall: false
 
     - name: Remove files
-      run: rm -f * || true
-
-    - name: Directory
-      run: ls
-      
+      run: |
+          rm -f * || true
+          cd */
+          mv * ../
+          
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
