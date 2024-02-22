@@ -10,13 +10,16 @@ jobs:
 
     steps:
     - name: Download latest OpenSSL
-      uses: robinraju/release-downloader@v1.8
+      uses: robinraju/release-downloader@v1.9
       with:
         repository: openssl/openssl
         latest: true
         tarBall: false
         zipBall: true
         extract: true
+
+    - name: Directory
+      run: dir
         
     - name: Enable NMake
       uses: ilammy/msvc-dev-cmd@v1.13.0
@@ -45,7 +48,7 @@ jobs:
 
     steps:
     - name: Download latest OpenSSL
-      uses: robinraju/release-downloader@v1.8
+      uses: robinraju/release-downloader@v1.9
       with:
         repository: openssl/openssl
         latest: true
