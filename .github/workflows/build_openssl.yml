@@ -1,7 +1,10 @@
 name: OpenSSL
 
 
-on: workflow_dispatch
+on: 
+  push:
+    branches: [dev]
+  workflow_dispatch:
 
 
 jobs:
@@ -57,7 +60,7 @@ jobs:
         tarBall: false
 
     - name: Remove files
-      run: rm -rf *.*
+      run: rm -f *
 
     - name: Directory
       run: ls
