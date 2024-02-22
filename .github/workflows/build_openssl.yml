@@ -56,6 +56,9 @@ jobs:
         zipBall: false
         tarBall: false
 
+    - name: Remove files
+      run: rm -rf *.*
+
     - name: Directory
       run: ls
       
