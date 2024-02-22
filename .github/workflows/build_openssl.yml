@@ -60,7 +60,7 @@ jobs:
         tarBall: false
 
     - name: Remove files
-      run: rm -f *
+      run: rm -f * || true
 
     - name: Directory
       run: ls
