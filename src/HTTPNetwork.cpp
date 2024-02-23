@@ -68,7 +68,7 @@ namespace web
 
 			if (lastPacket == SOCKET_ERROR)
 			{
-				throw exceptions::WebException();
+				THROW_WEB_EXCEPTION
 			}
 			else if (!lastPacket)
 			{

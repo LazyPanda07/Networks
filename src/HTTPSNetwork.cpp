@@ -69,7 +69,7 @@ namespace web
 
 			if (lastSend <= 0)
 			{
-				throw exceptions::WebException();
+				THROW_WEB_EXCEPTION
 			}
 
 			totalSent += lastSend;
