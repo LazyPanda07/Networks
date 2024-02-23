@@ -139,5 +139,5 @@ jobs:
       working-directory: Tests
       run: |
           cd build/bin
-          ./Tests ${{ secrets.GITHUB_TOKEN }}
+          LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
   
