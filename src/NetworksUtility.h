@@ -7,10 +7,10 @@
 #define NETWORKS_API __attribute__((visibility("default")))
 #else
 #define NETWORKS_API __declspec(dllexport)
+#endif
 
 #define NETWORKS_API_FUNCTION extern "C" NETWORKS_API
 
-#endif
 #else
 #define NETWORKS_API
 #define NETWORKS_API_FUNCTION
