@@ -11,6 +11,7 @@ if (UNIX)
 	add_definitions(-D__LINUX__)
 
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
+	add_compile_options(-fPIC)
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
