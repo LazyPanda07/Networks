@@ -37,6 +37,9 @@ bin/
 # VS folder
 .vs/
 
+# gtest
+gtest/
+
 # OpenSSL libs
 !crypto.lib
 !ssl.lib

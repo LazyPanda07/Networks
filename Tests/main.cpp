@@ -1,0 +1,42 @@
+#include <string>
+
+#include "HTTPBuilder.h"
+#include "HTTPParser.h"
+#include "BaseIOSocketStream.h"
+#include "HTTPSNetwork.h"
+
+#include "gtest/gtest.h"
+
+std::string token;
+
+TEST(HTTP, GithubAPI)
+{
+	streams::IOSocketStream stream(make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+	std::string request = web::HTTPBuilder()
+		.getRequest()
+		.parameters("repos/LazyPanda07/Networks/branches")
+		.headers
+		(
+			"Host", "api.github.com",
+			"Accept", "application/vnd.github+json",
+			"Authorization", "Bearer " + token,
+			"User-Agent", "NetworkTests"
+		)
+		.build();
+	std::string response;
+
+	stream << request;
+
+	stream >> response;
+
+	ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
+}
+
+int main(int argc, char **argv)
+{
+	token = argv[1];
+
+	testing::InitGoogleTest(&argc, argv);
+
+	return RUN_ALL_TESTS();
+}

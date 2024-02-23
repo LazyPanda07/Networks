@@ -55,4 +55,5 @@ install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
 
 if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	install(DIRECTORY src/ DESTINATION ${CMAKE_BINARY_DIR}/bin/include FILES_MATCHING PATTERN "*.h")
+	install(DIRECTORY vendor/OpenSSL/include DESTINATION ${CMAKE_BINARY_DIR}/bin/include)
 endif ()

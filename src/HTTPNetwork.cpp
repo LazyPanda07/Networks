@@ -66,9 +66,13 @@ namespace web
 
 			lastPacket = this->receiveDataMethod(data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
 
-			if (lastPacket == SOCKET_ERROR || !lastPacket)
+			if (lastPacket == SOCKET_ERROR)
 			{
 				throw exceptions::WebException();
+			}
+			else if (!lastPacket)
+			{
+				break;
 			}
 
 			totalSize += lastPacket;
