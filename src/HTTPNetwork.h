@@ -1,14 +1,6 @@
 #pragma once
 
-#ifdef NETWORKS_DLL
-#ifdef __LINUX__
-#define NETWORKS_API __attribute__((visibility("default")))
-#else
-#define NETWORKS_API __declspec(dllexport)
-#endif
-#else
-#define NETWORKS_API
-#endif // NETWORKS_DLL
+#include "NetworksUtility.h"
 
 #include "BaseNetwork.h"
 

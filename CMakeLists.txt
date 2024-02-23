@@ -27,11 +27,13 @@ add_library(
 	${PROJECT_NAME} ${LIBRARY_TYPE}
 	src/HTTPNetwork.cpp
 	src/HTTPSNetwork.cpp
+	src/NetworksUtility.cpp
 	src/Exceptions/SSLException.cpp
 )
 
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
+	src/
 	HTTP/src
 	HTTP/JSON/src
 	SocketStreams/src
