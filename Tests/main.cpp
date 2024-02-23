@@ -35,7 +35,7 @@ TEST(HTTP, GithubAPI)
 	}
 	catch (const web::exceptions::WebException& e)
 	{
-		std::cout << e.what() << ' ' << e.getErrorCode() << std::endl;
+		std::cout << e.what() << ' ' << e.getErrorCode() << ' ' << e.getLine() << ' ' << e.getFile() << std::endl;
 
 		ASSERT_TRUE(false);
 	}
