@@ -5,6 +5,8 @@ project(Tests)
 set(CMAKE_CXX_STANDARD 17)
 set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
 set(LIBS Networks HTTP JSON SocketStreams gtest gtest_main ssl crypto)
+set(SHARED_OBJECT ../Networks/Networks.dll)
+
 
 if (UNIX)
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
@@ -41,3 +43,7 @@ target_link_libraries(
 )
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
+
+if(EXISTS ${SHARED_OBJECT})
+    install(FILES ${SHARED_OBJECT} DESTINATION ${CMAKE_BINARY_DIR}/bin)
+endif()
