@@ -1,24 +1,30 @@
 cmake_minimum_required(VERSION 3.27.0)
 
 set(CMAKE_CXX_STANDARD 17)
+set(OPENSSL_LIB_PATH vendor/OpenSSL/lib)
+set(LIBS HTTP SocketStreams libcrypto libssl)
+set(LIBRARY_TYPE STATIC)
 option(BUILD_SHARED_LIBS "" OFF)
+option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
 
-	set(VENDOR_LIBRARY_PATH vendor/Linux/Release-x64)
+	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
 else ()
-	set(VENDOR_LIBRARY_PATH vendor/Windows/Release-x64)
+	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
+	set(LIBS ${LIBS} crypt32)
 endif ()
 
-if (${BUILD_SHARED_LIBS} STREQUAL "ON")
+if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
 	add_definitions(-DNETWORKS_DLL)
+	set(LIBRARY_TYPE SHARED)
 endif ()
 
 project(Networks)
 
 add_library(
-	${PROJECT_NAME}
+	${PROJECT_NAME} ${LIBRARY_TYPE}
 	src/HTTPNetwork.cpp
 	src/HTTPSNetwork.cpp
 	src/Exceptions/SSLException.cpp
@@ -34,17 +40,13 @@ target_include_directories(
 
 target_link_directories(
 	${PROJECT_NAME} PUBLIC
-	${VENDOR_LIBRARY_PATH}
+	${OPENSSL_LIB_PATH}
 )
 
-target_link_libraries(
-	${PROJECT_NAME} PUBLIC
-	HTTP
-	crypto
-	ssl
-)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBS})
 
 add_subdirectory(HTTP)
+add_subdirectory(SocketStreams)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
 

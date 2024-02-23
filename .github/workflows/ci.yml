@@ -9,8 +9,53 @@ on:
 jobs:
   windows-build:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+
+    - name: Enable NMake
+      uses: ilammy/msvc-dev-cmd@v1.13.0
+
+    - name: Build
+      run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}\bin -G "NMake Makefiles" ..
+          nmake install
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        path: bin
+        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
+
+  linux-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+        shared: [[ON, DLL], [OFF, ""]]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Build
+      run: |
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/bin ..
+          make install -j $(nproc)
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        path: bin
+        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux

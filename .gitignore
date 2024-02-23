@@ -37,9 +37,8 @@ bin/
 # VS folder
 .vs/
 
-# OpenSSL libs and dlls
+# OpenSSL libs
 !libcrypto.lib
 !libssl.lib
-
-!libcrypto-3-x64.dll
-!libssl-3-x64.dll
+!libcrypto.a
+!libssl.a
