@@ -38,7 +38,7 @@ bin/
 .vs/
 
 # OpenSSL libs
-!libcrypto.lib
-!libssl.lib
+!crypto.lib
+!ssl.lib
 !libcrypto.a
 !libssl.a
