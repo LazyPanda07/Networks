@@ -5,7 +5,7 @@ project(Tests)
 set(CMAKE_CXX_STANDARD 17)
 set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
 set(LIBS Networks HTTP JSON SocketStreams gtest gtest_main ssl crypto)
-set(SHARED_OBJECT ../Networks/Networks.dll)
+set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/Networks.dll)
 
 
 if (UNIX)
