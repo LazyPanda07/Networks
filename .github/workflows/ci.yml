@@ -26,13 +26,13 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}\bin -G "NMake Makefiles" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -G "NMake Makefiles" ..
           nmake install
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        path: bin
+        path: build/bin
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
 
   linux-build:
@@ -57,5 +57,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        path: bin
+        path: build/bin
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
