@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(OPENSSL_LIB_PATH vendor/OpenSSL/lib)
-set(LIBS HTTP SocketStreams libcrypto libssl)
+set(LIBS HTTP SocketStreams crypto ssl)
 set(LIBRARY_TYPE STATIC)
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)

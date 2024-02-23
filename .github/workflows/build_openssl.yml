@@ -39,6 +39,11 @@ jobs:
           mkdir ${{ github.workspace }}\install-dir\OpenSSL
           perl Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}\install-dir\OpenSSL
           nmake install
+
+    - name: Rename
+      run: |
+          Rename-Item -Path .\install-dir\OpenSSL\lib\libssl.lib -NewName ssl.lib
+          Rename-Item -Path .\install-dir\OpenSSL\lib\libcrypto.lib -NewName crypto.lib
           
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
