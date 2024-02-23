@@ -11,7 +11,7 @@ std::string token;
 
 TEST(HTTP, GithubAPI)
 {
-	streams::IOSocketStream stream(make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+	streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
 	std::string request = web::HTTPBuilder()
 		.getRequest()
 		.parameters("repos/LazyPanda07/Networks/branches")

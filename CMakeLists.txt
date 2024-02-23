@@ -11,10 +11,15 @@ if (UNIX)
 	add_definitions(-D__LINUX__)
 
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
+
 	add_compile_options(-fPIC)
+
+	install(DIRECTORY vendor/OpenSSL/lib/Linux DESTINATION ${CMAKE_BINARY_DIR}/bin FILES_MATCHING PATTERN "*.a")
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
+
+	install(DIRECTORY vendor/OpenSSL/lib/Windows DESTINATION ${CMAKE_BINARY_DIR}/bin FILES_MATCHING PATTERN "*.lib")
 endif ()
 
 if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
