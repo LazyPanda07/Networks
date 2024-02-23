@@ -115,4 +115,29 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
+        path: Networks
+
+    - name: Get Google Test
+      uses: LazyPanda07/get-gtest@v1
+      with:
+        install-path: Tests/gtest
+
+    - name: Build tests
+      working-directory: Tests
+      run: |
+          mkdir build
+          cd build
+          cmake ..
+          make install -j $(nproc)
+
+    - name: Tests
+      working-directory: Tests
+      run: |
+          cd build/bin
+          ./Tests ${{ secrets.GITHUB_TOKEN }}
   

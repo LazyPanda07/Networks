@@ -5,14 +5,14 @@ project(Tests)
 set(CMAKE_CXX_STANDARD 17)
 set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
 set(LIBS Networks HTTP JSON SocketStreams gtest gtest_main ssl crypto)
-set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/Networks.dll)
-
 
 if (UNIX)
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
+	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/libNetworks.so)
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
+	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/Networks.dll)
 endif (UNIX)
 
 add_executable(
