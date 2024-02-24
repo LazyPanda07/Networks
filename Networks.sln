@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HTTP", "HTTP\HTTP.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JSON", "HTTP\JSON\JSON.vcxproj", "{F6B57139-D9F3-4B02-AA92-4E1F417649DA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{67CACB49-8A9B-4817-A576-6F4E854D892E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -72,6 +74,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BB9F3BD-68F4-403A-ACC6-F85C75F5D14F} = {67CACB49-8A9B-4817-A576-6F4E854D892E}
+		{CD88B391-B7B9-47D5-AF8D-153FCB2B5A2B} = {67CACB49-8A9B-4817-A576-6F4E854D892E}
+		{F6B57139-D9F3-4B02-AA92-4E1F417649DA} = {67CACB49-8A9B-4817-A576-6F4E854D892E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CC422BF-F0CA-420D-A5E6-FC9FC2330A40}
