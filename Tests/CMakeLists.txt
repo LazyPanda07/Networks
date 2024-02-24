@@ -33,7 +33,7 @@ target_include_directories(
 
 target_link_directories(
 	${PROJECT_NAME} PUBLIC
-	../Networks
+	../Networks/liob
 	gtest/lib
 	${OPENSSL_LIB_PATH}
 )
