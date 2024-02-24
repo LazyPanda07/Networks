@@ -11,37 +11,28 @@ std::string token;
 
 TEST(HTTP, GithubAPI)
 {
-	try
-	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
-		std::string request = web::HTTPBuilder()
-			.getRequest()
-			.parameters("repos/LazyPanda07/Networks/branches")
-			.headers
-			(
-				"Host", "api.github.com",
-				"Accept", "application/vnd.github+json",
-				"Authorization", "Bearer " + token,
-				"User-Agent", "NetworkTests"
-			)
-			.build();
-		std::string response;
+	streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+	std::string request = web::HTTPBuilder()
+		.getRequest()
+		.parameters("repos/LazyPanda07/Networks/branches")
+		.headers
+		(
+			"Host", "api.github.com",
+			"Accept", "application/vnd.github+json",
+			"Authorization", "Bearer " + token,
+			"User-Agent", "NetworkTests"
+		)
+		.build();
+	std::string response;
 
-		stream << request;
+	stream << request;
 
-		stream >> response;
+	stream >> response;
 
-		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
-	}
-	catch (const web::exceptions::WebException& e)
-	{
-		std::cout << e.what() << ' ' << e.getErrorCode() << ' ' << e.getLine() << ' ' << e.getFile() << std::endl;
-
-		ASSERT_TRUE(false);
-	}
+	ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	token = argv[1];
 

@@ -8,12 +8,12 @@ set(LIBS Networks HTTP JSON SocketStreams gtest gtest_main ssl crypto)
 
 if (UNIX)
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
-	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/libNetworks.so)
+	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/lib/libNetworks.so)
 	add_definitions(-D__LINUX__)
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
-	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/Networks.dll)
+	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/dll/Networks.dll)
 endif (UNIX)
 
 add_executable(
