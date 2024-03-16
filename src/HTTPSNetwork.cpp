@@ -67,9 +67,13 @@ namespace web
 		{
 			lastSend = SSL_write(ssl, data.data() + totalSent, count - totalSent);
 
-			if (lastSend <= 0)
+			if (lastSend == SOCKET_ERROR)
 			{
 				THROW_WEB_EXCEPTION
+			}
+			else if (!lastSend)
+			{
+				break;
 			}
 
 			totalSent += lastSend;
