@@ -51,7 +51,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/bin ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} ..
           make install -j $(nproc)
 
     - name: Upload artifacts
