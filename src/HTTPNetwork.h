@@ -2,7 +2,7 @@
 
 #include "NetworksUtility.h"
 
-#include "BaseNetwork.h"
+#include "Network.h"
 
 namespace web
 {
@@ -23,7 +23,7 @@ namespace web
 		static inline const std::string httpPort = "80";
 
 	protected:
-		virtual int receiveDataMethod(char* data, int length);
+		virtual int receiveData(char* data, int length);
 
 	public:
 		/// @brief Server side constructor
@@ -40,7 +40,7 @@ namespace web
 		/// </summary>
 		/// <param name="data">that sends through HTTP</param>
 		/// <returns>total send bytes</returns>
-		virtual int sendData(const std::vector<char>& data) override;
+		virtual int sendData(const std::vector<char>& data, bool& endOfStream) override;
 
 		/// <summary>
 		/// Specific HTTP receive data function
@@ -48,7 +48,7 @@ namespace web
 		/// <param name="data">output data from HTTP</param>
 		/// <returns>total receive bytes</returns>
 		/// <exception cref="web::WebException"></exception>
-		virtual int receiveData(std::vector<char>& data) override;
+		virtual int receiveData(std::vector<char>& data, bool& endOfStream) override;
 
 		virtual ~HTTPNetwork() = default;
 	};

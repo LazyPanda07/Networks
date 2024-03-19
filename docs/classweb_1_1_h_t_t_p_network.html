@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.0.2</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.0.3</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -105,12 +105,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8a43dc0e40b0af91e874361a60f86760" id="r_a8a43dc0e40b0af91e874361a60f86760"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a8a43dc0e40b0af91e874361a60f86760">HTTPNetwork</a> (const std::string &amp;ip, const std::string &amp;port=httpPort)</td></tr>
 <tr class="memdesc:a8a43dc0e40b0af91e874361a60f86760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
 <tr class="separator:a8a43dc0e40b0af91e874361a60f86760"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a707831f39197480fd434407d05d4792b" id="r_a707831f39197480fd434407d05d4792b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a707831f39197480fd434407d05d4792b">sendData</a> (const std::vector&lt; char &gt; &amp;data) override</td></tr>
-<tr class="memdesc:a707831f39197480fd434407d05d4792b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default send function.  <br /></td></tr>
-<tr class="separator:a707831f39197480fd434407d05d4792b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d31e3b2832de5d9cc082022208b830" id="r_a51d31e3b2832de5d9cc082022208b830"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a51d31e3b2832de5d9cc082022208b830">receiveData</a> (std::vector&lt; char &gt; &amp;data) override</td></tr>
-<tr class="memdesc:a51d31e3b2832de5d9cc082022208b830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific HTTP receive data function.  <br /></td></tr>
-<tr class="separator:a51d31e3b2832de5d9cc082022208b830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2963bbdb8818de10bcc5c5687487978" id="r_aa2963bbdb8818de10bcc5c5687487978"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#aa2963bbdb8818de10bcc5c5687487978">sendData</a> (const std::vector&lt; char &gt; &amp;data, bool &amp;endOfStream) override</td></tr>
+<tr class="memdesc:aa2963bbdb8818de10bcc5c5687487978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default send function.  <br /></td></tr>
+<tr class="separator:aa2963bbdb8818de10bcc5c5687487978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774283c046915e1439461611655df086" id="r_a774283c046915e1439461611655df086"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a774283c046915e1439461611655df086">receiveData</a> (std::vector&lt; char &gt; &amp;data, bool &amp;endOfStream) override</td></tr>
+<tr class="memdesc:a774283c046915e1439461611655df086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific HTTP receive data function.  <br /></td></tr>
+<tr class="separator:a774283c046915e1439461611655df086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -141,9 +141,9 @@ static const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>h
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a8be15b4b97ea732b49c31a01cf68a6cc" id="r_a8be15b4b97ea732b49c31a01cf68a6cc"><td class="memItemLeft" align="right" valign="top"><a id="a8be15b4b97ea732b49c31a01cf68a6cc" name="a8be15b4b97ea732b49c31a01cf68a6cc"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMethod</b> (char *data, int length)</td></tr>
-<tr class="separator:a8be15b4b97ea732b49c31a01cf68a6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9bbf24be520b5a0dfe27821f7aafc34" id="r_ac9bbf24be520b5a0dfe27821f7aafc34"><td class="memItemLeft" align="right" valign="top"><a id="ac9bbf24be520b5a0dfe27821f7aafc34" name="ac9bbf24be520b5a0dfe27821f7aafc34"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b> (char *data, int length)</td></tr>
+<tr class="separator:ac9bbf24be520b5a0dfe27821f7aafc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Network functions for HTTP. </p>
@@ -212,8 +212,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMet
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a51d31e3b2832de5d9cc082022208b830" name="a51d31e3b2832de5d9cc082022208b830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51d31e3b2832de5d9cc082022208b830">&#9670;&#160;</a></span>receiveData()</h2>
+<a id="a774283c046915e1439461611655df086" name="a774283c046915e1439461611655df086"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774283c046915e1439461611655df086">&#9670;&#160;</a></span>receiveData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,11 +222,21 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMet
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int web::HTTPNetwork::receiveData </td>
+          <td class="memname">virtual int web::HTTPNetwork::receiveData </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; char &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>endOfStream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -253,8 +263,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMet
 
 </div>
 </div>
-<a id="a707831f39197480fd434407d05d4792b" name="a707831f39197480fd434407d05d4792b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a707831f39197480fd434407d05d4792b">&#9670;&#160;</a></span>sendData()</h2>
+<a id="aa2963bbdb8818de10bcc5c5687487978" name="aa2963bbdb8818de10bcc5c5687487978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2963bbdb8818de10bcc5c5687487978">&#9670;&#160;</a></span>sendData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,8 +276,18 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMet
           <td class="memname">int web::HTTPNetwork::sendData </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; char &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool &amp;&#160;</td>
+          <td class="paramname"><em>endOfStream</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -286,7 +306,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveDataMet
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>total send bytes</dd></dl>
 
-<p>Reimplemented in <a class="el" href="classweb_1_1_h_t_t_p_s_network.html#a36166be6f2f9d2445bdb753ee1b42764">web::HTTPSNetwork</a>.</p>
+<p>Reimplemented in <a class="el" href="classweb_1_1_h_t_t_p_s_network.html#a60bbd8cb6f066196bc07ba3cabc3dc1e">web::HTTPSNetwork</a>.</p>
 
 </div>
 </div>

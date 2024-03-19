@@ -17,7 +17,7 @@ namespace web
 		bool isClientSide;
 
 	protected:
-		virtual int receiveDataMethod(char* data, int length) override;
+		virtual int receiveData(char* data, int length) override;
 
 	public:
 		/// @brief Server side constructor
@@ -35,7 +35,7 @@ namespace web
 		/// @brief Send function for streams::BaseIOSocketStream
 		/// @return Total number of bytes sended
 		/// @exception web::exceptions::SSLException
-		int sendData(const std::vector<char>& data) override;
+		int sendData(const std::vector<char>& data, bool& endOfStream) override;
 
 		virtual ~HTTPSNetwork();
 	};

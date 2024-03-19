@@ -9,7 +9,7 @@ using namespace std;
 
 namespace web
 {
-	int HTTPSNetwork::receiveDataMethod(char* data, int length)
+	int HTTPSNetwork::receiveData(char* data, int length)
 	{
 		return SSL_read(ssl, data, length);
 	}
@@ -57,11 +57,13 @@ namespace web
 		}
 	}
 
-	int HTTPSNetwork::sendData(const vector<char>& data)
+	int HTTPSNetwork::sendData(const vector<char>& data, bool& endOfStream)
 	{
 		int lastSend = 0;
 		int totalSent = 0;
 		int count = static_cast<int>(data.size());
+
+		endOfStream = false;
 
 		do
 		{
@@ -73,6 +75,8 @@ namespace web
 			}
 			else if (!lastSend)
 			{
+				endOfStream = true;
+
 				break;
 			}
 

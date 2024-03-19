@@ -13,7 +13,7 @@ static string_view getHeaderValue(string_view::const_iterator startHeader, size_
 
 namespace web
 {
-	int HTTPNetwork::receiveDataMethod(char* data, int length)
+	int HTTPNetwork::receiveData(char* data, int length)
 	{
 		return recv(clientSocket, data, length, NULL);
 	}
@@ -30,27 +30,29 @@ namespace web
 
 	}
 
-	int HTTPNetwork::sendData(const vector<char>& data)
+	int HTTPNetwork::sendData(const vector<char>& data, bool& endOfStream)
 	{
 		try
 		{
-			return Network::sendBytes(data.data(), static_cast<int>(data.size()));
+			return Network::sendBytes(data.data(), static_cast<int>(data.size()), endOfStream);
 		}
 		catch (const exceptions::WebException& e)
 		{
 			this->log(e.what());
 
-			return -1;
+			throw;
 		}
 	}
 
-	int HTTPNetwork::receiveData(vector<char>& data)
+	int HTTPNetwork::receiveData(vector<char>& data, bool& endOfStream)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
 		int bodySize = -1;
 		bool isFindEnd = false;
 		bool chunked = false;
+
+		endOfStream = false;
 
 		if (data.size() < averageHTTPRequestSize)
 		{
@@ -64,7 +66,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = this->receiveDataMethod(data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
+			lastPacket = this->receiveData(data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
 
 			if (lastPacket == SOCKET_ERROR)
 			{
@@ -72,6 +74,8 @@ namespace web
 			}
 			else if (!lastPacket)
 			{
+				endOfStream = true;
+
 				break;
 			}
 
