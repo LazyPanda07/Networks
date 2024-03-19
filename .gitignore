@@ -33,6 +33,8 @@
 
 # Binaries
 bin/
+out/
+build/
 
 # VS folder
 .vs/
