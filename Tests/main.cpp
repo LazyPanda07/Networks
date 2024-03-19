@@ -2,7 +2,7 @@
 
 #include "HTTPBuilder.h"
 #include "HTTPParser.h"
-#include "BaseIOSocketStream.h"
+#include "IOSocketStream.h"
 #include "HTTPSNetwork.h"
 
 #include "gtest/gtest.h"
