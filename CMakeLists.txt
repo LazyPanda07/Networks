@@ -66,5 +66,5 @@ install(
 
 if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
 	install(DIRECTORY src/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include FILES_MATCHING PATTERN "*.h")
-	install(DIRECTORY vendor/OpenSSL/include DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+	install(DIRECTORY vendor/OpenSSL/include DESTINATION ${CMAKE_INSTALL_PREFIX}/include/vendor/OpenSSL/include)
 endif ()
