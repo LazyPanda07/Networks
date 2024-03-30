@@ -19,7 +19,7 @@ namespace web
 
 	}
 
-	HTTPNetwork::HTTPNetwork(const string& ip, const string& port) :
+	HTTPNetwork::HTTPNetwork(string_view ip, string_view port) :
 		Network(ip, port)
 	{
 

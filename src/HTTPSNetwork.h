@@ -9,7 +9,7 @@ namespace web
 	class NETWORKS_API HTTPSNetwork : public HTTPNetwork
 	{
 	public:
-		static inline const std::string httpsPort = "443";
+		static inline constexpr std::string_view httpsPort = "443";
 
 	protected:
 		SSL* ssl;
@@ -32,12 +32,7 @@ namespace web
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
 		/// @exception web::exceptions::SSLException
-		HTTPSNetwork(const std::string& ip, const std::string& port = httpsPort, const std::string& hostName = "");
-
-		/// @brief Send function for streams::BaseIOSocketStream
-		/// @return Total number of bytes sended
-		/// @exception web::exceptions::SSLException
-		int sendData(const std::vector<char>& data, bool& endOfStream) override;
+		HTTPSNetwork(std::string_view ip, std::string_view port = httpsPort, std::string_view hostName = "");
 
 		virtual ~HTTPSNetwork();
 	};

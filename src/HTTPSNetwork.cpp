@@ -28,7 +28,7 @@ namespace web
 
 	}
 
-	HTTPSNetwork::HTTPSNetwork(const string& ip, const string& port, const string& hostName) :
+	HTTPSNetwork::HTTPSNetwork(string_view ip, string_view port, string_view hostName) :
 		HTTPNetwork(ip, port),
 		isClientSide(true)
 	{
@@ -60,36 +60,6 @@ namespace web
 		{
 			throw exceptions::SSLException();
 		}
-	}
-
-	int HTTPSNetwork::sendData(const vector<char>& data, bool& endOfStream)
-	{
-		int lastSend = 0;
-		int totalSent = 0;
-		int count = static_cast<int>(data.size());
-
-		endOfStream = false;
-
-		do
-		{
-			lastSend = SSL_write(ssl, data.data() + totalSent, count - totalSent);
-
-			if (lastSend == SOCKET_ERROR)
-			{
-				THROW_WEB_EXCEPTION
-			}
-			else if (!lastSend)
-			{
-				endOfStream = true;
-
-				break;
-			}
-
-			totalSent += lastSend;
-
-		} while (totalSent < count);
-
-		return totalSent;
 	}
 
 	HTTPSNetwork::~HTTPSNetwork()

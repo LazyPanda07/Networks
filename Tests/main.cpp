@@ -25,13 +25,20 @@ TEST(HTTP, GithubAPI)
 				"User-Agent", "NetworkTests"
 			)
 			.build();
-		std::string response;
+		std::vector<char> testRequest;
+		std::vector<char> testResponse;
+		// std::string response;
 
-		stream << request;
+		for (char c : request) 
+		{
+			testRequest.push_back(c);
+		}
 
-		stream >> response;
+		stream << testRequest;
 
-		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
+		stream >> testResponse;
+
+		ASSERT_EQ(web::HTTPParser(testResponse).getResponseCode(), web::responseCodes::ok);
 	} 
 	catch (const web::exceptions::WebException& e)
 	{
