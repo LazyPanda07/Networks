@@ -17,7 +17,9 @@ namespace web
 		bool isClientSide;
 
 	protected:
-		virtual int receiveData(char* data, int length) override;
+		int sendBytesImplementation(const char* data, int count, int flags = NULL) override;
+
+		int receiveBytesImplementation(char* data, int count, int flags = NULL) override;
 
 	public:
 		/// @brief Server side constructor

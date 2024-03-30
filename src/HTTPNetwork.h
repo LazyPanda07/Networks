@@ -22,9 +22,6 @@ namespace web
 
 		static inline const std::string httpPort = "80";
 
-	protected:
-		virtual int receiveData(char* data, int length);
-
 	public:
 		/// @brief Server side constructor
 		/// @param clientSocket Socket from WSA accept function

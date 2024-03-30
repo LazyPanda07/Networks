@@ -9,9 +9,14 @@ using namespace std;
 
 namespace web
 {
-	int HTTPSNetwork::receiveData(char* data, int length)
+	int HTTPSNetwork::sendBytesImplementation(const char* data, int count, int flags)
 	{
-		return SSL_read(ssl, data, length);
+		return SSL_write(ssl, data, count);
+	}
+
+	int HTTPSNetwork::receiveBytesImplementation(char* data, int count, int flags)
+	{
+		return SSL_read(ssl, data, count);
 	}
 
 	HTTPSNetwork::HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context) :
@@ -20,7 +25,7 @@ namespace web
 		context(context),
 		isClientSide(false)
 	{
-		
+
 	}
 
 	HTTPSNetwork::HTTPSNetwork(const string& ip, const string& port, const string& hostName) :

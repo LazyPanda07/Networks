@@ -13,11 +13,6 @@ static string_view getHeaderValue(string_view::const_iterator startHeader, size_
 
 namespace web
 {
-	int HTTPNetwork::receiveData(char* data, int length)
-	{
-		return recv(clientSocket, data, length, NULL);
-	}
-
 	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
 		Network(clientSocket)
 	{
@@ -66,7 +61,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = this->receiveData(data.data() + totalSize, static_cast<int>(data.size()) - totalSize);
+			lastPacket = this->sendBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream);
 
 			if (lastPacket == SOCKET_ERROR)
 			{
