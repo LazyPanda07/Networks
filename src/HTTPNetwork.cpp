@@ -61,7 +61,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = this->sendBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream);
+			lastPacket = this->receiveBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream);
 
 			if (lastPacket == SOCKET_ERROR)
 			{
