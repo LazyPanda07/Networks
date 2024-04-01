@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.1.1</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.2.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -77,7 +77,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classweb_1_1_h_t_t_p_network-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">web::HTTPNetwork Class Reference</div></div>
 </div><!--header-->
@@ -102,15 +101,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aba267705b39499f08c41fa6d97a047e0" id="r_aba267705b39499f08c41fa6d97a047e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#aba267705b39499f08c41fa6d97a047e0">HTTPNetwork</a> (SOCKET clientSocket)</td></tr>
 <tr class="memdesc:aba267705b39499f08c41fa6d97a047e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor.  <br /></td></tr>
 <tr class="separator:aba267705b39499f08c41fa6d97a047e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a43dc0e40b0af91e874361a60f86760" id="r_a8a43dc0e40b0af91e874361a60f86760"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a8a43dc0e40b0af91e874361a60f86760">HTTPNetwork</a> (const std::string &amp;ip, const std::string &amp;port=httpPort)</td></tr>
-<tr class="memdesc:a8a43dc0e40b0af91e874361a60f86760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
-<tr class="separator:a8a43dc0e40b0af91e874361a60f86760"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2963bbdb8818de10bcc5c5687487978" id="r_aa2963bbdb8818de10bcc5c5687487978"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#aa2963bbdb8818de10bcc5c5687487978">sendData</a> (const std::vector&lt; char &gt; &amp;data, bool &amp;endOfStream) override</td></tr>
-<tr class="memdesc:aa2963bbdb8818de10bcc5c5687487978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default send function.  <br /></td></tr>
-<tr class="separator:aa2963bbdb8818de10bcc5c5687487978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a774283c046915e1439461611655df086" id="r_a774283c046915e1439461611655df086"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a774283c046915e1439461611655df086">receiveData</a> (std::vector&lt; char &gt; &amp;data, bool &amp;endOfStream) override</td></tr>
-<tr class="memdesc:a774283c046915e1439461611655df086"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific HTTP receive data function.  <br /></td></tr>
-<tr class="separator:a774283c046915e1439461611655df086"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e91d7a2680b558e6035c0d2857e164" id="r_a29e91d7a2680b558e6035c0d2857e164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a29e91d7a2680b558e6035c0d2857e164">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort)</td></tr>
+<tr class="memdesc:a29e91d7a2680b558e6035c0d2857e164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
+<tr class="separator:a29e91d7a2680b558e6035c0d2857e164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5ef4ff69fc9c1b09b1a83a118976a96" id="r_ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#ad5ef4ff69fc9c1b09b1a83a118976a96">sendData</a> (const utility::ContainerWrapper &amp;data, bool &amp;endOfStream) override</td></tr>
+<tr class="memdesc:ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default send function.  <br /></td></tr>
+<tr class="separator:ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105843562122159278a4a2c08938c73b" id="r_a105843562122159278a4a2c08938c73b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a105843562122159278a4a2c08938c73b">receiveData</a> (utility::ContainerWrapper &amp;data, bool &amp;endOfStream) override</td></tr>
+<tr class="memdesc:a105843562122159278a4a2c08938c73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specific HTTP receive data function.  <br /></td></tr>
+<tr class="separator:a105843562122159278a4a2c08938c73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -135,15 +134,9 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 <tr class="memitem:ab2c56e878b30f610821288a486461522" id="r_ab2c56e878b30f610821288a486461522"><td class="memItemLeft" align="right" valign="top"><a id="ab2c56e878b30f610821288a486461522" name="ab2c56e878b30f610821288a486461522"></a>
 static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>crlf</b> = &quot;\r\n&quot;</td></tr>
 <tr class="separator:ab2c56e878b30f610821288a486461522"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a680a0d7ace56cec8bc0b6d7097f72ad0" id="r_a680a0d7ace56cec8bc0b6d7097f72ad0"><td class="memItemLeft" align="right" valign="top"><a id="a680a0d7ace56cec8bc0b6d7097f72ad0" name="a680a0d7ace56cec8bc0b6d7097f72ad0"></a>
-static const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>httpPort</b> = &quot;80&quot;</td></tr>
-<tr class="separator:a680a0d7ace56cec8bc0b6d7097f72ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ac9bbf24be520b5a0dfe27821f7aafc34" id="r_ac9bbf24be520b5a0dfe27821f7aafc34"><td class="memItemLeft" align="right" valign="top"><a id="ac9bbf24be520b5a0dfe27821f7aafc34" name="ac9bbf24be520b5a0dfe27821f7aafc34"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b> (char *data, int length)</td></tr>
-<tr class="separator:ac9bbf24be520b5a0dfe27821f7aafc34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae62daeb05e83607f3534707301e1de" id="r_aaae62daeb05e83607f3534707301e1de"><td class="memItemLeft" align="right" valign="top"><a id="aaae62daeb05e83607f3534707301e1de" name="aaae62daeb05e83607f3534707301e1de"></a>
+static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>httpPort</b> = &quot;80&quot;</td></tr>
+<tr class="separator:aaae62daeb05e83607f3534707301e1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Network functions for HTTP. </p>
@@ -174,8 +167,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
 
 </div>
 </div>
-<a id="a8a43dc0e40b0af91e874361a60f86760" name="a8a43dc0e40b0af91e874361a60f86760"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a43dc0e40b0af91e874361a60f86760">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
+<a id="a29e91d7a2680b558e6035c0d2857e164" name="a29e91d7a2680b558e6035c0d2857e164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e91d7a2680b558e6035c0d2857e164">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,13 +176,13 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
         <tr>
           <td class="memname">web::HTTPNetwork::HTTPNetwork </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>ip</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>port</em> = <code>httpPort</code>&#160;</td>
         </tr>
         <tr>
@@ -212,8 +205,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a774283c046915e1439461611655df086" name="a774283c046915e1439461611655df086"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a774283c046915e1439461611655df086">&#9670;&#160;</a></span>receiveData()</h2>
+<a id="a105843562122159278a4a2c08938c73b" name="a105843562122159278a4a2c08938c73b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105843562122159278a4a2c08938c73b">&#9670;&#160;</a></span>receiveData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,9 +215,9 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual int web::HTTPNetwork::receiveData </td>
+          <td class="memname">int web::HTTPNetwork::receiveData </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; char &gt; &amp;&#160;</td>
+          <td class="paramtype">utility::ContainerWrapper &amp;&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -241,7 +234,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -263,8 +256,8 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
 
 </div>
 </div>
-<a id="aa2963bbdb8818de10bcc5c5687487978" name="aa2963bbdb8818de10bcc5c5687487978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2963bbdb8818de10bcc5c5687487978">&#9670;&#160;</a></span>sendData()</h2>
+<a id="ad5ef4ff69fc9c1b09b1a83a118976a96" name="ad5ef4ff69fc9c1b09b1a83a118976a96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ef4ff69fc9c1b09b1a83a118976a96">&#9670;&#160;</a></span>sendData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -275,7 +268,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
         <tr>
           <td class="memname">int web::HTTPNetwork::sendData </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; char &gt; &amp;&#160;</td>
+          <td class="paramtype">const utility::ContainerWrapper &amp;&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -292,7 +285,7 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -305,8 +298,6 @@ virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>total send bytes</dd></dl>
-
-<p>Reimplemented in <a class="el" href="classweb_1_1_h_t_t_p_s_network.html#a60bbd8cb6f066196bc07ba3cabc3dc1e">web::HTTPSNetwork</a>.</p>
 
 </div>
 </div>
