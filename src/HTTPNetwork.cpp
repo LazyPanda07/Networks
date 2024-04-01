@@ -25,7 +25,7 @@ namespace web
 
 	}
 
-	int HTTPNetwork::sendData(const vector<char>& data, bool& endOfStream)
+	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream)
 	{
 		try
 		{
@@ -39,7 +39,7 @@ namespace web
 		}
 	}
 
-	int HTTPNetwork::receiveData(vector<char>& data, bool& endOfStream)
+	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
@@ -65,7 +65,7 @@ namespace web
 
 			if (lastPacket == SOCKET_ERROR)
 			{
-				THROW_WEB_EXCEPTION
+				THROW_WEB_EXCEPTION;
 			}
 			else if (!lastPacket)
 			{

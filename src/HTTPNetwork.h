@@ -37,7 +37,7 @@ namespace web
 		/// </summary>
 		/// <param name="data">that sends through HTTP</param>
 		/// <returns>total send bytes</returns>
-		virtual int sendData(const std::vector<char>& data, bool& endOfStream) override;
+		int sendData(const utility::ContainerWrapper& data, bool& endOfStream) override;
 
 		/// <summary>
 		/// Specific HTTP receive data function
@@ -45,7 +45,7 @@ namespace web
 		/// <param name="data">output data from HTTP</param>
 		/// <returns>total receive bytes</returns>
 		/// <exception cref="web::WebException"></exception>
-		virtual int receiveData(std::vector<char>& data, bool& endOfStream) override;
+		int receiveData(utility::ContainerWrapper& data, bool& endOfStream) override;
 
 		virtual ~HTTPNetwork() = default;
 	};

@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -171,7 +171,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -202,7 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -233,7 +233,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -266,7 +266,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
@@ -296,7 +296,7 @@ XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
