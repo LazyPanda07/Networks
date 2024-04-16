@@ -19,6 +19,11 @@ namespace web
 		return SSL_read(ssl, data, count);
 	}
 
+	void HTTPSNetwork::throwException(int line, string_view file) const
+	{
+		throw exceptions::SSLException(line, file);
+	}
+
 	HTTPSNetwork::HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context) :
 		HTTPNetwork(clientSocket),
 		ssl(ssl),
@@ -39,26 +44,26 @@ namespace web
 
 		if (!context)
 		{
-			throw exceptions::SSLException();
+			throw exceptions::SSLException(__LINE__, __FILE__);
 		}
 
 		ssl = SSL_new(context);
 
 		if (!ssl)
 		{
-			throw exceptions::SSLException();
+			throw exceptions::SSLException(__LINE__, __FILE__);
 		}
 
 		if (!SSL_set_fd(ssl, static_cast<int>(clientSocket)))
 		{
-			throw exceptions::SSLException();
+			throw exceptions::SSLException(__LINE__, __FILE__);
 		}
 
 		SSL_set_tlsext_host_name(ssl, (hostName.empty() ? ip.data() : hostName.data()));
 
 		if (SSL_connect(ssl) != 1)
 		{
-			throw exceptions::SSLException();
+			throw exceptions::SSLException(__LINE__, __FILE__);
 		}
 	}
 

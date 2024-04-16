@@ -11,10 +11,10 @@ namespace web
 		class NETWORKS_API SSLException : public std::runtime_error
 		{
 		private:
-			static std::string getSSLError();
+			static std::string getSSLError(int line, std::string_view file);
 
 		public:
-			SSLException();
+			SSLException(int line, std::string_view file);
 
 			~SSLException() = default;
 		};

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.3.4</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.4.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -148,12 +148,15 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a3651a328b2bcff2d8560d3eb6452ac60" id="r_a3651a328b2bcff2d8560d3eb6452ac60"><td class="memItemLeft" align="right" valign="top"><a id="a3651a328b2bcff2d8560d3eb6452ac60" name="a3651a328b2bcff2d8560d3eb6452ac60"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sendBytesImplementation</b> (const char *data, int count, int flags=NULL) override</td></tr>
-<tr class="separator:a3651a328b2bcff2d8560d3eb6452ac60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94a9808891e2d5007ff00a9d2ef651fb" id="r_a94a9808891e2d5007ff00a9d2ef651fb"><td class="memItemLeft" align="right" valign="top"><a id="a94a9808891e2d5007ff00a9d2ef651fb" name="a94a9808891e2d5007ff00a9d2ef651fb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveBytesImplementation</b> (char *data, int count, int flags=NULL) override</td></tr>
-<tr class="separator:a94a9808891e2d5007ff00a9d2ef651fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad44fe63f10cc2cc275999d3df121c305" id="r_ad44fe63f10cc2cc275999d3df121c305"><td class="memItemLeft" align="right" valign="top"><a id="ad44fe63f10cc2cc275999d3df121c305" name="ad44fe63f10cc2cc275999d3df121c305"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sendBytesImplementation</b> (const char *data, int count, int flags=0) override</td></tr>
+<tr class="separator:ad44fe63f10cc2cc275999d3df121c305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaabcd91db58913d992410fd2efc09e62" id="r_aaabcd91db58913d992410fd2efc09e62"><td class="memItemLeft" align="right" valign="top"><a id="aaabcd91db58913d992410fd2efc09e62" name="aaabcd91db58913d992410fd2efc09e62"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveBytesImplementation</b> (char *data, int count, int flags=0) override</td></tr>
+<tr class="separator:aaabcd91db58913d992410fd2efc09e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e5609cdf001452e2885807ea3e444d" id="r_a62e5609cdf001452e2885807ea3e444d"><td class="memItemLeft" align="right" valign="top"><a id="a62e5609cdf001452e2885807ea3e444d" name="a62e5609cdf001452e2885807ea3e444d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>throwException</b> (int line, std::string_view file) const override</td></tr>
+<tr class="separator:a62e5609cdf001452e2885807ea3e444d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>

@@ -17,9 +17,11 @@ namespace web
 		bool isClientSide;
 
 	protected:
-		int sendBytesImplementation(const char* data, int count, int flags = NULL) override;
+		int sendBytesImplementation(const char* data, int count, int flags = 0) override;
 
-		int receiveBytesImplementation(char* data, int count, int flags = NULL) override;
+		int receiveBytesImplementation(char* data, int count, int flags = 0) override;
+
+		void throwException(int line, std::string_view file) const override;
 
 	public:
 		/// @brief Server side constructor

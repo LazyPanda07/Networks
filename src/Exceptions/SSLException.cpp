@@ -1,6 +1,7 @@
 #include "SSLException.h"
 
 #include <string>
+#include <format>
 
 #include <openssl/err.h>
 
@@ -10,22 +11,18 @@ namespace web
 {
 	namespace exceptions
 	{
-		string SSLException::getSSLError()
+		string SSLException::getSSLError(int line, string_view file)
 		{
 			string result;
 			int errorCode;
 
 			while (errorCode = ERR_get_error())
 			{
-				const char* error = ERR_error_string(errorCode, nullptr);
+				result += format("SSL error code '{}'", errorCode);
 
-				if (error)
+				if (const char* error = ERR_error_string(errorCode, nullptr))
 				{
-					result += error;
-				}
-				else
-				{
-					result += "SSL error code: " + to_string(errorCode);
+					result += format(" with description '{}' in file '{}' on line '{}'", error, file, line);
 				}
 
 				result += '\n';
@@ -34,8 +31,8 @@ namespace web
 			return result;
 		}
 
-		SSLException::SSLException() :
-			runtime_error(getSSLError())
+		SSLException::SSLException(int line, string_view file) :
+			runtime_error(getSSLError(line, file))
 		{
 
 		}
