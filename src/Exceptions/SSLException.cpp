@@ -32,9 +32,12 @@ namespace web
 		}
 
 		SSLException::SSLException(int line, string_view file) :
-			runtime_error(getSSLError(line, file))
+			WebException(line, file)
 		{
-
+			if (!errorCode)
+			{
+				data = SSLException::getSSLError(line, file);
+			}
 		}
 	}
 }
