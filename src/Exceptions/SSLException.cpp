@@ -34,9 +34,11 @@ namespace web
 		SSLException::SSLException(int line, string_view file) :
 			WebException(line, file)
 		{
-			if (!errorCode)
+			string sslException = SSLException::getSSLError(line, file);
+
+			if (sslException.size())
 			{
-				data = SSLException::getSSLError(line, file);
+				data += '\n' + sslException;
 			}
 		}
 	}
