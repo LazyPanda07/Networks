@@ -11,35 +11,37 @@ namespace web
 {
 	namespace exceptions
 	{
-		string SSLException::getSSLError(int line, string_view file)
+		void SSLException::getSSLError(int line, string_view file)
 		{
-			string result;
-			int errorCode;
-
-			while (errorCode = ERR_get_error())
+			while (int errorCode = ERR_get_error())
 			{
-				result += format("SSL error code '{}'", errorCode);
+				if (data.back() != '\n')
+				{
+					data += '\n';
+				}
+
+				errorCodes.push_back(errorCode);
+
+				data += format("SSL error code '{}'", errorCode);
 
 				if (const char* error = ERR_error_string(errorCode, nullptr))
 				{
-					result += format(" with description '{}' in file '{}' on line '{}'", error, file, line);
+					data += format(" with description '{}' in file '{}' on line '{}'", error, file, line);
 				}
 
-				result += '\n';
+				data += '\n';
 			}
-
-			return result;
 		}
 
 		SSLException::SSLException(int line, string_view file) :
 			WebException(line, file)
 		{
-			string sslException = SSLException::getSSLError(line, file);
+			this->getSSLError(line, file);
+		}
 
-			if (sslException.size())
-			{
-				data += '\n' + sslException;
-			}
+		const vector<int>& SSLException::getErrorCodes() const
+		{
+			return errorCodes;
 		}
 	}
 }
