@@ -20,11 +20,11 @@ namespace web
 					data += '\n';
 				}
 
-				int errorCode = SSL_get_error(ssl, returnCode);
+				int errorCode = SSL_get_error(*ssl, returnCode);
 
 				errorCodes.push_back(errorCode);
 
-				data += format("SSL error code '{}'", errorCode);
+				data += format("SSL error code '{}' in file '{}' on line '{}'", errorCode, file, line);
 			}
 
 			while (unsigned long errorCode = ERR_get_error())
@@ -53,9 +53,9 @@ namespace web
 			this->getSSLError(line, file);
 		}
 
-		SSLException::SSLException(int line, string_view file, const SSL* ssl, int returnCode) :
+		SSLException::SSLException(int line, string_view file, SSL*& ssl, int returnCode) :
 			WebException(line, file),
-			ssl(ssl),
+			ssl(&ssl),
 			returnCode(returnCode)
 		{
 
@@ -69,6 +69,16 @@ namespace web
 		int SSLException::getReturnCode() const
 		{
 			return returnCode;
+		}
+
+		SSLException::~SSLException()
+		{
+			if (ssl)
+			{
+				SSL_free(*ssl);
+
+				*ssl = nullptr;
+			}
 		}
 	}
 }

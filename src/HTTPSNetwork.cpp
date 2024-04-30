@@ -74,6 +74,9 @@ namespace web
 			SSL_CTX_free(context);
 		}
 
-		SSL_free(ssl);
+		if (ssl)
+		{
+			SSL_free(ssl);
+		}
 	}
 }

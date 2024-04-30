@@ -16,7 +16,7 @@ namespace web
 		private:
 			std::vector<unsigned long> errorCodes;
 			int returnCode;
-			const SSL* ssl;
+			SSL** ssl;
 
 		private:
 			void getSSLError(int line, std::string_view file);
@@ -24,13 +24,13 @@ namespace web
 		public:
 			SSLException(int line, std::string_view file);
 
-			SSLException(int line, std::string_view file, const SSL* ssl, int returnCode);
+			SSLException(int line, std::string_view file, SSL*& ssl, int returnCode);
 
 			const std::vector<unsigned long>& getErrorCodes() const;
 
 			int getReturnCode() const;
 
-			~SSLException() = default;
+			~SSLException();
 		};
 	}
 }
