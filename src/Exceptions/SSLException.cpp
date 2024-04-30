@@ -58,7 +58,20 @@ namespace web
 			ssl(&ssl),
 			returnCode(returnCode)
 		{
+			this->getSSLError(line, file);
+		}
 
+		SSLException::SSLException(int line, string_view file, int returnCode) :
+			WebException(line, file),
+			ssl(nullptr),
+			returnCode(returnCode)
+		{
+			this->getSSLError(line, file);
+		}
+
+		bool SSLException::hasSSL() const
+		{
+			return static_cast<bool>(ssl);
 		}
 
 		const vector<unsigned long>& SSLException::getErrorCodes() const

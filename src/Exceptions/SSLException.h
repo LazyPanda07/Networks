@@ -26,6 +26,10 @@ namespace web
 
 			SSLException(int line, std::string_view file, SSL*& ssl, int returnCode);
 
+			SSLException(int line, std::string_view file, int returnCode);
+
+			bool hasSSL() const;
+
 			const std::vector<unsigned long>& getErrorCodes() const;
 
 			int getReturnCode() const;
