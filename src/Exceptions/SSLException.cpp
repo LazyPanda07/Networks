@@ -13,7 +13,7 @@ namespace web
 	{
 		void SSLException::getSSLError(int line, string_view file)
 		{
-			while (int errorCode = ERR_get_error())
+			while (unsigned long errorCode = ERR_get_error())
 			{
 				if (data.back() != '\n')
 				{
@@ -34,14 +34,27 @@ namespace web
 		}
 
 		SSLException::SSLException(int line, string_view file) :
-			WebException(line, file)
+			WebException(line, file),
+			returnCode((std::numeric_limits<int>::min)())
 		{
 			this->getSSLError(line, file);
 		}
 
-		const vector<int>& SSLException::getErrorCodes() const
+		SSLException::SSLException(int line, string_view file, int returnCode) :
+			WebException(line, file),
+			returnCode(returnCode)
+		{
+
+		}
+
+		const vector<unsigned long>& SSLException::getErrorCodes() const
 		{
 			return errorCodes;
+		}
+
+		int SSLException::getReturnCode() const
+		{
+			return returnCode;
 		}
 	}
 }

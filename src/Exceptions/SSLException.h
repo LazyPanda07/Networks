@@ -12,7 +12,8 @@ namespace web
 		class NETWORKS_API SSLException : public web::exceptions::WebException
 		{
 		private:
-			std::vector<int> errorCodes;
+			std::vector<unsigned long> errorCodes;
+			int returnCode;
 
 		private:
 			void getSSLError(int line, std::string_view file);
@@ -20,7 +21,11 @@ namespace web
 		public:
 			SSLException(int line, std::string_view file);
 
-			const std::vector<int>& getErrorCodes() const;
+			SSLException(int line, std::string_view file, int returnCode);
+
+			const std::vector<unsigned long>& getErrorCodes() const;
+
+			int getReturnCode() const;
 
 			~SSLException() = default;
 		};

@@ -61,9 +61,9 @@ namespace web
 
 		SSL_set_tlsext_host_name(ssl, (hostName.empty() ? ip.data() : hostName.data()));
 
-		if (SSL_connect(ssl) != 1)
+		if (int errorCode = SSL_connect(ssl); errorCode != 1)
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__);
+			throw exceptions::SSLException(__LINE__, __FILE__, errorCode);
 		}
 	}
 
