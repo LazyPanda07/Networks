@@ -13,6 +13,20 @@ namespace web
 	{
 		void SSLException::getSSLError(int line, string_view file)
 		{
+			if (ssl)
+			{
+				if (data.back() != '\n')
+				{
+					data += '\n';
+				}
+
+				int errorCode = SSL_get_error(ssl, returnCode);
+
+				errorCodes.push_back(errorCode);
+
+				data += format("SSL error code '{}'", errorCode);
+			}
+
 			while (unsigned long errorCode = ERR_get_error())
 			{
 				if (data.back() != '\n')
@@ -28,20 +42,20 @@ namespace web
 				{
 					data += format(" with description '{}' in file '{}' on line '{}'", error, file, line);
 				}
-
-				data += '\n';
 			}
 		}
 
 		SSLException::SSLException(int line, string_view file) :
 			WebException(line, file),
-			returnCode((std::numeric_limits<int>::min)())
+			ssl(nullptr),
+			returnCode((numeric_limits<int>::min)())
 		{
 			this->getSSLError(line, file);
 		}
 
-		SSLException::SSLException(int line, string_view file, int returnCode) :
+		SSLException::SSLException(int line, string_view file, const SSL* ssl, int returnCode) :
 			WebException(line, file),
+			ssl(ssl),
 			returnCode(returnCode)
 		{
 

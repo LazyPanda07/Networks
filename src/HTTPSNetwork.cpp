@@ -63,7 +63,7 @@ namespace web
 
 		if (int errorCode = SSL_connect(ssl); errorCode != 1)
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__, errorCode);
+			throw exceptions::SSLException(__LINE__, __FILE__, ssl, errorCode);
 		}
 	}
 

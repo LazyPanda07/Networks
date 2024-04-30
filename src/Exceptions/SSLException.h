@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include <openssl/ssl.h>
+
 #include "WebException.h"
 #include "NetworksUtility.h"
 
@@ -14,6 +16,7 @@ namespace web
 		private:
 			std::vector<unsigned long> errorCodes;
 			int returnCode;
+			const SSL* ssl;
 
 		private:
 			void getSSLError(int line, std::string_view file);
@@ -21,7 +24,7 @@ namespace web
 		public:
 			SSLException(int line, std::string_view file);
 
-			SSLException(int line, std::string_view file, int returnCode);
+			SSLException(int line, std::string_view file, const SSL* ssl, int returnCode);
 
 			const std::vector<unsigned long>& getErrorCodes() const;
 
