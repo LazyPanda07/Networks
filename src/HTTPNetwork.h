@@ -30,7 +30,7 @@ namespace web
 		/// @brief Client side constructor
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
-		HTTPNetwork(std::string_view ip, std::string_view port = httpPort);
+		HTTPNetwork(std::string_view ip, std::string_view port = httpPort, DWORD timeout = 30'000);
 
 		/// <summary>
 		/// Default send function

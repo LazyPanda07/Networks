@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.5.6</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.6.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -101,9 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aba267705b39499f08c41fa6d97a047e0" id="r_aba267705b39499f08c41fa6d97a047e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#aba267705b39499f08c41fa6d97a047e0">HTTPNetwork</a> (SOCKET clientSocket)</td></tr>
 <tr class="memdesc:aba267705b39499f08c41fa6d97a047e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor.  <br /></td></tr>
 <tr class="separator:aba267705b39499f08c41fa6d97a047e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29e91d7a2680b558e6035c0d2857e164" id="r_a29e91d7a2680b558e6035c0d2857e164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a29e91d7a2680b558e6035c0d2857e164">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort)</td></tr>
-<tr class="memdesc:a29e91d7a2680b558e6035c0d2857e164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
-<tr class="separator:a29e91d7a2680b558e6035c0d2857e164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f0e743ac86a3f5fd8d2ef6744b8cc0" id="r_a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a44f0e743ac86a3f5fd8d2ef6744b8cc0">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000)</td></tr>
+<tr class="memdesc:a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
+<tr class="separator:a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5ef4ff69fc9c1b09b1a83a118976a96" id="r_ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#ad5ef4ff69fc9c1b09b1a83a118976a96">sendData</a> (const utility::ContainerWrapper &amp;data, bool &amp;endOfStream) override</td></tr>
 <tr class="memdesc:ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default send function.  <br /></td></tr>
 <tr class="separator:ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +167,8 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
-<a id="a29e91d7a2680b558e6035c0d2857e164" name="a29e91d7a2680b558e6035c0d2857e164"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29e91d7a2680b558e6035c0d2857e164">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
+<a id="a44f0e743ac86a3f5fd8d2ef6744b8cc0" name="a44f0e743ac86a3f5fd8d2ef6744b8cc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f0e743ac86a3f5fd8d2ef6744b8cc0">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +183,13 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>port</em> = <code>httpPort</code>&#160;</td>
+          <td class="paramname"><em>port</em> = <code>httpPort</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">DWORD&#160;</td>
+          <td class="paramname"><em>timeout</em> = <code>30&#160;'000</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

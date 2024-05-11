@@ -34,7 +34,7 @@ namespace web
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
 		/// @exception web::exceptions::SSLException
-		HTTPSNetwork(std::string_view ip, std::string_view port = httpsPort, std::string_view hostName = "");
+		HTTPSNetwork(std::string_view ip, std::string_view port = httpsPort, DWORD timeout = 30'000, std::string_view hostName = "");
 
 		virtual ~HTTPSNetwork();
 	};

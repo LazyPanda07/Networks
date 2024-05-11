@@ -19,8 +19,8 @@ namespace web
 
 	}
 
-	HTTPNetwork::HTTPNetwork(string_view ip, string_view port) :
-		Network(ip, port)
+	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout) :
+		Network(ip, port, timeout)
 	{
 
 	}

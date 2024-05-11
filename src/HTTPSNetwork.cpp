@@ -33,8 +33,8 @@ namespace web
 
 	}
 
-	HTTPSNetwork::HTTPSNetwork(string_view ip, string_view port, string_view hostName) :
-		HTTPNetwork(ip, port),
+	HTTPSNetwork::HTTPSNetwork(string_view ip, string_view port, DWORD timeout, string_view hostName) :
+		HTTPNetwork(ip, port, timeout),
 		isClientSide(true)
 	{
 		SSL_library_init();
