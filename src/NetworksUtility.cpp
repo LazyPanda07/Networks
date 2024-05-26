@@ -4,7 +4,7 @@ namespace web
 {
 	std::string getNetworksVersion()
 	{
-		std::string version = "1.8.1";
+		std::string version = "1.8.2";
 
 		return version;
 	}
