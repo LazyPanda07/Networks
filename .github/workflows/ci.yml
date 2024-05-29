@@ -36,7 +36,7 @@ jobs:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
 
   linux-build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -49,8 +49,6 @@ jobs:
 
     - name: Build
       run: |
-          export CC=/usr/bin/gcc-13
-          export CXX=/usr/bin/g++-13
           mkdir build
           cd build
           cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} ..
@@ -106,7 +104,7 @@ jobs:
           .\Tests ${{ secrets.GITHUB_TOKEN }}
 
   linux-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: linux-build
     strategy:
       matrix:
@@ -132,8 +130,6 @@ jobs:
     - name: Build tests
       working-directory: Tests
       run: |
-          export CC=/usr/bin/gcc-13
-          export CXX=/usr/bin/g++-13
           mkdir build
           cd build
           cmake ..
@@ -146,7 +142,7 @@ jobs:
           LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
   
   memory-leak-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: linux-build
     strategy:
       matrix:
@@ -172,8 +168,6 @@ jobs:
     - name: Build tests
       working-directory: Tests
       run: |
-          export CC=/usr/bin/gcc-13
-          export CXX=/usr/bin/g++-13
           mkdir build
           cd build
           cmake ..
@@ -190,7 +184,7 @@ jobs:
 
   publish:
     needs: [windows-tests, linux-tests, memory-leak-tests]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - uses: actions/checkout@v4
