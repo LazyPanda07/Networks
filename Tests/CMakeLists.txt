@@ -1,10 +1,17 @@
 cmake_minimum_required(VERSION 3.27.0)
 
-project(Tests)
-
 set(CMAKE_CXX_STANDARD 20)
 set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
-set(LIBS Networks HTTP JSON SocketStreams gtest gtest_main ssl crypto)
+set(LIBS Networks HTTP JSON SocketStreams ssl crypto)
+
+project(Tests)
+
+find_package(GTest)
+
+if(NOT ${GTest_FOUND})
+	set(GTEST_BOTH_LIBRARIES gtest gtest_main)
+	set(GTEST_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/gtest/include/)
+endif()
 
 if (UNIX)
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
@@ -23,12 +30,12 @@ add_executable(
 
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
-	gtest/include/
 	../src/
 	../HTTP/src/
 	../HTTP/JSON/src/
 	../SocketStreams/src/
 	../vendor/OpenSSL/include/
+	${GTEST_INCLUDE_DIRS}
 )
 
 target_link_directories(
@@ -41,6 +48,7 @@ target_link_directories(
 target_link_libraries(
 	${PROJECT_NAME} PUBLIC
 	${LIBS}
+	${GTEST_BOTH_LIBRARIES}
 )
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
