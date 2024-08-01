@@ -142,7 +142,7 @@ jobs:
         export CC=${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-${{ env.android-version }}-clang
         export CXX=${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-${{ env.android-version }}-clang++
         ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL android-arm64 -D__ANDROID_API__=28
-        make install -j $(nproc)
+        make install
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
