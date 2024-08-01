@@ -11,11 +11,19 @@ option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" O
 if (UNIX)
 	add_definitions(-D__LINUX__)
 
-	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-	add_compile_options(-fPIC)
+	if (${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+		add_definitions(-D__ANDROID__)
 
-	install(DIRECTORY vendor/OpenSSL/lib/Linux/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
+		set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Android)
+
+		install(DIRECTORY vendor/OpenSSL/lib/Android/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
+	else()
+		set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)
+
+		install(DIRECTORY vendor/OpenSSL/lib/Linux/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
+	endif()
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
