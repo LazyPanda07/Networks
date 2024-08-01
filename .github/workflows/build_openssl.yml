@@ -108,6 +108,12 @@ jobs:
         zipBall: false
         tarBall: false
 
+    - name: Prepare
+      run: |
+          rm -f * || true
+          cd */
+          mv * ../
+
     - name: Get Android SDK
       run: wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O tools.zip
 
@@ -135,6 +141,8 @@ jobs:
         export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
         export CC=${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-${{ env.android-version }}-clang
         export CXX=${NDK_PATH}/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-${{ env.android-version }}-clang++
+        mkdir build
+        cd build
         ../Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL android-arm64 -D__ANDROID_API__=28
         make install -j $(nproc)
 
