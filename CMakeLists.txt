@@ -8,6 +8,8 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install-dir CACHE STRING "")
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
+project(Networks)
+
 if (UNIX)
 	add_definitions(-D__LINUX__)
 
@@ -35,8 +37,6 @@ if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
 	add_definitions(-DNETWORKS_DLL)
 	set(LIBRARY_TYPE SHARED)
 endif ()
-
-project(Networks)
 
 add_library(
 	${PROJECT_NAME} ${LIBRARY_TYPE}
