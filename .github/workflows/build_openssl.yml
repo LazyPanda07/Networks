@@ -81,9 +81,6 @@ jobs:
       with:
         repository: openssl/openssl
         ref: ${{ env.OPEN_SSL_TAG }}
-
-    - name: Setup Perl
-      uses: shogo82148/actions-setup-perl@v1
         
     - name: Build
       run: |
