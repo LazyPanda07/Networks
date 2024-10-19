@@ -49,10 +49,7 @@ jobs:
     
   linux-build:
     runs-on: ubuntu-latest
-
-    env:
-      install-path: $(pwd)/install-dir/OpenSSL
-
+    
     steps:
     - name: Get OpenSSL
       uses: actions/checkout@v4
@@ -63,24 +60,21 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure no-shared no-docs no-legacy --prefix=${{ env.install-path }}
+          ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
           make install
           
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Linux
-        path: ${{ env.install-path }}
+        path: ${{ github.workspace }}/install-dir/OpenSSL
 
 
   android-build:
     runs-on: ubuntu-latest
     container:
       image: lazypanda07/ubuntu_cxx20:android
-
-    env:
-      install-path: $(pwd)/install-dir/OpenSSL
-
+      
     steps:
     - name: Get OpenSSL
       uses: actions/checkout@v4
@@ -90,7 +84,7 @@ jobs:
         
     - name: Build
       run: |
-        ./Configure no-shared no-docs no-legacy --prefix=${{ env.install-path }} android-arm64 -D__ANDROID_API__=${{ env.android-api-version }}
+        ./Configure no-shared no-docs no-legacy android-arm64 -D__ANDROID_API__=${{ env.android-api-version }}
         make install
 
     - name: Upload artifacts
