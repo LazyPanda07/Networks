@@ -60,14 +60,14 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          ./Configure no-shared no-docs no-legacy --prefix=$(pwd)/install-dir/OpenSSL
           make install
           
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Linux
-        path: ${{ github.workspace }}/install-dir/OpenSSL
+        path: $(pwd)/install-dir/OpenSSL
 
 
   android-build:
@@ -84,11 +84,11 @@ jobs:
         
     - name: Build
       run: |
-        ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL android-arm64 -D__ANDROID_API__=${{ env.android-api-version }}
+        ./Configure no-shared no-docs no-legacy --prefix=$(pwd)/install-dir/OpenSSL android-arm64 -D__ANDROID_API__=${{ env.android-api-version }}
         make install
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Android
-        path: ${{ github.workspace }}/install-dir/OpenSSL
+        path: $(pwd)/install-dir/OpenSSL
