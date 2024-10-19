@@ -84,11 +84,11 @@ jobs:
         
     - name: Build
       run: |
-        ./Configure no-shared no-docs no-legacy android-arm64 -D__ANDROID_API__=${{ env.android-api-version }}
+        ./Configure no-shared no-docs no-legacy android-arm64 --prefix=/usr/local/OpenSSL -D__ANDROID_API__=${{ env.android-api-version }}
         make install
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Android
-        path: /usr/local/ssl
+        path: /usr/local/OpenSSL
