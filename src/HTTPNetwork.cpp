@@ -92,9 +92,9 @@ namespace web
 
 					from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
 
-					if (static_cast<size_t>(totalSize + bodySize) > data.size())
+					if (static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize) > data.size())
 					{
-						data.resize(static_cast<size_t>(totalSize + bodySize));
+						data.resize(static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize));
 
 						http = string_view(data.data(), totalSize);
 					}
