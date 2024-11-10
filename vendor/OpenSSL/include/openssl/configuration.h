@@ -27,7 +27,7 @@ extern "C" {
  * OpenSSL was configured with the following options:
  */
 
-# define OPENSSL_CONFIGURED_API 30400
+# define OPENSSL_CONFIGURED_API 30300
 # ifndef OPENSSL_RAND_SEED_OS
 #  define OPENSSL_RAND_SEED_OS
 # endif
@@ -36,6 +36,9 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_ACVP_TESTS
 #  define OPENSSL_NO_ACVP_TESTS
+# endif
+# ifndef OPENSSL_NO_AFALGENG
+#  define OPENSSL_NO_AFALGENG
 # endif
 # ifndef OPENSSL_NO_ASAN
 #  define OPENSSL_NO_ASAN
@@ -52,9 +55,6 @@ extern "C" {
 # ifndef OPENSSL_NO_CRYPTO_MDEBUG_BACKTRACE
 #  define OPENSSL_NO_CRYPTO_MDEBUG_BACKTRACE
 # endif
-# ifndef OPENSSL_NO_DEMOS
-#  define OPENSSL_NO_DEMOS
-# endif
 # ifndef OPENSSL_NO_DEVCRYPTOENG
 #  define OPENSSL_NO_DEVCRYPTOENG
 # endif
@@ -70,9 +70,6 @@ extern "C" {
 # ifndef OPENSSL_NO_EXTERNAL_TESTS
 #  define OPENSSL_NO_EXTERNAL_TESTS
 # endif
-# ifndef OPENSSL_NO_FIPS_POST
-#  define OPENSSL_NO_FIPS_POST
-# endif
 # ifndef OPENSSL_NO_FIPS_SECURITYCHECKS
 #  define OPENSSL_NO_FIPS_SECURITYCHECKS
 # endif
@@ -81,12 +78,6 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_FUZZ_LIBFUZZER
 #  define OPENSSL_NO_FUZZ_LIBFUZZER
-# endif
-# ifndef OPENSSL_NO_H3DEMO
-#  define OPENSSL_NO_H3DEMO
-# endif
-# ifndef OPENSSL_NO_JITTER
-#  define OPENSSL_NO_JITTER
 # endif
 # ifndef OPENSSL_NO_KTLS
 #  define OPENSSL_NO_KTLS
@@ -99,9 +90,6 @@ extern "C" {
 # endif
 # ifndef OPENSSL_NO_MSAN
 #  define OPENSSL_NO_MSAN
-# endif
-# ifndef OPENSSL_NO_PIE
-#  define OPENSSL_NO_PIE
 # endif
 # ifndef OPENSSL_NO_RC5
 #  define OPENSSL_NO_RC5
@@ -167,7 +155,7 @@ extern "C" {
 #  undef THIRTY_TWO_BIT
 # endif
 
-# define RC4_INT unsigned int
+# define RC4_INT unsigned char
 
 # if defined(OPENSSL_NO_COMP) || (defined(OPENSSL_NO_BROTLI) && defined(OPENSSL_NO_ZSTD) && defined(OPENSSL_NO_ZLIB))
 #  define OPENSSL_NO_COMP_ALG
