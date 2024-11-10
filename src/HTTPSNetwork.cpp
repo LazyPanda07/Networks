@@ -61,9 +61,29 @@ namespace web
 
 		SSL_set_tlsext_host_name(ssl, (hostName.empty() ? ip.data() : hostName.data()));
 
-		if (int errorCode = SSL_connect(ssl); errorCode != 1)
+		while (true)
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__, ssl, errorCode);
+			int returnCode = SSL_connect(ssl);
+
+			if (returnCode == 1)
+			{
+				break;
+			}
+			else if (returnCode == 0)
+			{
+				throw exceptions::SSLException(__LINE__, __FILE__, ssl, returnCode);
+			}
+			else if (returnCode == -1)
+			{
+				int errorCode = SSL_get_error(ssl, returnCode);
+
+				if (errorCode == SSL_ERROR_WANT_WRITE || errorCode == SSL_ERROR_WANT_READ)
+				{
+					continue;
+				}
+
+				exceptions::SSLException::throwSSLExceptionWithErrorCode(__LINE__, __FILE__, returnCode, errorCode);
+			}
 		}
 	}
 
