@@ -11,12 +11,12 @@ namespace web
 {
 	namespace exceptions
 	{
-		SSLException::SSLException(int line, std::string_view file) :
+		SSLException::SSLException(int line, std::string_view file, int returnCode, int errorCode) :
 			WebException(line, file),
-			returnCode((numeric_limits<int>::min)()),
+			returnCode(returnCode),
 			ssl(nullptr)
 		{
-
+			this->appendErrorMessage(static_cast<unsigned long>(errorCode));
 		}
 
 		void SSLException::appendErrorMessage(unsigned long errorCode)
@@ -56,17 +56,6 @@ namespace web
 
 				this->appendErrorMessage(errorCode);
 			}
-		}
-
-		void SSLException::throwSSLExceptionWithErrorCode(int line, string_view file, int returnCode, int errorCode)
-		{
-			SSLException exception(line, file);
-
-			exception.returnCode = returnCode;
-
-			exception.appendErrorMessage(static_cast<unsigned long>(errorCode));
-
-			throw exception;
 		}
 
 		SSLException::SSLException(int line, string_view file) :

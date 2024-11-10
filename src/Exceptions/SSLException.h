@@ -19,15 +19,9 @@ namespace web
 			SSL** ssl;
 
 		private:
-			SSLException(int line, std::string_view file);
-
-		private:
 			void appendErrorMessage(unsigned long errorCode);
 
 			void getSSLError(int line, std::string_view file);
-
-		public:
-			static void throwSSLExceptionWithErrorCode(int line, std::string_view file, int returnCode, int errorCode);
 
 		public:
 			SSLException(int line, std::string_view file);
@@ -35,6 +29,8 @@ namespace web
 			SSLException(int line, std::string_view file, SSL*& ssl, int returnCode);
 
 			SSLException(int line, std::string_view file, int returnCode);
+
+			SSLException(int line, std::string_view file, int returnCode, int errorCode);
 
 			bool hasSSL() const;
 
