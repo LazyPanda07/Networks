@@ -82,7 +82,7 @@ namespace web
 					continue;
 				}
 
-				exceptions::SSLException::throwSSLExceptionWithErrorCode(__LINE__, __FILE__, returnCode, errorCode);
+				throw exceptions::SSLException(__LINE__, __FILE__, returnCode, errorCode);
 			}
 		}
 	}
