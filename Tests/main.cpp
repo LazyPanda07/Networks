@@ -9,7 +9,7 @@
 
 std::string token;
 
-TEST(HTTP, GithubAPIString)
+TEST(HTTP, GithubAPI)
 {
 	try
 	{
@@ -33,6 +33,37 @@ TEST(HTTP, GithubAPIString)
 
 		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
 	} 
+	catch (const web::exceptions::WebException& e)
+	{
+		std::cout << e.what() << ' ' << e.getFile() << ' ' << e.getLine() << ' ' << e.getErrorCode() << std::endl;
+
+		exit(1);
+	}
+}
+
+TEST(HTTP, GithubAPIBuilder)
+{
+	try
+	{
+		streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+		web::HTTPBuilder request = web::HTTPBuilder()
+			.getRequest()
+			.parameters("repos/LazyPanda07/Networks/branches")
+			.headers
+			(
+				"Host", "api.github.com",
+				"Accept", "application/vnd.github+json",
+				"Authorization", "Bearer " + token,
+				"User-Agent", "NetworkTests"
+			);
+		web::HTTPParser response;
+
+		stream << request;
+
+		stream >> response;
+
+		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
+	}
 	catch (const web::exceptions::WebException& e)
 	{
 		std::cout << e.what() << ' ' << e.getFile() << ' ' << e.getLine() << ' ' << e.getErrorCode() << std::endl;
