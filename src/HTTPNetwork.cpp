@@ -11,6 +11,14 @@ static bool endsWith(string_view test, string_view suffix);
 
 static string_view getHeaderValue(string_view::const_iterator startHeader, size_t headerSize, string_view http);
 
+class ReadOnlyContainerWrapper : public web::utility::ContainerWrapper
+{
+public:
+	ReadOnlyContainerWrapper(char* data, int size);
+
+	~ReadOnlyContainerWrapper() = default;
+};
+
 namespace web
 {
 	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
@@ -27,9 +35,14 @@ namespace web
 
 	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream)
 	{
+		this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream);
+	}
+
+	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream)
+	{
 		try
 		{
-			return Network::sendBytes(data.data(), static_cast<int>(data.size()), endOfStream);
+			return Network::sendBytes(data, size, endOfStream);
 		}
 		catch (const exceptions::WebException& e)
 		{
@@ -154,6 +167,13 @@ namespace web
 
 		return totalSize;
 	}
+
+	int HTTPNetwork::receiveRawData(char* data, int size, bool& endOfStream)
+	{
+		ReadOnlyContainerWrapper wrapper(data, size);
+
+		this->receiveData(wrapper, endOfStream);
+	}
 }
 
 bool insensetiveSearching(char first, char second)
@@ -173,4 +193,35 @@ string_view getHeaderValue(string_view::const_iterator startHeader, size_t heade
 	size_t valueSize = http.find(web::HTTPNetwork::crlf, distance(http.begin(), startHeader)) - headerValuePosition;
 
 	return http.substr(headerValuePosition, valueSize);
+}
+
+ReadOnlyContainerWrapper::ReadOnlyContainerWrapper(char* data, int size) :
+	ContainerWrapper
+	(
+		[data]() -> char*
+		{
+			return data;
+		},
+		[data]() -> const char*
+		{
+			return data;
+		},
+		[size]() -> size_t
+		{
+			return size;
+		},
+		[size](size_t newSize)
+		{
+			if (newSize > size)
+			{
+				throw runtime_error("Can't resize ReadOnlyContainerWrapper");
+			}
+		},
+		[data, size](size_t index) -> char&
+		{
+			return data[index];
+		}
+	)
+{
+
 }
