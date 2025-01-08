@@ -35,7 +35,7 @@ namespace web
 
 	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream)
 	{
-		this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream);
+		return this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream);
 	}
 
 	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream)
@@ -172,7 +172,7 @@ namespace web
 	{
 		ReadOnlyContainerWrapper wrapper(data, size);
 
-		this->receiveData(wrapper, endOfStream);
+		return this->receiveData(wrapper, endOfStream);
 	}
 }
 
