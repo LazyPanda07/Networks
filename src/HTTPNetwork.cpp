@@ -76,14 +76,8 @@ namespace web
 
 			lastPacket = this->receiveBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream);
 
-			if (lastPacket == SOCKET_ERROR)
+			if (endOfStream)
 			{
-				THROW_WEB_EXCEPTION;
-			}
-			else if (!lastPacket)
-			{
-				endOfStream = true;
-
 				break;
 			}
 
