@@ -6,6 +6,16 @@ set(LIBS Networks HTTP JSON SocketStreams ssl crypto)
 
 project(Tests)
 
+include(FetchContent)
+
+FetchContent_Declare(
+    BaseTCPServer
+    GIT_REPOSITORY https://github.com/LazyPanda07/BaseTCPServer.git
+    GIT_TAG        ${BASE_TCP_SERVER_TAG}
+)
+
+FetchContent_MakeAvailable(BaseTCPServer)
+
 find_package(GTest)
 
 if(NOT ${GTest_FOUND})
@@ -26,6 +36,7 @@ endif (UNIX)
 add_executable(
 	${PROJECT_NAME}
 	main.cpp
+	server.cpp
 )
 
 target_include_directories(
@@ -35,6 +46,7 @@ target_include_directories(
 	../HTTP/JSON/src/
 	../SocketStreams/src/
 	../vendor/OpenSSL/include/
+	${basetcpserver_SOURCE_DIR}/src
 	${GTEST_INCLUDE_DIRS}
 )
 
@@ -48,6 +60,7 @@ target_link_directories(
 target_link_libraries(
 	${PROJECT_NAME} PUBLIC
 	${LIBS}
+	BaseTCPServer
 	${GTEST_BOTH_LIBRARIES}
 )
 
