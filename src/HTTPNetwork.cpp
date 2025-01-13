@@ -33,16 +33,16 @@ namespace web
 
 	}
 
-	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream)
+	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
-		return this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream);
+		return this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream, flags);
 	}
 
-	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream)
+	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream, int flags)
 	{
 		try
 		{
-			return Network::sendBytes(data, size, endOfStream);
+			return Network::sendBytes(data, size, endOfStream, flags);
 		}
 		catch (const exceptions::WebException& e)
 		{
@@ -52,7 +52,7 @@ namespace web
 		}
 	}
 
-	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream)
+	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
@@ -74,7 +74,7 @@ namespace web
 				data.resize(data.size() * 2);
 			}
 
-			lastPacket = this->receiveBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream);
+			lastPacket = this->receiveBytes(data.data() + totalSize, static_cast<int>(data.size()) - totalSize, endOfStream, flags);
 
 			if (endOfStream)
 			{
@@ -162,11 +162,11 @@ namespace web
 		return totalSize;
 	}
 
-	int HTTPNetwork::receiveRawData(char* data, int size, bool& endOfStream)
+	int HTTPNetwork::receiveRawData(char* data, int size, bool& endOfStream, int flags)
 	{
 		ReadOnlyContainerWrapper wrapper(data, size);
 
-		return this->receiveData(wrapper, endOfStream);
+		return this->receiveData(wrapper, endOfStream, flags);
 	}
 }
 

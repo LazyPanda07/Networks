@@ -32,13 +32,13 @@ namespace web
 		/// @param port Remote port to connect to
 		HTTPNetwork(std::string_view ip, std::string_view port = httpPort, DWORD timeout = 30'000);
 
-		int sendData(const utility::ContainerWrapper& data, bool& endOfStream) override;
+		int sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags = 0) override;
 
-		int sendRawData(const char* data, int size, bool& endOfStream) override;
+		int sendRawData(const char* data, int size, bool& endOfStream, int flags = 0) override;
 
-		int receiveData(utility::ContainerWrapper& data, bool& endOfStream) override;
+		int receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags = 0) override;
 
-		int receiveRawData(char* data, int size, bool& endOfStream) override;
+		int receiveRawData(char* data, int size, bool& endOfStream, int flags = 0) override;
 
 		virtual ~HTTPNetwork() = default;
 	};
