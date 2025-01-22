@@ -15,7 +15,7 @@ TEST(HTTPS, GithubAPI)
 {
 	try
 	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
 		std::string request = web::HTTPBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -47,7 +47,7 @@ TEST(HTTPS, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
 		web::HTTPBuilder request = web::HTTPBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -78,7 +78,7 @@ TEST(HTTPS, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPSNetwork>("api.github.com", "443"));
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
 		std::string request = web::HTTPBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -110,7 +110,7 @@ TEST(HTTP, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPNetwork>("127.0.0.1", "8080"));
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
 		web::HTTPBuilder request = web::HTTPBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -124,7 +124,6 @@ TEST(HTTP, GithubAPIBuilder)
 		web::HTTPParser response;
 
 		stream << request;
-
 		stream >> response;
 
 		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
@@ -141,7 +140,7 @@ TEST(HTTP, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream(std::make_unique<web::HTTPNetwork>("127.0.0.1", "8080"));
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
 		std::string request = web::HTTPBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")

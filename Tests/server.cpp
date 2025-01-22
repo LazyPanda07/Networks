@@ -3,6 +3,7 @@
 #include "IOSocketStream.h"
 #include "HTTPBuilder.h"
 #include "HTTPParser.h"
+#include "HTTPNetwork.h"
 
 #include "BaseTCPServer.h"
 
@@ -13,7 +14,7 @@ class TestServer : public web::BaseTCPServer
 private:
 	void clientConnection(const std::string& ip, SOCKET clientSocket, sockaddr address, std::function<void()>& cleanup) override
 	{
-		streams::IOSocketStream stream(clientSocket);
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>(clientSocket);
 
 		while (true)
 		{
