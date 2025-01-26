@@ -30,8 +30,10 @@ private:
 			{
 				stream >> parser;
 			}
-			catch (const std::exception&)
+			catch (const std::exception& e)
 			{
+				printf("%s\n", e.what());
+
 				break;
 			}
 
