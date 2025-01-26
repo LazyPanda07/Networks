@@ -16,54 +16,27 @@ private:
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>(clientSocket);
 
-		while (true)
+		web::HTTPParser parser;
+		web::HTTPBuilder builder;
+
+		stream >> parser;
+
+		try
 		{
-			web::HTTPParser parser;
-			web::HTTPBuilder builder;
+			const web::HeadersMap& headers = parser.getHeaders();
 
-			if (stream.eof() || stream.bad())
-			{
-				break;
-			}
-			
-			try
-			{
-				stream >> parser;
-			}
-			catch (const std::exception& e)
-			{
-				printf("%s\n", e.what());
+			check(headers, "Host", "api.github.com");
+			check(headers, "Accept", "application/vnd.github+json");
+			check(headers, "User-Agent", "NetworkTests");
 
-				break;
-			}
-
-			if (!parser)
-			{
-				continue;
-			}
-
-			if (stream.eof() || stream.bad())
-			{
-				break;
-			}
-
-			try
-			{
-				const auto& headers = parser.getHeaders();
-
-				check(headers, "Host", "api.github.com");
-				check(headers, "Accept", "application/vnd.github+json");
-				check(headers, "User-Agent", "NetworkTests");
-
-				builder.responseCode(web::ResponseCodes::ok);
-			}
-			catch (const std::exception&)
-			{
-				builder.responseCode(web::ResponseCodes::internalServerError);
-			}
-
-			stream << builder;
+			builder.responseCode(web::ResponseCodes::ok);
 		}
+		catch (const std::exception&)
+		{
+			builder.responseCode(web::ResponseCodes::internalServerError);
+		}
+
+		stream << builder;
 	}
 
 public:
