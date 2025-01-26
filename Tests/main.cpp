@@ -33,7 +33,7 @@ TEST(HTTPS, GithubAPI)
 
 		stream >> response;
 
-		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::responseCodes::ok);
+		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::ResponseCodes::ok);
 	} 
 	catch (const web::exceptions::WebException& e)
 	{
@@ -64,7 +64,7 @@ TEST(HTTPS, GithubAPIBuilder)
 
 		stream >> response;
 
-		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
+		ASSERT_EQ(response.getResponseCode(), web::ResponseCodes::ok);
 	}
 	catch (const web::exceptions::WebException& e)
 	{
@@ -96,7 +96,7 @@ TEST(HTTPS, GithubAPIParser)
 
 		stream >> response;
 
-		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
+		ASSERT_EQ(response.getResponseCode(), web::ResponseCodes::ok);
 	}
 	catch (const web::exceptions::WebException& e)
 	{
@@ -126,7 +126,7 @@ TEST(HTTP, GithubAPIBuilder)
 		stream << request;
 		stream >> response;
 
-		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
+		ASSERT_EQ(response.getResponseCode(), web::ResponseCodes::ok);
 	}
 	catch (const web::exceptions::WebException& e)
 	{
@@ -158,7 +158,7 @@ TEST(HTTP, GithubAPIParser)
 
 		stream >> response;
 
-		ASSERT_EQ(response.getResponseCode(), web::responseCodes::ok);
+		ASSERT_EQ(response.getResponseCode(), web::ResponseCodes::ok);
 	}
 	catch (const web::exceptions::WebException& e)
 	{

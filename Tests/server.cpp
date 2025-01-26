@@ -25,8 +25,20 @@ private:
 			{
 				break;
 			}
+			
+			try
+			{
+				stream >> parser;
+			}
+			catch (const std::exception&)
+			{
+				break;
+			}
 
-			stream >> parser;
+			if (!parser)
+			{
+				continue;
+			}
 
 			if (stream.eof() || stream.bad())
 			{
@@ -41,11 +53,11 @@ private:
 				check(headers, "Accept", "application/vnd.github+json");
 				check(headers, "User-Agent", "NetworkTests");
 
-				builder.responseCode(web::responseCodes::ok);
+				builder.responseCode(web::ResponseCodes::ok);
 			}
 			catch (const std::exception&)
 			{
-				builder.responseCode(web::responseCodes::internalServerError);
+				builder.responseCode(web::ResponseCodes::internalServerError);
 			}
 
 			stream << builder;
