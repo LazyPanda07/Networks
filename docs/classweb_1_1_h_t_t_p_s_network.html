@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.11.10</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.12.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -123,18 +123,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a44f0e743ac86a3f5fd8d2ef6744b8cc0 inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classweb_1_1_h_t_t_p_network.html#a44f0e743ac86a3f5fd8d2ef6744b8cc0">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000)</td></tr>
 <tr class="memdesc:a44f0e743ac86a3f5fd8d2ef6744b8cc0 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
 <tr class="separator:a44f0e743ac86a3f5fd8d2ef6744b8cc0 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5ef4ff69fc9c1b09b1a83a118976a96 inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_ad5ef4ff69fc9c1b09b1a83a118976a96"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sendData</b> (const utility::ContainerWrapper &amp;data, bool &amp;endOfStream) override</td></tr>
-<tr class="separator:ad5ef4ff69fc9c1b09b1a83a118976a96 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae018e86a545d521328c56754b92308db inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_ae018e86a545d521328c56754b92308db"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sendRawData</b> (const char *data, int size, bool &amp;endOfStream) override</td></tr>
-<tr class="separator:ae018e86a545d521328c56754b92308db inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a105843562122159278a4a2c08938c73b inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_a105843562122159278a4a2c08938c73b"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b> (utility::ContainerWrapper &amp;data, bool &amp;endOfStream) override</td></tr>
-<tr class="separator:a105843562122159278a4a2c08938c73b inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad00d428c85d1f8776b56b8d82554135b inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_ad00d428c85d1f8776b56b8d82554135b"><td class="memItemLeft" align="right" valign="top">
-int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveRawData</b> (char *data, int size, bool &amp;endOfStream) override</td></tr>
-<tr class="separator:ad00d428c85d1f8776b56b8d82554135b inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb3c96b9e6b68dc858832d2eb06fb6db inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_adb3c96b9e6b68dc858832d2eb06fb6db"><td class="memItemLeft" align="right" valign="top">
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sendData</b> (const utility::ContainerWrapper &amp;data, bool &amp;endOfStream, int flags=0) override</td></tr>
+<tr class="separator:adb3c96b9e6b68dc858832d2eb06fb6db inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6a21e99be4ea9d43537b55b059e84f7 inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_aa6a21e99be4ea9d43537b55b059e84f7"><td class="memItemLeft" align="right" valign="top">
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sendRawData</b> (const char *data, int size, bool &amp;endOfStream, int flags=0) override</td></tr>
+<tr class="separator:aa6a21e99be4ea9d43537b55b059e84f7 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af856f5f7e22cbb5958b938c733d7a1c3 inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_af856f5f7e22cbb5958b938c733d7a1c3"><td class="memItemLeft" align="right" valign="top">
+int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveData</b> (utility::ContainerWrapper &amp;data, bool &amp;endOfStream, int flags=0) override</td></tr>
+<tr class="separator:af856f5f7e22cbb5958b938c733d7a1c3 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a13cb5ede85b668fdee5d4478cf440 inherit pub_methods_classweb_1_1_h_t_t_p_network" id="r_a25a13cb5ede85b668fdee5d4478cf440"><td class="memItemLeft" align="right" valign="top">
+int&#160;</td><td class="memItemRight" valign="bottom"><b>receiveRawData</b> (char *data, int size, bool &amp;endOfStream, int flags=0) override</td></tr>
+<tr class="separator:a25a13cb5ede85b668fdee5d4478cf440 inherit pub_methods_classweb_1_1_h_t_t_p_network"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
