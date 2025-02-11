@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.12.0</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.13.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -113,12 +113,14 @@ Inheritance diagram for web::HTTPNetwork:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aba267705b39499f08c41fa6d97a047e0" id="r_aba267705b39499f08c41fa6d97a047e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba267705b39499f08c41fa6d97a047e0">HTTPNetwork</a> (SOCKET clientSocket)</td></tr>
-<tr class="memdesc:aba267705b39499f08c41fa6d97a047e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor.  <br /></td></tr>
-<tr class="separator:aba267705b39499f08c41fa6d97a047e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44f0e743ac86a3f5fd8d2ef6744b8cc0" id="r_a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44f0e743ac86a3f5fd8d2ef6744b8cc0">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000)</td></tr>
-<tr class="memdesc:a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
-<tr class="separator:a44f0e743ac86a3f5fd8d2ef6744b8cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fda6d58f420b8ae36426d6fcf12269" id="r_ab6fda6d58f420b8ae36426d6fcf12269"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6fda6d58f420b8ae36426d6fcf12269">HTTPNetwork</a> (SOCKET clientSocket, uint64_t largeBodySizeThreshold=0)</td></tr>
+<tr class="memdesc:ab6fda6d58f420b8ae36426d6fcf12269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor.  <br /></td></tr>
+<tr class="separator:ab6fda6d58f420b8ae36426d6fcf12269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6b9592eb8ab6507f912bccec07ea27" id="r_a8c6b9592eb8ab6507f912bccec07ea27"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c6b9592eb8ab6507f912bccec07ea27">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000, uint64_t largeBodySizeThreshold=0)</td></tr>
+<tr class="memdesc:a8c6b9592eb8ab6507f912bccec07ea27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
+<tr class="separator:a8c6b9592eb8ab6507f912bccec07ea27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a622c7a9d42530e4f3c6e57f94ecacdf3" id="r_a622c7a9d42530e4f3c6e57f94ecacdf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a622c7a9d42530e4f3c6e57f94ecacdf3">setLargeBodyHandler</a> (const std::function&lt; bool(std::string_view)&gt; &amp;largeBodyHandler, const std::function&lt; void(utility::ContainerWrapper &amp;)&gt; &amp;headersHandler, int64_t largeBodyPacketSize=-1)</td></tr>
+<tr class="separator:a622c7a9d42530e4f3c6e57f94ecacdf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb3c96b9e6b68dc858832d2eb06fb6db" id="r_adb3c96b9e6b68dc858832d2eb06fb6db"><td class="memItemLeft" align="right" valign="top"><a id="adb3c96b9e6b68dc858832d2eb06fb6db" name="adb3c96b9e6b68dc858832d2eb06fb6db"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sendData</b> (const utility::ContainerWrapper &amp;data, bool &amp;endOfStream, int flags=0) override</td></tr>
 <tr class="separator:adb3c96b9e6b68dc858832d2eb06fb6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +142,9 @@ static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:abe8260b841229c8a037df635a591b06b" id="r_abe8260b841229c8a037df635a591b06b"><td class="memItemLeft" align="right" valign="top"><a id="abe8260b841229c8a037df635a591b06b" name="abe8260b841229c8a037df635a591b06b"></a>
 static constexpr uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>thresholdSize</b> = 100</td></tr>
 <tr class="separator:abe8260b841229c8a037df635a591b06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af68b39d1509d7ae87a1aca0f73598f74" id="r_af68b39d1509d7ae87a1aca0f73598f74"><td class="memItemLeft" align="right" valign="top"><a id="af68b39d1509d7ae87a1aca0f73598f74" name="af68b39d1509d7ae87a1aca0f73598f74"></a>
+static constexpr uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>defaultLargeBodySize</b> = 128 * 1024 * 1024</td></tr>
+<tr class="separator:af68b39d1509d7ae87a1aca0f73598f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdba3a51dc754abc761c7d0bb1b8e0a3" id="r_abdba3a51dc754abc761c7d0bb1b8e0a3"><td class="memItemLeft" align="right" valign="top"><a id="abdba3a51dc754abc761c7d0bb1b8e0a3" name="abdba3a51dc754abc761c7d0bb1b8e0a3"></a>
 static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><b>contentLengthHeader</b> = &quot;Content-Length&quot;</td></tr>
 <tr class="separator:abdba3a51dc754abc761c7d0bb1b8e0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,8 +167,8 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Network functions for HTTP. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aba267705b39499f08c41fa6d97a047e0" name="aba267705b39499f08c41fa6d97a047e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba267705b39499f08c41fa6d97a047e0">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[1/2]</span></h2>
+<a id="ab6fda6d58f420b8ae36426d6fcf12269" name="ab6fda6d58f420b8ae36426d6fcf12269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6fda6d58f420b8ae36426d6fcf12269">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,8 +176,12 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
         <tr>
           <td class="memname">web::HTTPNetwork::HTTPNetwork </td>
           <td>(</td>
-          <td class="paramtype">SOCKET</td>          <td class="paramname"><span class="paramname"><em>clientSocket</em></span></td><td>)</td>
+          <td class="paramtype">SOCKET</td>          <td class="paramname"><span class="paramname"><em>clientSocket</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>largeBodySizeThreshold</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -187,8 +196,8 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 
 </div>
 </div>
-<a id="a44f0e743ac86a3f5fd8d2ef6744b8cc0" name="a44f0e743ac86a3f5fd8d2ef6744b8cc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44f0e743ac86a3f5fd8d2ef6744b8cc0">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
+<a id="a8c6b9592eb8ab6507f912bccec07ea27" name="a8c6b9592eb8ab6507f912bccec07ea27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c6b9592eb8ab6507f912bccec07ea27">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +215,12 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DWORD</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30&#160;'000</span>&#160;)</td>
+          <td class="paramtype">DWORD</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30&#160;'000</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>largeBodySizeThreshold</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -216,6 +230,40 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
   <table class="params">
     <tr><td class="paramname">ip</td><td>Remote address to connect to </td></tr>
     <tr><td class="paramname">port</td><td>Remote port to connect to </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a622c7a9d42530e4f3c6e57f94ecacdf3" name="a622c7a9d42530e4f3c6e57f94ecacdf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a622c7a9d42530e4f3c6e57f94ecacdf3">&#9670;&#160;</a></span>setLargeBodyHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void web::HTTPNetwork::setLargeBodyHandler </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; bool(std::string_view)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>largeBodyHandler</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::function&lt; void(utility::ContainerWrapper &amp;)&gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>headersHandler</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t</td>          <td class="paramname"><span class="paramname"><em>largeBodyPacketSize</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">largeBodyHandler</td><td></td></tr>
+    <tr><td class="paramname">largeBodyPacketSize</td><td>-1 means uses default </td></tr>
   </table>
   </dd>
 </dl>

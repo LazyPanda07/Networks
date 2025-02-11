@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.12.0</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.13.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -94,45 +94,56 @@ $(function(){ initResizable(false); });
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;NetworksUtility.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Network.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;NetworksUtility.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>web</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classweb_1_1_h_t_t_p_network.html">   12</a></span>    <span class="keyword">class </span>NETWORKS_API <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">HTTPNetwork</a> : <span class="keyword">public</span> web::Network</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> uint16_t averageHTTPRequestSize = 1500;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> uint16_t thresholdSize = 100;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view contentLengthHeader = <span class="stringliteral">&quot;Content-Length&quot;</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view transferEncodingHeader = <span class="stringliteral">&quot;Transfer-Encoding&quot;</span>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view transferEncodingChunked = <span class="stringliteral">&quot;Chunked&quot;</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view crlfcrlf = <span class="stringliteral">&quot;\r\n\r\n&quot;</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view crlf = <span class="stringliteral">&quot;\r\n&quot;</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">constexpr</span> std::string_view httpPort = <span class="stringliteral">&quot;80&quot;</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">HTTPNetwork</a>(SOCKET clientSocket);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classweb_1_1_h_t_t_p_network.html#a44f0e743ac86a3f5fd8d2ef6744b8cc0">   33</a></span>        <a class="code hl_function" href="classweb_1_1_h_t_t_p_network.html#a44f0e743ac86a3f5fd8d2ef6744b8cc0">HTTPNetwork</a>(std::string_view ip, std::string_view port = httpPort, DWORD timeout = 30&#39;000);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordtype">int</span> sendData(<span class="keyword">const</span> utility::ContainerWrapper&amp; data, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">int</span> sendRawData(<span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> size, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Network.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span>web</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classweb_1_1_h_t_t_p_network.html">   14</a></span>    <span class="keyword">class </span>NETWORKS_API <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">HTTPNetwork</a> : <span class="keyword">public</span> web::Network</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> uint16_t averageHTTPRequestSize = 1500;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> uint16_t thresholdSize = 100;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> uint64_t defaultLargeBodySize = 128 * 1024 * 1024;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view contentLengthHeader = <span class="stringliteral">&quot;Content-Length&quot;</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view transferEncodingHeader = <span class="stringliteral">&quot;Transfer-Encoding&quot;</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view transferEncodingChunked = <span class="stringliteral">&quot;Chunked&quot;</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view crlfcrlf = <span class="stringliteral">&quot;\r\n\r\n&quot;</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view crlf = <span class="stringliteral">&quot;\r\n&quot;</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">constexpr</span> std::string_view httpPort = <span class="stringliteral">&quot;80&quot;</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        std::function&lt;bool(std::string_view)&gt; largeBodyHandler;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        std::function&lt;void(utility::ContainerWrapper&amp;)&gt; headersHandler;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        uint64_t largeBodySizeThreshold;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        int64_t largeBodyPacketSize;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">HTTPNetwork</a>(SOCKET clientSocket, uint64_t largeBodySizeThreshold = 0);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">int</span> receiveData(utility::ContainerWrapper&amp; data, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">int</span> receiveRawData(<span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> size, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">~HTTPNetwork</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classweb_1_1_h_t_t_p_network.html#a8c6b9592eb8ab6507f912bccec07ea27">   42</a></span>        <a class="code hl_function" href="classweb_1_1_h_t_t_p_network.html#a8c6b9592eb8ab6507f912bccec07ea27">HTTPNetwork</a>(std::string_view ip, std::string_view port = httpPort, DWORD timeout = 30&#39;000, uint64_t largeBodySizeThreshold = 0);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">void</span> setLargeBodyHandler(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">bool</span>(std::string_view)&gt;&amp; largeBodyHandler, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(utility::ContainerWrapper&amp;)&gt;&amp; headersHandler, int64_t largeBodyPacketSize = -1);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">int</span> sendData(<span class="keyword">const</span> utility::ContainerWrapper&amp; data, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">int</span> sendRawData(<span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> size, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">int</span> receiveData(utility::ContainerWrapper&amp; data, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">int</span> receiveRawData(<span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> size, <span class="keywordtype">bool</span>&amp; endOfStream, <span class="keywordtype">int</span> flags = 0) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classweb_1_1_h_t_t_p_network.html">~HTTPNetwork</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    };</div>
 </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
-<div class="ttc" id="aclassweb_1_1_h_t_t_p_network_html"><div class="ttname"><a href="classweb_1_1_h_t_t_p_network.html">web::HTTPNetwork</a></div><div class="ttdoc">Network functions for HTTP.</div><div class="ttdef"><b>Definition</b> HTTPNetwork.h:13</div></div>
-<div class="ttc" id="aclassweb_1_1_h_t_t_p_network_html_a44f0e743ac86a3f5fd8d2ef6744b8cc0"><div class="ttname"><a href="classweb_1_1_h_t_t_p_network.html#a44f0e743ac86a3f5fd8d2ef6744b8cc0">web::HTTPNetwork::HTTPNetwork</a></div><div class="ttdeci">HTTPNetwork(std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000)</div><div class="ttdoc">Client side constructor.</div></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+<div class="ttc" id="aclassweb_1_1_h_t_t_p_network_html"><div class="ttname"><a href="classweb_1_1_h_t_t_p_network.html">web::HTTPNetwork</a></div><div class="ttdoc">Network functions for HTTP.</div><div class="ttdef"><b>Definition</b> HTTPNetwork.h:15</div></div>
+<div class="ttc" id="aclassweb_1_1_h_t_t_p_network_html_a8c6b9592eb8ab6507f912bccec07ea27"><div class="ttname"><a href="classweb_1_1_h_t_t_p_network.html#a8c6b9592eb8ab6507f912bccec07ea27">web::HTTPNetwork::HTTPNetwork</a></div><div class="ttdeci">HTTPNetwork(std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000, uint64_t largeBodySizeThreshold=0)</div><div class="ttdoc">Client side constructor.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

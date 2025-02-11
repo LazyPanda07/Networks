@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['receivedata_0',['receiveData',['../classweb_1_1_h_t_t_p_network.html#a105843562122159278a4a2c08938c73b',1,'web::HTTPNetwork']]]
+  ['setlargebodyhandler_0',['setLargeBodyHandler',['../classweb_1_1_h_t_t_p_network.html#a622c7a9d42530e4f3c6e57f94ecacdf3',1,'web::HTTPNetwork']]]
 ];
