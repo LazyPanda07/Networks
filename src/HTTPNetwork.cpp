@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <charconv>
+#include <cstring>
 
 using namespace std;
 
