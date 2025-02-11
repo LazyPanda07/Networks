@@ -161,7 +161,7 @@ namespace web
 					{
 						string bodyData(data.data() + position, totalSize - position);
 
-						memset(data.data() + position, 0, bodyData.size());
+						std::memset(data.data() + position, 0, bodyData.size());
 
 						headersHandler(data);
 						largeBodyHandler(bodyData);
