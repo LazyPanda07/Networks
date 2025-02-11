@@ -8,7 +8,7 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install-dir CACHE STRING "")
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
-project(Networks VERSION 1.12.0)
+project(Networks VERSION 1.13.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)

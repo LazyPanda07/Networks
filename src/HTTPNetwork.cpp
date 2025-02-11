@@ -21,16 +21,31 @@ public:
 
 namespace web
 {
-	HTTPNetwork::HTTPNetwork(SOCKET clientSocket) :
-		Network(clientSocket)
+	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, uint64_t largeBodySizeThreshold) :
+		Network(clientSocket),
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize),
+		largeBodyPacketSize(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize / 64)
 	{
 
 	}
 
-	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout) :
-		Network(ip, port, timeout)
+	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout, uint64_t largeBodySizeThreshold) :
+		Network(ip, port, timeout),
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize),
+		largeBodyPacketSize(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize / 64)
 	{
 
+	}
+
+	void HTTPNetwork::setLargeBodyHandler(const std::function<bool(std::string_view)>& largeBodyHandler, const std::function<void(utility::ContainerWrapper&)>& headersHandler, int64_t largeBodyPacketSize)
+	{
+		this->largeBodyHandler = largeBodyHandler;
+		this->headersHandler = headersHandler;
+
+		if (largeBodyPacketSize != -1)
+		{
+			this->largeBodyPacketSize = largeBodyPacketSize;
+		}
 	}
 
 	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags)
@@ -56,7 +71,8 @@ namespace web
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
-		int bodySize = -1;
+		int64_t bodySize = -1;
+		string largeBodyData;
 		bool isFindEnd = false;
 		bool chunked = false;
 
@@ -99,7 +115,11 @@ namespace web
 
 					from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
 
-					if (static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize) > data.size())
+					if (largeBodyHandler && static_cast<uint64_t>(bodySize) >= largeBodySizeThreshold)
+					{
+						largeBodyData.resize(largeBodyPacketSize);
+					}
+					else if (static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize) > data.size())
 					{
 						data.resize(static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize));
 
@@ -135,11 +155,29 @@ namespace web
 
 				if (position != string_view::npos)
 				{
-					isFindEnd = totalSize - position == bodySize + crlfcrlf.size();
+					position += crlfcrlf.size();
+
+					if (largeBodyData.size())
+					{
+						string bodyData(data.data() + position, totalSize - position);
+
+						memset(data.data() + position, 0, bodyData.size());
+
+						headersHandler(data);
+						largeBodyHandler(bodyData);
+
+						bodySize -= bodyData.size();
+						totalSize -= static_cast<int>(bodyData.size());
+
+						isFindEnd = true;
+					}
+					else
+					{
+						isFindEnd = totalSize - position == bodySize;
+					}
 				}
 			}
-
-			if (endsWith(http, crlfcrlf))
+			else if (endsWith(http, crlfcrlf))
 			{
 				if (chunked)
 				{
@@ -154,6 +192,23 @@ namespace web
 				{
 					isFindEnd = http.find(crlfcrlf) != string_view::npos;
 				}
+			}
+		}
+
+		if (largeBodyData.size())
+		{
+			while (bodySize)
+			{
+				lastPacket = this->receiveBytes(largeBodyData.data(), (std::min)(static_cast<int>(largeBodyData.size()), static_cast<int>(bodySize)), endOfStream, flags);
+
+				if (endOfStream)
+				{
+					break;
+				}
+
+				bodySize -= lastPacket;
+
+				largeBodyHandler(string_view(largeBodyData.data(), lastPacket));
 			}
 		}
 
