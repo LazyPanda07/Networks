@@ -324,12 +324,14 @@ XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions</Command>
     <ClCompile Include="src\Exceptions\SSLException.cpp" />
     <ClCompile Include="src\HTTPNetwork.cpp" />
     <ClCompile Include="src\HTTPSNetwork.cpp" />
+    <ClCompile Include="src\LargeBodyHandler.cpp" />
     <ClCompile Include="src\NetworksUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Exceptions\SSLException.h" />
     <ClInclude Include="src\HTTPNetwork.h" />
     <ClInclude Include="src\HTTPSNetwork.h" />
+    <ClInclude Include="src\LargeBodyHandler.h" />
     <ClInclude Include="src\NetworksUtility.h" />
   </ItemGroup>
   <ItemGroup>

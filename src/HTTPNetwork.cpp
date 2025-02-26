@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <charconv>
 #include <cstring>
+#include <chrono>
 
 using namespace std;
 
@@ -22,31 +23,23 @@ public:
 
 namespace web
 {
-	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, uint64_t largeBodySizeThreshold) :
+	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, size_t largeBodySizeThreshold) :
 		Network(clientSocket),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize),
-		largeBodyPacketSize(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize / 64)
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
 
 	}
 
-	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout, uint64_t largeBodySizeThreshold) :
+	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout, size_t largeBodySizeThreshold) :
 		Network(ip, port, timeout),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize),
-		largeBodyPacketSize(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize / 64)
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
 
 	}
 
-	void HTTPNetwork::setLargeBodyHandler(const std::function<bool(std::string_view)>& largeBodyHandler, const std::function<void(utility::ContainerWrapper&)>& headersHandler, int64_t largeBodyPacketSize)
+	void HTTPNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
 	{
-		this->largeBodyHandler = largeBodyHandler;
-		this->headersHandler = headersHandler;
-
-		if (largeBodyPacketSize != -1)
-		{
-			this->largeBodyPacketSize = largeBodyPacketSize;
-		}
+		this->largeBodySizeThreshold = largeBodySizeThreshold;
 	}
 
 	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags)
@@ -73,15 +66,37 @@ namespace web
 		int totalSize = 0;
 		int lastPacket = 0;
 		int64_t bodySize = -1;
-		string largeBodyData;
 		bool isFindEnd = false;
 		bool chunked = false;
+		bool largeBodyDetected = false;
 
 		endOfStream = false;
 
 		if (data.size() < averageHTTPRequestSize)
 		{
 			data.resize(averageHTTPRequestSize);
+		}
+
+		if (largeBodyHandler)
+		{
+			LargeBodyHandler::WaitBehavior behavior = largeBodyHandler->getWaitBehavior();
+
+			switch (behavior)
+			{
+			case web::LargeBodyHandler::WaitBehavior::wait:
+				while (largeBodyHandler->isRunning())
+				{
+					this_thread::sleep_for(1s);
+				}
+
+				break;
+
+			case web::LargeBodyHandler::WaitBehavior::exit:
+				return 0;
+
+			default:
+				return 0;
+			}
 		}
 
 		while (!isFindEnd)
@@ -116,9 +131,9 @@ namespace web
 
 					from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
 
-					if (largeBodyHandler && static_cast<uint64_t>(bodySize) >= largeBodySizeThreshold)
+					if (largeBodyHandler && bodySize >= static_cast<int64_t>(largeBodySizeThreshold))
 					{
-						largeBodyData.resize(largeBodyPacketSize);
+						largeBodyDetected = true;
 					}
 					else if (static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize) > data.size())
 					{
@@ -158,19 +173,19 @@ namespace web
 				{
 					position += crlfcrlf.size();
 
-					if (largeBodyData.size())
+					if (largeBodyDetected)
 					{
 						string bodyData(data.data() + position, totalSize - position);
 
 						std::memset(data.data() + position, 0, bodyData.size());
 
-						headersHandler(data);
-						largeBodyHandler(bodyData);
+						largeBodyHandler->run(data, bodySize, bodyData);
 
 						bodySize -= bodyData.size();
 						totalSize -= static_cast<int>(bodyData.size());
 
 						isFindEnd = true;
+						largeBodyDetected = false;
 					}
 					else
 					{
@@ -196,21 +211,9 @@ namespace web
 			}
 		}
 
-		if (largeBodyData.size())
+		if (largeBodyDetected)
 		{
-			while (bodySize)
-			{
-				lastPacket = this->receiveBytes(largeBodyData.data(), (std::min)(static_cast<int>(largeBodyData.size()), static_cast<int>(bodySize)), endOfStream, flags);
-
-				if (endOfStream)
-				{
-					break;
-				}
-
-				bodySize -= lastPacket;
-
-				largeBodyHandler(string_view(largeBodyData.data(), lastPacket));
-			}
+			largeBodyHandler->run(data, bodySize);
 		}
 
 		data.resize(totalSize);
