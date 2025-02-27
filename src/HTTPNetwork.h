@@ -44,10 +44,10 @@ namespace web
 		template<std::derived_from<LargeBodyHandler> T, typename... Args>
 		void setLargeBodyHandler(size_t largeBodyPacketSize, Args&&... args);
 
-		template<std::derived_from<LargeBodyHandler> T>
+		template<std::derived_from<LargeBodyHandler> T = LargeBodyHandler>
 		T& getLargeBodyHandler();
 
-		template<std::derived_from<LargeBodyHandler> T>
+		template<std::derived_from<LargeBodyHandler> T = LargeBodyHandler>
 		const T& getLargeBodyHandler() const;
 
 		int sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags = 0) override;
@@ -77,7 +77,7 @@ namespace web
 			return static_cast<T&>(*largeBodyHandler);
 		}
 
-		throw std::bad_cast();
+		throw std::runtime_error("largeBodyHandler is nullptr");
 
 		return static_cast<T&>(*largeBodyHandler);
 	}
@@ -90,7 +90,7 @@ namespace web
 			return static_cast<const T&>(*largeBodyHandler);
 		}
 
-		throw std::bad_cast();
+		throw std::runtime_error("largeBodyHandler is nullptr");
 
 		return static_cast<const T&>(*largeBodyHandler);
 	}
