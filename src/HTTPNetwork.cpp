@@ -92,7 +92,12 @@ namespace web
 				break;
 
 			case web::LargeBodyHandler::WaitBehavior::exit:
-				return 0;
+				if (largeBodyHandler->isRunning())
+				{
+					return 0;
+				}
+				
+				break;
 
 			default:
 				return 0;
