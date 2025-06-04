@@ -92,7 +92,7 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure linux-aarch64 no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          ./Configure linux-aarch64 no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
           make -j $(nproc)
           make install
           
@@ -100,7 +100,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_LinuxARM
-        path: ${{ github.workspace }}/install-dir/OpenSSL
+        path: /opt/install-dir/OpenSSL
 
 
   android-build:
