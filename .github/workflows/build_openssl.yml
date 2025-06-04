@@ -84,7 +84,7 @@ jobs:
         repository: openssl/openssl
         ref: ${{ env.OPEN_SSL_TAG }}
         
-    - name: Install
+    - name: Install ar
       run: |
           sudo apt update
           sudo apt install -y binutils
