@@ -5,7 +5,7 @@ on: workflow_dispatch
 
 
 env:
-  OPEN_SSL_TAG: openssl-3.4.0
+  OPEN_SSL_TAG: openssl-3.5.0
   android-api-version: 35
 
 
@@ -33,6 +33,7 @@ jobs:
       run: |
           mkdir ${{ github.workspace }}\install-dir\OpenSSL
           perl Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}\install-dir\OpenSSL
+          nmake
           nmake install
 
     - name: Rename
@@ -61,12 +62,39 @@ jobs:
       run: |
           mkdir -p install-dir/OpenSSL
           ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          make -j $(nproc)
           make install
           
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: OpenSSL_Linux
+        path: ${{ github.workspace }}/install-dir/OpenSSL
+
+
+  linux-aarch64-build:
+    runs-on: ubuntu-latest
+    container:
+      image: lazypanda07/ubuntu_cxx20:aarch64
+    
+    steps:
+    - name: Get OpenSSL
+      uses: actions/checkout@v4
+      with:
+        repository: openssl/openssl
+        ref: ${{ env.OPEN_SSL_TAG }}
+        
+    - name: Build
+      run: |
+          mkdir -p install-dir/OpenSSL
+          ./Configure no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          make -j $(nproc)
+          make install
+          
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: OpenSSL_LinuxARM
         path: ${{ github.workspace }}/install-dir/OpenSSL
 
 
@@ -85,6 +113,7 @@ jobs:
     - name: Build
       run: |
         ./Configure no-shared no-docs no-legacy android-arm64 --prefix=/usr/local/OpenSSL -D__ANDROID_API__=${{ env.android-api-version }}
+        make -j $(nproc)
         make install
 
     - name: Upload artifacts

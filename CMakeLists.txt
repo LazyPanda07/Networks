@@ -8,7 +8,7 @@ set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install-dir CACHE STRING "")
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
-project(Networks VERSION 1.15.0)
+project(Networks VERSION 1.16.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
@@ -46,6 +46,10 @@ add_library(
 	src/Exceptions/SSLException.cpp
 	src/LargeBodyHandler.cpp
 )
+
+if (DEFINED ENV{MARCH} AND NOT "$ENV{MARCH}" STREQUAL "")
+	target_compile_options(${PROJECT_NAME} PRIVATE -march=$ENV{MARCH})
+endif()
 
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
