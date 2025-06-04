@@ -87,7 +87,7 @@ jobs:
     - name: Install
       run: |
           sudo apt update
-          sudo apt install -y binutils-aarch64-linux-gnu
+          sudo apt install -y binutils
 
     - name: Build
       run: |
