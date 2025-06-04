@@ -86,7 +86,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_TOOLCHAIN_FILE=../toolchain-aarch64.cmake ..
           make install -j $(nproc)
 
     - name: Upload artifacts
@@ -201,7 +201,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake ..
+          cmake -DCMAKE_TOOLCHAIN_FILE=../../toolchain-aarch64.cmake ..
           make install -j $(nproc)
 
     - name: Tests
