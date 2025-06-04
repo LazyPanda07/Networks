@@ -74,6 +74,8 @@ jobs:
 
   linux-aarch64-build:
     runs-on: ubuntu-latest
+    container:
+      image: lazypanda07/ubuntu_cxx20:aarch64
     
     steps:
     - name: Get OpenSSL
@@ -81,11 +83,16 @@ jobs:
       with:
         repository: openssl/openssl
         ref: ${{ env.OPEN_SSL_TAG }}
+        
+    - name: Install
+      run: |
+          sudo apt update
+          sudo apt install -y binutils-aarch64-linux-gnu
 
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure linux-aarch64 --cross-compile-prefix=aarch64-linux-gnu- no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
+          ./Configure linux-aarch64 no-shared no-docs no-legacy --prefix=${{ github.workspace }}/install-dir/OpenSSL
           make -j $(nproc)
           make install
           
