@@ -47,11 +47,11 @@ public:
 	}
 };
 
-void runServer()
+void runServer(bool& isRunning)
 {
 	TestServer server;
 
-	server.start(true, []() { std::cout << "Server is running" << std::endl; });
+	server.start(true, [&isRunning]() { std::cout << "Server is running" << std::endl; isRunning = true; });
 }
 
 void check(const web::HeadersMap& headers, const std::string& header, const std::string& value)

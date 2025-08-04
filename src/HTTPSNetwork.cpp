@@ -54,7 +54,7 @@ namespace web
 			throw exceptions::SSLException(__LINE__, __FILE__);
 		}
 
-		if (!SSL_set_fd(ssl, static_cast<int>(clientSocket)))
+		if (!SSL_set_fd(ssl, static_cast<int>(*clientSocket)))
 		{
 			throw exceptions::SSLException(__LINE__, __FILE__);
 		}

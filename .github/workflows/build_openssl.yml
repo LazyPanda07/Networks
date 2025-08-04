@@ -5,7 +5,7 @@ on: workflow_dispatch
 
 
 env:
-  OPEN_SSL_TAG: openssl-3.5.0
+  OPEN_SSL_TAG: openssl-3.5.1
   android-api-version: 35
 
 

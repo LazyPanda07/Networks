@@ -1,4 +1,5 @@
 #include <string>
+#include <chrono>
 
 #include "HTTPBuilder.h"
 #include "HTTPParser.h"
@@ -9,7 +10,7 @@
 
 std::string token;
 
-extern void runServer();
+extern void runServer(bool& isRunning);
 
 TEST(HTTPS, GithubAPI)
 {
@@ -34,7 +35,7 @@ TEST(HTTPS, GithubAPI)
 		stream >> response;
 
 		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::ResponseCodes::ok);
-	} 
+	}
 	catch (const web::exceptions::WebException& e)
 	{
 		std::cout << e.what() << ' ' << e.getFile() << ' ' << e.getLine() << ' ' << e.getErrorCode() << std::endl;
@@ -172,9 +173,18 @@ int main(int argc, char** argv)
 {
 	token = argv[1];
 
-	std::thread(runServer).detach();
+	bool isRunning = false;
+
+	std::thread(runServer, std::ref(isRunning)).detach();
 
 	testing::InitGoogleTest(&argc, argv);
+
+	while (!isRunning)
+	{
+		std::cout << "Wait server..." << std::endl;
+
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
 
 	return RUN_ALL_TESTS();
 }
