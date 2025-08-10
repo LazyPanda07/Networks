@@ -27,14 +27,18 @@ namespace web
 		Network(clientSocket),
 		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
-
+#ifdef NETWORKS_LOGGING
+		clog << format("Server socket created: {}", getClientSocket()) << endl;
+#endif
 	}
 
 	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout, size_t largeBodySizeThreshold) :
 		Network(ip, port, timeout),
 		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
-
+#ifdef NETWORKS_LOGGING
+		clog << format("Client socket created: {}", getClientSocket()) << endl;
+#endif
 	}
 
 	void HTTPNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
@@ -51,17 +55,26 @@ namespace web
 	{
 		try
 		{
+#ifdef NETWORKS_LOGGING
+			clog << format("Socket state: {}", getClientSocket()) << endl;
+#endif
+
 			return Network::sendBytes(data, size, endOfStream, flags);
 		}
+#ifdef NETWORKS_LOGGING
 		catch (const exceptions::WebException& e)
 		{
 			this->log(e.what());
+#else
+		catch (const exceptions::WebException&)
+		{
+#endif
 
 			throw;
 		}
 	}
 
-	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags)
+	int HTTPNetwork::receiveData(utility::ContainerWrapper & data, bool& endOfStream, int flags)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
@@ -96,7 +109,7 @@ namespace web
 				{
 					return 0;
 				}
-				
+
 				break;
 
 			default:
