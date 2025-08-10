@@ -9,7 +9,7 @@ option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 option(WITH_LOGGING "Enable logging via std::clog" OFF)
 
-project(Networks VERSION 1.18.0)
+project(Networks VERSION 1.18.1)
 
 if (${WITH_LOGGING})
 	add_definitions(-DNETWORKS_LOGGING)
