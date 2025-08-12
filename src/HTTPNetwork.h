@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <format>
 
 #include "NetworksUtility.h"
 #include "Network.h"
@@ -31,13 +32,14 @@ namespace web
 
 	public:
 		/// @brief Server side constructor
-		/// @param clientSocket Socket from WSA accept function
-		HTTPNetwork(SOCKET clientSocket, size_t largeBodySizeThreshold = 0);
+		template<Timeout T = std::chrono::seconds>
+		HTTPNetwork(SOCKET clientSocket, T timeout = 30s, size_t largeBodySizeThreshold = 0);
 
 		/// @brief Client side constructor
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
-		HTTPNetwork(std::string_view ip, std::string_view port = httpPort, DWORD timeout = 30'000, size_t largeBodySizeThreshold = 0);
+		template<Timeout T = std::chrono::seconds>
+		HTTPNetwork(std::string_view ip, std::string_view port = httpPort, T timeout = 30s, size_t largeBodySizeThreshold = 0);
 
 		void setLargeBodySizeThreshold(size_t largeBodySizeThreshold);
 
@@ -60,6 +62,29 @@ namespace web
 
 		virtual ~HTTPNetwork() = default;
 	};
+}
+
+namespace web
+{
+	template<Timeout T>
+	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, T timeout, size_t largeBodySizeThreshold) :
+		Network(clientSocket, timeout),
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
+	{
+#ifdef NETWORKS_LOGGING
+		std::clog << std::format("Server socket created: {}", getClientSocket()) << endl;
+#endif
+	}
+
+	template<Timeout T>
+	HTTPNetwork::HTTPNetwork(std::string_view ip, std::string_view port, T timeout, size_t largeBodySizeThreshold) :
+		Network(ip, port, timeout),
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
+	{
+#ifdef NETWORKS_LOGGING
+		std::clog << std::format("Client socket created: {}", getClientSocket()) << endl;
+#endif
+	}
 
 	template<std::derived_from<LargeBodyHandler> T, typename... Args>
 	void HTTPNetwork::setLargeBodyHandler(size_t largeBodyPacketSize, Args&&... args)

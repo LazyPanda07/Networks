@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <charconv>
 #include <cstring>
-#include <chrono>
 
 using namespace std;
 
@@ -23,24 +22,6 @@ public:
 
 namespace web
 {
-	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, size_t largeBodySizeThreshold) :
-		Network(clientSocket),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
-	{
-#ifdef NETWORKS_LOGGING
-		clog << format("Server socket created: {}", getClientSocket()) << endl;
-#endif
-	}
-
-	HTTPNetwork::HTTPNetwork(string_view ip, string_view port, DWORD timeout, size_t largeBodySizeThreshold) :
-		Network(ip, port, timeout),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
-	{
-#ifdef NETWORKS_LOGGING
-		clog << format("Client socket created: {}", getClientSocket()) << endl;
-#endif
-	}
-
 	void HTTPNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
 	{
 		this->largeBodySizeThreshold = largeBodySizeThreshold;

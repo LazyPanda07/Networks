@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.18.1</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.19.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -113,12 +113,15 @@ Inheritance diagram for web::HTTPNetwork:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a631129d7179536fc622da4351b9ac96b" id="r_a631129d7179536fc622da4351b9ac96b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a631129d7179536fc622da4351b9ac96b">HTTPNetwork</a> (SOCKET clientSocket, size_t largeBodySizeThreshold=0)</td></tr>
-<tr class="memdesc:a631129d7179536fc622da4351b9ac96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor.  <br /></td></tr>
-<tr class="separator:a631129d7179536fc622da4351b9ac96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f4181520c87d0a177f1e120c12df84" id="r_ae3f4181520c87d0a177f1e120c12df84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3f4181520c87d0a177f1e120c12df84">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, DWORD timeout=30 '000, size_t largeBodySizeThreshold=0)</td></tr>
-<tr class="memdesc:ae3f4181520c87d0a177f1e120c12df84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
-<tr class="separator:ae3f4181520c87d0a177f1e120c12df84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd7bb52b161ea21ef5d73943a3be30f6" id="r_acd7bb52b161ea21ef5d73943a3be30f6"><td class="memTemplParams" colspan="2"><a id="acd7bb52b161ea21ef5d73943a3be30f6" name="acd7bb52b161ea21ef5d73943a3be30f6"></a>
+template&lt;Timeout T = std::chrono::seconds&gt; </td></tr>
+<tr class="memitem:acd7bb52b161ea21ef5d73943a3be30f6"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>HTTPNetwork</b> (SOCKET clientSocket, T timeout=30s, size_t largeBodySizeThreshold=0)</td></tr>
+<tr class="memdesc:acd7bb52b161ea21ef5d73943a3be30f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Server side constructor. <br /></td></tr>
+<tr class="separator:acd7bb52b161ea21ef5d73943a3be30f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaeb90b405641ffc992ddea16c4197c4" id="r_afaeb90b405641ffc992ddea16c4197c4"><td class="memTemplParams" colspan="2">template&lt;Timeout T = std::chrono::seconds&gt; </td></tr>
+<tr class="memitem:afaeb90b405641ffc992ddea16c4197c4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#afaeb90b405641ffc992ddea16c4197c4">HTTPNetwork</a> (std::string_view ip, std::string_view port=httpPort, T timeout=30s, size_t largeBodySizeThreshold=0)</td></tr>
+<tr class="memdesc:afaeb90b405641ffc992ddea16c4197c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Client side constructor.  <br /></td></tr>
+<tr class="separator:afaeb90b405641ffc992ddea16c4197c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fd511d269f010e33e549f65ef0de3d3" id="r_a4fd511d269f010e33e549f65ef0de3d3"><td class="memItemLeft" align="right" valign="top"><a id="a4fd511d269f010e33e549f65ef0de3d3" name="a4fd511d269f010e33e549f65ef0de3d3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setLargeBodySizeThreshold</b> (size_t largeBodySizeThreshold)</td></tr>
 <tr class="separator:a4fd511d269f010e33e549f65ef0de3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,40 +183,13 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Network functions for HTTP. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a631129d7179536fc622da4351b9ac96b" name="a631129d7179536fc622da4351b9ac96b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a631129d7179536fc622da4351b9ac96b">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[1/2]</span></h2>
+<a id="afaeb90b405641ffc992ddea16c4197c4" name="afaeb90b405641ffc992ddea16c4197c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaeb90b405641ffc992ddea16c4197c4">&#9670;&#160;</a></span>HTTPNetwork()</h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">web::HTTPNetwork::HTTPNetwork </td>
-          <td>(</td>
-          <td class="paramtype">SOCKET</td>          <td class="paramname"><span class="paramname"><em>clientSocket</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>largeBodySizeThreshold</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Server side constructor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">clientSocket</td><td>Socket from WSA accept function </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae3f4181520c87d0a177f1e120c12df84" name="ae3f4181520c87d0a177f1e120c12df84"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3f4181520c87d0a177f1e120c12df84">&#9670;&#160;</a></span>HTTPNetwork() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
+<div class="memtemplate">
+template&lt;Timeout T&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">web::HTTPNetwork::HTTPNetwork </td>
@@ -228,7 +204,7 @@ static constexpr std::string_view&#160;</td><td class="memItemRight" valign="bot
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">DWORD</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30&#160;'000</span>, </td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30s</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>

@@ -7,11 +7,11 @@ set(LIBRARY_TYPE STATIC)
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install-dir CACHE STRING "")
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
-option(WITH_LOGGING "Enable logging via std::clog" OFF)
+option(WITH_NETWORKS_LOGGING "Enable logging via std::clog" OFF)
 
-project(Networks VERSION 1.18.1)
+project(Networks VERSION 1.19.0)
 
-if (${WITH_LOGGING})
+if (${WITH_NETWORKS_LOGGING})
 	add_definitions(-DNETWORKS_LOGGING)
 endif()
 
