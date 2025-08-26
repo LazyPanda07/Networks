@@ -16,7 +16,7 @@ namespace web
 			running = this->handleChunk(initialData);
 		}
 
-		while (running)
+		while (running && !this->isLast())
 		{
 			int dataSize = network.receiveBytes(data.data(), static_cast<int>(chunkSize), endOfStream, NULL);
 
