@@ -178,7 +178,7 @@ namespace web
 
 						std::memset(data.data() + position, 0, bodyData.size());
 
-						largeBodyHandler->run(data, bodySize, bodyData);
+						largeBodyHandler->run(data, bodyData);
 
 						bodySize -= bodyData.size();
 						totalSize -= static_cast<int>(bodyData.size());
@@ -212,7 +212,7 @@ namespace web
 
 		if (largeBodyDetected)
 		{
-			largeBodyHandler->run(data, bodySize);
+			largeBodyHandler->run(data);
 		}
 
 		data.resize(totalSize);

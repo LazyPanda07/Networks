@@ -23,14 +23,16 @@ namespace web
 		web::HTTPParser parser;
 		std::future<void> runThread;
 		std::atomic_bool running;
+		std::atomic_int64_t currentReceive;
+		int64_t contentLength;
 		size_t chunkSize;
 		Network& network;
 
 	private:
-		void loadLoop(std::string initialData, size_t bodySize);
+		void loadLoop(std::string initialData);
 
 	protected:
-		virtual bool handleChunk(std::string_view data, size_t bodySize) = 0;
+		virtual bool handleChunk(std::string_view data) = 0;
 
 		virtual void onParseHeaders();
 
@@ -39,9 +41,13 @@ namespace web
 	public:
 		LargeBodyHandler(Network& network);
 
-		void run(const utility::ContainerWrapper& data, size_t bodySize, const std::string& initialData = "");
+		void run(const utility::ContainerWrapper& data, const std::string& initialData = "");
 
 		bool isRunning() const;
+
+		bool isLast() const;
+
+		int64_t getRemainingSize() const;
 
 		void setChunkSize(size_t chunkSize);
 

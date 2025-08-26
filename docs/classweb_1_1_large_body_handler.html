@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Networks<span id="projectnumber">&#160;v1.19.1</span>
+   <div id="projectname">Networks<span id="projectnumber">&#160;v1.20.0</span>
    </div>
    <div id="projectbrief">Various number of network implementations</div>
   </td>
@@ -111,12 +111,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa2771e808020c2c9d2fe887906961c17" id="r_aa2771e808020c2c9d2fe887906961c17"><td class="memItemLeft" align="right" valign="top"><a id="aa2771e808020c2c9d2fe887906961c17" name="aa2771e808020c2c9d2fe887906961c17"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>LargeBodyHandler</b> (Network &amp;network)</td></tr>
 <tr class="separator:aa2771e808020c2c9d2fe887906961c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade3f941a012b6506ec58da74ddb44012" id="r_ade3f941a012b6506ec58da74ddb44012"><td class="memItemLeft" align="right" valign="top"><a id="ade3f941a012b6506ec58da74ddb44012" name="ade3f941a012b6506ec58da74ddb44012"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (const utility::ContainerWrapper &amp;data, size_t bodySize, const std::string &amp;initialData=&quot;&quot;)</td></tr>
-<tr class="separator:ade3f941a012b6506ec58da74ddb44012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb63fae20ec0479cc96533ec05502038" id="r_abb63fae20ec0479cc96533ec05502038"><td class="memItemLeft" align="right" valign="top"><a id="abb63fae20ec0479cc96533ec05502038" name="abb63fae20ec0479cc96533ec05502038"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> (const utility::ContainerWrapper &amp;data, const std::string &amp;initialData=&quot;&quot;)</td></tr>
+<tr class="separator:abb63fae20ec0479cc96533ec05502038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b4c53d5c76d9df72c1fcf832bc6978e" id="r_a7b4c53d5c76d9df72c1fcf832bc6978e"><td class="memItemLeft" align="right" valign="top"><a id="a7b4c53d5c76d9df72c1fcf832bc6978e" name="a7b4c53d5c76d9df72c1fcf832bc6978e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isRunning</b> () const</td></tr>
 <tr class="separator:a7b4c53d5c76d9df72c1fcf832bc6978e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a078588d6255212cb6fe2d16d17e49b" id="r_a5a078588d6255212cb6fe2d16d17e49b"><td class="memItemLeft" align="right" valign="top"><a id="a5a078588d6255212cb6fe2d16d17e49b" name="a5a078588d6255212cb6fe2d16d17e49b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLast</b> () const</td></tr>
+<tr class="separator:a5a078588d6255212cb6fe2d16d17e49b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a4891231ebb7940b91a71a96fecee8" id="r_a77a4891231ebb7940b91a71a96fecee8"><td class="memItemLeft" align="right" valign="top"><a id="a77a4891231ebb7940b91a71a96fecee8" name="a77a4891231ebb7940b91a71a96fecee8"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>getRemainingSize</b> () const</td></tr>
+<tr class="separator:a77a4891231ebb7940b91a71a96fecee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa45e4d3958eec12209fc83dcd4e28bba" id="r_aa45e4d3958eec12209fc83dcd4e28bba"><td class="memItemLeft" align="right" valign="top"><a id="aa45e4d3958eec12209fc83dcd4e28bba" name="aa45e4d3958eec12209fc83dcd4e28bba"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setChunkSize</b> (size_t chunkSize)</td></tr>
 <tr class="separator:aa45e4d3958eec12209fc83dcd4e28bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,9 +132,9 @@ virtual WaitBehavior&#160;</td><td class="memItemRight" valign="bottom"><b>getWa
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae4d20f12331602a7f9c1966539ca8abc" id="r_ae4d20f12331602a7f9c1966539ca8abc"><td class="memItemLeft" align="right" valign="top"><a id="ae4d20f12331602a7f9c1966539ca8abc" name="ae4d20f12331602a7f9c1966539ca8abc"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleChunk</b> (std::string_view data, size_t bodySize)=0</td></tr>
-<tr class="separator:ae4d20f12331602a7f9c1966539ca8abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6070cbe8aee61aee0a509af6677678a8" id="r_a6070cbe8aee61aee0a509af6677678a8"><td class="memItemLeft" align="right" valign="top"><a id="a6070cbe8aee61aee0a509af6677678a8" name="a6070cbe8aee61aee0a509af6677678a8"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>handleChunk</b> (std::string_view data)=0</td></tr>
+<tr class="separator:a6070cbe8aee61aee0a509af6677678a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8d234bb3f31ef440ebf74eaf7ec36b3" id="r_af8d234bb3f31ef440ebf74eaf7ec36b3"><td class="memItemLeft" align="right" valign="top"><a id="af8d234bb3f31ef440ebf74eaf7ec36b3" name="af8d234bb3f31ef440ebf74eaf7ec36b3"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>onParseHeaders</b> ()</td></tr>
 <tr class="separator:af8d234bb3f31ef440ebf74eaf7ec36b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +153,12 @@ std::future&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>
 <tr class="memitem:ae1ceb67ab11d1f9fb1c9f2a114df5734" id="r_ae1ceb67ab11d1f9fb1c9f2a114df5734"><td class="memItemLeft" align="right" valign="top"><a id="ae1ceb67ab11d1f9fb1c9f2a114df5734" name="ae1ceb67ab11d1f9fb1c9f2a114df5734"></a>
 std::atomic_bool&#160;</td><td class="memItemRight" valign="bottom"><b>running</b></td></tr>
 <tr class="separator:ae1ceb67ab11d1f9fb1c9f2a114df5734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98df2b09908f128d4ef7ce40354b3c89" id="r_a98df2b09908f128d4ef7ce40354b3c89"><td class="memItemLeft" align="right" valign="top"><a id="a98df2b09908f128d4ef7ce40354b3c89" name="a98df2b09908f128d4ef7ce40354b3c89"></a>
+std::atomic_int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>currentReceive</b></td></tr>
+<tr class="separator:a98df2b09908f128d4ef7ce40354b3c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6ed25b5ba3a480279f5b95f3cec52b4" id="r_af6ed25b5ba3a480279f5b95f3cec52b4"><td class="memItemLeft" align="right" valign="top"><a id="af6ed25b5ba3a480279f5b95f3cec52b4" name="af6ed25b5ba3a480279f5b95f3cec52b4"></a>
+int64_t&#160;</td><td class="memItemRight" valign="bottom"><b>contentLength</b></td></tr>
+<tr class="separator:af6ed25b5ba3a480279f5b95f3cec52b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e802dab6ca399564e9633d3f2ebe3d7" id="r_a2e802dab6ca399564e9633d3f2ebe3d7"><td class="memItemLeft" align="right" valign="top"><a id="a2e802dab6ca399564e9633d3f2ebe3d7" name="a2e802dab6ca399564e9633d3f2ebe3d7"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>chunkSize</b></td></tr>
 <tr class="separator:a2e802dab6ca399564e9633d3f2ebe3d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
