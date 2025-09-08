@@ -30,7 +30,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -59,7 +59,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -88,7 +88,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_TOOLCHAIN_FILE=../toolchain-aarch64.cmake -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_TOOLCHAIN_FILE=../toolchain-aarch64.cmake -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 

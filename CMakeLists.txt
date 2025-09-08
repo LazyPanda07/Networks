@@ -4,12 +4,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(OPENSSL_LIB_PATH vendor/OpenSSL/lib)
 set(LIBS HTTP SocketStreams crypto ssl)
 set(LIBRARY_TYPE STATIC)
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install-dir CACHE STRING "")
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 option(WITH_NETWORKS_LOGGING "Enable logging via std::clog" OFF)
 
-project(Networks VERSION 1.20.2)
+project(Networks VERSION 1.20.3)
 
 if (${WITH_NETWORKS_LOGGING})
 	add_definitions(-DNETWORKS_LOGGING)
@@ -79,10 +78,11 @@ add_subdirectory(SocketStreams)
 
 install(
 	TARGETS ${PROJECT_NAME} 
-	ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
-	LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
-	RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/dll
+	ARCHIVE DESTINATION lib
+	LIBRARY DESTINATION lib
+	RUNTIME DESTINATION dll
 )
 
-install(DIRECTORY src/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include FILES_MATCHING PATTERN "*.h")
-install(DIRECTORY vendor/OpenSSL/include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/vendor/OpenSSL/)
+install(DIRECTORY src/ DESTINATION include FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY vendor/OpenSSL/include/ DESTINATION include/vendor/OpenSSL/)
+install(DIRECTORY vendor/OpenSSL/license/ DESTINATION license)
