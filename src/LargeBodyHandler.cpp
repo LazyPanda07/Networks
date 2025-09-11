@@ -13,6 +13,8 @@ namespace web
 
 		if (initialData.size())
 		{
+			currentReceive += initialData.size();
+
 			running = this->handleChunk(initialData);
 		}
 
