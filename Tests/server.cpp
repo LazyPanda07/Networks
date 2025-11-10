@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "IOSocketStream.h"
-#include "HTTPBuilder.h"
-#include "HTTPParser.h"
-#include "HTTPNetwork.h"
+#include <BaseTCPServer.h>
 
-#include "BaseTCPServer.h"
+#include "IOSocketStream.h"
+#include "HttpBuilder.h"
+#include "HttpParser.h"
+#include "HttpNetwork.h"
 
 void check(const web::HeadersMap& headers, const std::string& header, const std::string& value);
 

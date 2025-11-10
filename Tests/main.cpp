@@ -1,12 +1,12 @@
 #include <string>
 #include <chrono>
 
+#include <gtest/gtest.h>
+
 #include "HttpBuilder.h"
 #include "HttpParser.h"
 #include "IOSocketStream.h"
-#include "HTTPSNetwork.h"
-
-#include "gtest/gtest.h"
+#include "HttpsNetwork.h"
 
 std::string token;
 
