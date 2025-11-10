@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HTTPNetwork.h"
+#include "HttpNetwork.h"
 
 #include <openssl/ssl.h>
 
