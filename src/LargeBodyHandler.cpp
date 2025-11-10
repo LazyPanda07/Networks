@@ -1,6 +1,6 @@
 #include "LargeBodyHandler.h"
 
-#include "Network.h"
+#include <Network.h>
 
 namespace web
 {
@@ -58,7 +58,7 @@ namespace web
 		parser = web::HttpParser(data.data());
 		running = true;
 		currentReceive = 0;
-		contentLength = stoll(parser.getHeaders().at("Content-Length"));
+		contentLength = std::stoll(parser.getHeaders().at("Content-Length"));
 
 		this->onParseHeaders();
 

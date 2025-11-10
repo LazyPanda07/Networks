@@ -327,16 +327,16 @@ XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions</Command>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Exceptions\SSLException.cpp" />
-    <ClCompile Include="src\HTTPNetwork.cpp" />
-    <ClCompile Include="src\HTTPSNetwork.cpp" />
+    <ClCompile Include="src\Exceptions\SslException.cpp" />
+    <ClCompile Include="src\HttpNetwork.cpp" />
+    <ClCompile Include="src\HttpsNetwork.cpp" />
     <ClCompile Include="src\LargeBodyHandler.cpp" />
     <ClCompile Include="src\NetworksUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Exceptions\SSLException.h" />
-    <ClInclude Include="include\HTTPNetwork.h" />
-    <ClInclude Include="include\HTTPSNetwork.h" />
+    <ClInclude Include="include\Exceptions\SslException.h" />
+    <ClInclude Include="include\HttpNetwork.h" />
+    <ClInclude Include="include\HttpsNetwork.h" />
     <ClInclude Include="include\LargeBodyHandler.h" />
     <ClInclude Include="include\NetworksUtility.h" />
   </ItemGroup>

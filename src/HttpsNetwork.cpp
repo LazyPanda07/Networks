@@ -1,25 +1,25 @@
-#include "HTTPSNetwork.h"
+#include "HttpsNetwork.h"
 
 #include <algorithm>
 
 namespace web
 {
-	int HTTPSNetwork::sendBytesImplementation(const char* data, int count, int flags)
+	int HttpsNetwork::sendBytesImplementation(const char* data, int count, int flags)
 	{
 		return SSL_write(ssl, data, count);
 	}
 
-	int HTTPSNetwork::receiveBytesImplementation(char* data, int count, int flags)
+	int HttpsNetwork::receiveBytesImplementation(char* data, int count, int flags)
 	{
 		return SSL_read(ssl, data, count);
 	}
 
-	void HTTPSNetwork::throwException(int line, std::string_view file) const
+	void HttpsNetwork::throwException(int line, std::string_view file) const
 	{
-		throw exceptions::SSLException(line, file);
+		throw exceptions::SslException(line, file);
 	}
 
-	HTTPSNetwork::~HTTPSNetwork()
+	HttpsNetwork::~HttpsNetwork()
 	{
 		if (isClientSide)
 		{

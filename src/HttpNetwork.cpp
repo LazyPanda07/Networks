@@ -1,4 +1,4 @@
-#include "HTTPNetwork.h"
+#include "HttpNetwork.h"
 
 #include <algorithm>
 #include <charconv>
@@ -20,22 +20,22 @@ public:
 
 namespace web
 {
-	void HTTPNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
+	void HttpNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
 	{
 		this->largeBodySizeThreshold = largeBodySizeThreshold;
 	}
 
-	int HTTPNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags)
+	int HttpNetwork::sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
 		return this->sendRawData(data.data(), static_cast<int>(data.size()), endOfStream, flags);
 	}
 
-	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream, int flags)
+	int HttpNetwork::sendRawData(const char* data, int size, bool& endOfStream, int flags)
 	{
 		return Network::sendBytes(data, size, endOfStream, flags);
 	}
 
-	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags)
+	int HttpNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
@@ -202,7 +202,7 @@ namespace web
 		return totalSize;
 	}
 
-	int HTTPNetwork::receiveRawData(char* data, int size, bool& endOfStream, int flags)
+	int HttpNetwork::receiveRawData(char* data, int size, bool& endOfStream, int flags)
 	{
 		ReadOnlyContainerWrapper wrapper(data, size);
 

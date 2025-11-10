@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\HTTPNetwork.cpp">
+    <ClCompile Include="src\HttpNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\HTTPSNetwork.cpp">
+    <ClCompile Include="src\HttpsNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\Exceptions\SSLException.cpp">
+    <ClCompile Include="src\Exceptions\SslException.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\NetworksUtility.cpp">
@@ -32,13 +32,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\HTTPNetwork.h">
+    <ClInclude Include="include\HttpNetwork.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\HTTPSNetwork.h">
+    <ClInclude Include="include\HttpsNetwork.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\Exceptions\SSLException.h">
+    <ClInclude Include="include\Exceptions\SslException.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="include\NetworksUtility.h">
