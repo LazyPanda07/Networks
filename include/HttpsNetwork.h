@@ -4,7 +4,7 @@
 
 #include <openssl/ssl.h>
 
-#include "Exceptions/SSLException.h"
+#include "Exceptions/SslException.h"
 
 namespace web
 {
