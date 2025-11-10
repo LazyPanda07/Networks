@@ -16,7 +16,7 @@ TEST(HTTPS, GithubAPI)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -48,7 +48,7 @@ TEST(HTTPS, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
 		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -79,7 +79,7 @@ TEST(HTTPS, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -111,7 +111,7 @@ TEST(HTTP, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpNetwork>("127.0.0.1", "8080");
 		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -141,7 +141,7 @@ TEST(HTTP, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpNetwork>("127.0.0.1", "8080");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
