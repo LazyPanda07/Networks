@@ -11,7 +11,7 @@ namespace web
 {
 	namespace exceptions
 	{
-		class NETWORKS_API SSLException : public web::exceptions::WebException
+		class NETWORKS_API SslException : public web::exceptions::WebException
 		{
 		private:
 			std::vector<unsigned long> errorCodes;
@@ -24,13 +24,13 @@ namespace web
 			void getSSLError(int line, std::string_view file);
 
 		public:
-			SSLException(int line, std::string_view file);
+			SslException(int line, std::string_view file);
 
-			SSLException(int line, std::string_view file, SSL*& ssl, int returnCode);
+			SslException(int line, std::string_view file, SSL*& ssl, int returnCode);
 
-			SSLException(int line, std::string_view file, int returnCode);
+			SslException(int line, std::string_view file, int returnCode);
 
-			SSLException(int line, std::string_view file, int returnCode, int errorCode);
+			SslException(int line, std::string_view file, int returnCode, int errorCode);
 
 			bool hasSSL() const;
 
@@ -38,7 +38,7 @@ namespace web
 
 			int getReturnCode() const;
 
-			~SSLException();
+			~SslException();
 		};
 	}
 }

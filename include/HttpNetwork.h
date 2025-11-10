@@ -12,7 +12,7 @@ namespace web
 	/// <summary>
 	/// Network functions for HTTP
 	/// </summary>
-	class NETWORKS_API HTTPNetwork : public web::Network
+	class NETWORKS_API HttpNetwork : public web::Network
 	{
 	public:
 		static constexpr uint16_t averageHTTPRequestSize = 1500;
@@ -31,13 +31,13 @@ namespace web
 	public:
 		/// @brief Server side constructor
 		template<Timeout T = std::chrono::seconds>
-		HTTPNetwork(SOCKET clientSocket, T timeout = 30s, size_t largeBodySizeThreshold = 0);
+		HttpNetwork(SOCKET clientSocket, T timeout = 30s, size_t largeBodySizeThreshold = 0);
 
 		/// @brief Client side constructor
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
 		template<Timeout T = std::chrono::seconds>
-		HTTPNetwork(std::string_view ip, std::string_view port = httpPort, T timeout = 30s, size_t largeBodySizeThreshold = 0);
+		HttpNetwork(std::string_view ip, std::string_view port = httpPort, T timeout = 30s, size_t largeBodySizeThreshold = 0);
 
 		void setLargeBodySizeThreshold(size_t largeBodySizeThreshold);
 
@@ -58,30 +58,30 @@ namespace web
 
 		int receiveRawData(char* data, int size, bool& endOfStream, int flags = 0) override;
 
-		virtual ~HTTPNetwork() = default;
+		virtual ~HttpNetwork() = default;
 	};
 }
 
 namespace web
 {
 	template<Timeout T>
-	HTTPNetwork::HTTPNetwork(SOCKET clientSocket, T timeout, size_t largeBodySizeThreshold) :
+	HttpNetwork::HttpNetwork(SOCKET clientSocket, T timeout, size_t largeBodySizeThreshold) :
 		Network(clientSocket, timeout),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HttpNetwork::defaultLargeBodySize)
 	{
 
 	}
 
 	template<Timeout T>
-	HTTPNetwork::HTTPNetwork(std::string_view ip, std::string_view port, T timeout, size_t largeBodySizeThreshold) :
+	HttpNetwork::HttpNetwork(std::string_view ip, std::string_view port, T timeout, size_t largeBodySizeThreshold) :
 		Network(ip, port, timeout),
-		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
+		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HttpNetwork::defaultLargeBodySize)
 	{
 
 	}
 
 	template<std::derived_from<LargeBodyHandler> T, typename... Args>
-	void HTTPNetwork::setLargeBodyHandler(size_t largeBodyPacketSize, Args&&... args)
+	void HttpNetwork::setLargeBodyHandler(size_t largeBodyPacketSize, Args&&... args)
 	{
 		largeBodyHandler = std::make_unique<T>(std::forward<Args>(args)...);
 
@@ -89,7 +89,7 @@ namespace web
 	}
 
 	template<std::derived_from<LargeBodyHandler> T>
-	T& HTTPNetwork::getLargeBodyHandler()
+	T& HttpNetwork::getLargeBodyHandler()
 	{
 		if (largeBodyHandler)
 		{
@@ -102,7 +102,7 @@ namespace web
 	}
 
 	template<std::derived_from<LargeBodyHandler> T>
-	const T& HTTPNetwork::getLargeBodyHandler() const
+	const T& HttpNetwork::getLargeBodyHandler() const
 	{
 		if (largeBodyHandler)
 		{

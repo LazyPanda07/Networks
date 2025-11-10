@@ -8,7 +8,7 @@
 
 namespace web
 {
-	class NETWORKS_API HTTPSNetwork : public HTTPNetwork
+	class NETWORKS_API HttpsNetwork : public HttpNetwork
 	{
 	public:
 		static inline constexpr std::string_view httpsPort = "443";
@@ -31,24 +31,24 @@ namespace web
 		/// @param context Result from SSL_CTX_new
 		/// @exception web::exceptions::SSLException
 		template<Timeout T = std::chrono::seconds>
-		HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout = 30s);
+		HttpsNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout = 30s);
 
 		/// @brief Client side constructor
 		/// @param ip Remote address to connect to
 		/// @param port Remote port to connect to
 		/// @exception web::exceptions::SSLException
 		template<Timeout T = std::chrono::seconds>
-		HTTPSNetwork(std::string_view ip, std::string_view port = httpsPort, T timeout = 30s, std::string_view hostName = "");
+		HttpsNetwork(std::string_view ip, std::string_view port = httpsPort, T timeout = 30s, std::string_view hostName = "");
 
-		virtual ~HTTPSNetwork();
+		virtual ~HttpsNetwork();
 	};
 }
 
 namespace web
 {
 	template<Timeout T>
-	HTTPSNetwork::HTTPSNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout) :
-		HTTPNetwork(clientSocket, timeout),
+	HttpsNetwork::HttpsNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout) :
+		HttpNetwork(clientSocket, timeout),
 		ssl(ssl),
 		context(context),
 		isClientSide(false)
@@ -57,8 +57,8 @@ namespace web
 	}
 
 	template<Timeout T>
-	HTTPSNetwork::HTTPSNetwork(std::string_view ip, std::string_view port, T timeout, std::string_view hostName) :
-		HTTPNetwork(ip, port, timeout),
+	HttpsNetwork::HttpsNetwork(std::string_view ip, std::string_view port, T timeout, std::string_view hostName) :
+		HttpNetwork(ip, port, timeout),
 		isClientSide(true)
 	{
 		SSL_library_init();
@@ -68,19 +68,19 @@ namespace web
 
 		if (!context)
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__);
+			throw exceptions::SslException(__LINE__, __FILE__);
 		}
 
 		ssl = SSL_new(context);
 
 		if (!ssl)
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__);
+			throw exceptions::SslException(__LINE__, __FILE__);
 		}
 
 		if (!SSL_set_fd(ssl, static_cast<int>(this->getClientSocket())))
 		{
-			throw exceptions::SSLException(__LINE__, __FILE__);
+			throw exceptions::SslException(__LINE__, __FILE__);
 		}
 
 		SSL_set_tlsext_host_name(ssl, (hostName.empty() ? ip.data() : hostName.data()));
@@ -95,7 +95,7 @@ namespace web
 			}
 			else if (returnCode == 0)
 			{
-				throw exceptions::SSLException(__LINE__, __FILE__, ssl, returnCode);
+				throw exceptions::SslException(__LINE__, __FILE__, ssl, returnCode);
 			}
 			else if (returnCode == -1)
 			{
@@ -106,7 +106,7 @@ namespace web
 					continue;
 				}
 
-				throw exceptions::SSLException(__LINE__, __FILE__, returnCode, errorCode);
+				throw exceptions::SslException(__LINE__, __FILE__, returnCode, errorCode);
 			}
 		}
 	}

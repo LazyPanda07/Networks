@@ -41,10 +41,10 @@ endif ()
 
 add_library(
 	${PROJECT_NAME} ${LIBRARY_TYPE}
-	src/HTTPNetwork.cpp
-	src/HTTPSNetwork.cpp
+	src/HttpNetwork.cpp
+	src/HttpsNetwork.cpp
 	src/NetworksUtility.cpp
-	src/Exceptions/SSLException.cpp
+	src/Exceptions/SslException.cpp
 	src/LargeBodyHandler.cpp
 )
 
