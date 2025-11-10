@@ -2,17 +2,12 @@ cmake_minimum_required(VERSION 3.27.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(OPENSSL_LIB_PATH vendor/OpenSSL/lib)
-set(LIBS HTTP SocketStreams crypto ssl)
+set(LIBS HTTP JSON SocketStreams crypto ssl)
 set(LIBRARY_TYPE STATIC)
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
-option(WITH_NETWORKS_LOGGING "Enable logging via std::clog" OFF)
 
-project(Networks VERSION 1.20.5)
-
-if (${WITH_NETWORKS_LOGGING})
-	add_definitions(-DNETWORKS_LOGGING)
-endif()
+project(Networks VERSION 1.21.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
@@ -31,12 +26,12 @@ if (UNIX)
 		endif()
 	endif()
 
-	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
+	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
 
-	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.lib")
+	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.lib")
 endif ()
 
 if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
@@ -57,12 +52,17 @@ if (DEFINED ENV{MARCH} AND NOT "$ENV{MARCH}" STREQUAL "")
 	target_compile_options(${PROJECT_NAME} PRIVATE -march=$ENV{MARCH})
 endif()
 
+if (NOT TARGET HTTP)
+	add_subdirectory(HTTP)
+endif()
+
+if (NOT TARGET SocketStreams)
+	add_subdirectory(SocketStreams)
+endif()
+
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
-	src/
-	HTTP/src
-	HTTP/JSON/src
-	SocketStreams/src
+	include
 	vendor/OpenSSL/include
 )
 
@@ -73,9 +73,6 @@ target_link_directories(
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBS})
 
-add_subdirectory(HTTP)
-add_subdirectory(SocketStreams)
-
 install(
 	TARGETS ${PROJECT_NAME} 
 	ARCHIVE DESTINATION lib
@@ -83,6 +80,6 @@ install(
 	RUNTIME DESTINATION dll
 )
 
-install(DIRECTORY src/ DESTINATION include FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY include DESTINATION .)
 install(DIRECTORY vendor/OpenSSL/include/ DESTINATION include/vendor/OpenSSL/)
 install(DIRECTORY vendor/OpenSSL/license/ DESTINATION license)

@@ -21,8 +21,6 @@ namespace web
 		static constexpr std::string_view contentLengthHeader = "Content-Length";
 		static constexpr std::string_view transferEncodingHeader = "Transfer-Encoding";
 		static constexpr std::string_view transferEncodingChunked = "Chunked";
-		static constexpr std::string_view crlfcrlf = "\r\n\r\n";
-		static constexpr std::string_view crlf = "\r\n";
 
 		static inline constexpr std::string_view httpPort = "80";
 
@@ -71,9 +69,7 @@ namespace web
 		Network(clientSocket, timeout),
 		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
-#ifdef NETWORKS_LOGGING
-		std::clog << std::format("Server socket created: {}", getClientSocket()) << endl;
-#endif
+
 	}
 
 	template<Timeout T>
@@ -81,9 +77,7 @@ namespace web
 		Network(ip, port, timeout),
 		largeBodySizeThreshold(largeBodySizeThreshold ? largeBodySizeThreshold : HTTPNetwork::defaultLargeBodySize)
 	{
-#ifdef NETWORKS_LOGGING
-		std::clog << std::format("Client socket created: {}", getClientSocket()) << endl;
-#endif
+
 	}
 
 	template<std::derived_from<LargeBodyHandler> T, typename... Args>

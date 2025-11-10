@@ -147,7 +147,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,7 +173,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -203,7 +205,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -234,7 +237,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -267,8 +271,9 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -297,8 +302,9 @@ XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions</Command>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NETWORKS_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\;$(ProjectDir)HTTP\src\;$(ProjectDir)HTTP\JSON\src\;$(ProjectDir)SocketStreams\src\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(ProjectDir)HTTP\include\;$(ProjectDir)HTTP\JSON\include\;$(ProjectDir)SocketStreams\include\;$(ProjectDir)vendor\OpenSSL\include\</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -328,11 +334,11 @@ XCOPY /Y /I $(ProjectDir)src\Exceptions\*.h $(OutDir)Exceptions</Command>
     <ClCompile Include="src\NetworksUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Exceptions\SSLException.h" />
-    <ClInclude Include="src\HTTPNetwork.h" />
-    <ClInclude Include="src\HTTPSNetwork.h" />
-    <ClInclude Include="src\LargeBodyHandler.h" />
-    <ClInclude Include="src\NetworksUtility.h" />
+    <ClInclude Include="include\Exceptions\SSLException.h" />
+    <ClInclude Include="include\HTTPNetwork.h" />
+    <ClInclude Include="include\HTTPSNetwork.h" />
+    <ClInclude Include="include\LargeBodyHandler.h" />
+    <ClInclude Include="include\NetworksUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="HTTP\HTTP.vcxproj">

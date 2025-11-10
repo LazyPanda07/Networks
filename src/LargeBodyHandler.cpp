@@ -2,13 +2,11 @@
 
 #include "Network.h"
 
-using namespace std;
-
 namespace web
 {
-	void LargeBodyHandler::loadLoop(string initialData)
+	void LargeBodyHandler::loadLoop(std::string initialData)
 	{
-		string data(chunkSize, '\0');
+		std::string data(chunkSize, '\0');
 		bool endOfStream = false;
 
 		if (initialData.size())
@@ -29,7 +27,7 @@ namespace web
 
 			currentReceive += dataSize;
 
-			running = this->handleChunk(string_view(data.data(), static_cast<size_t>(dataSize)));
+			running = this->handleChunk(std::string_view(data.data(), static_cast<size_t>(dataSize)));
 		}
 
 		this->onFinishHandleChunks();
@@ -55,16 +53,16 @@ namespace web
 
 	}
 
-	void LargeBodyHandler::run(const utility::ContainerWrapper& data, const string& initialData)
+	void LargeBodyHandler::run(const utility::ContainerWrapper& data, const std::string& initialData)
 	{
-		parser = web::HTTPParser(data.data());
+		parser = web::HttpParser(data.data());
 		running = true;
 		currentReceive = 0;
 		contentLength = stoll(parser.getHeaders().at("Content-Length"));
 
 		this->onParseHeaders();
 
-		runThread = async(launch::async, &LargeBodyHandler::loadLoop, this, initialData);
+		runThread = async(std::launch::async, &LargeBodyHandler::loadLoop, this, initialData);
 	}
 
 	bool LargeBodyHandler::isRunning() const

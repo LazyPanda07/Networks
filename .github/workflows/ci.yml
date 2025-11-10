@@ -117,13 +117,7 @@ jobs:
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
         path: Networks
-
-    - name: Get Google Test
-      uses: LazyPanda07/get-gtest@v1
-      with:
-        build-type: ${{ matrix.configuration }}
-        install-path: Tests/gtest
-
+        
     - name: Enable NMake
       uses: ilammy/msvc-dev-cmd@v1.13.0
 

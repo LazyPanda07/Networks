@@ -16,8 +16,8 @@ private:
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>(clientSocket);
 
-		web::HTTPParser parser;
-		web::HTTPBuilder builder;
+		web::HttpParser parser;
+		web::HttpBuilder builder;
 
 		stream >> parser;
 

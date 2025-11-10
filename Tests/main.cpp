@@ -1,8 +1,8 @@
 #include <string>
 #include <chrono>
 
-#include "HTTPBuilder.h"
-#include "HTTPParser.h"
+#include "HttpBuilder.h"
+#include "HttpParser.h"
 #include "IOSocketStream.h"
 #include "HTTPSNetwork.h"
 
@@ -17,7 +17,7 @@ TEST(HTTPS, GithubAPI)
 	try
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
-		std::string request = web::HTTPBuilder()
+		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
 			.headers
@@ -34,7 +34,7 @@ TEST(HTTPS, GithubAPI)
 
 		stream >> response;
 
-		ASSERT_EQ(web::HTTPParser(response).getResponseCode(), web::ResponseCodes::ok);
+		ASSERT_EQ(web::HttpParser(response).getResponseCode(), web::ResponseCodes::ok);
 	}
 	catch (const web::exceptions::WebException& e)
 	{
@@ -49,7 +49,7 @@ TEST(HTTPS, GithubAPIBuilder)
 	try
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
-		web::HTTPBuilder request = web::HTTPBuilder()
+		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
 			.headers
@@ -59,7 +59,7 @@ TEST(HTTPS, GithubAPIBuilder)
 				"Authorization", "Bearer " + token,
 				"User-Agent", "NetworkTests"
 			);
-		web::HTTPParser response;
+		web::HttpParser response;
 
 		stream << request;
 
@@ -80,7 +80,7 @@ TEST(HTTPS, GithubAPIParser)
 	try
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPSNetwork>("api.github.com", "443");
-		std::string request = web::HTTPBuilder()
+		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
 			.headers
@@ -91,7 +91,7 @@ TEST(HTTPS, GithubAPIParser)
 				"User-Agent", "NetworkTests"
 			)
 			.build();
-		web::HTTPParser response;
+		web::HttpParser response;
 
 		stream << request;
 
@@ -112,7 +112,7 @@ TEST(HTTP, GithubAPIBuilder)
 	try
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
-		web::HTTPBuilder request = web::HTTPBuilder()
+		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
 			.headers
@@ -122,7 +122,7 @@ TEST(HTTP, GithubAPIBuilder)
 				"Authorization", "Bearer " + token,
 				"User-Agent", "NetworkTests"
 			);
-		web::HTTPParser response;
+		web::HttpParser response;
 
 		stream << request;
 		stream >> response;
@@ -142,7 +142,7 @@ TEST(HTTP, GithubAPIParser)
 	try
 	{
 		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HTTPNetwork>("127.0.0.1", "8080");
-		std::string request = web::HTTPBuilder()
+		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
 			.headers
@@ -153,7 +153,7 @@ TEST(HTTP, GithubAPIParser)
 				"User-Agent", "NetworkTests"
 			)
 			.build();
-		web::HTTPParser response;
+		web::HttpParser response;
 
 		stream << request;
 

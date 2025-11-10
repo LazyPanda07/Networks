@@ -4,7 +4,7 @@
 
 #include "NetworksUtility.h"
 #include "ContainerWrapper.h"
-#include "HTTPParser.h"
+#include "HttpParser.h"
 
 namespace web
 {
@@ -20,7 +20,7 @@ namespace web
 		};
 
 	protected:
-		web::HTTPParser parser;
+		web::HttpParser parser;
 		std::future<void> runThread;
 		std::atomic_bool running;
 		std::atomic_int64_t currentReceive;

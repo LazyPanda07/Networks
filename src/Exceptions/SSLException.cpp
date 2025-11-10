@@ -1,11 +1,9 @@
-#include "SSLException.h"
+#include "Exceptions/SSLException.h"
 
 #include <string>
 #include <format>
 
 #include <openssl/err.h>
-
-using namespace std;
 
 namespace web
 {
@@ -23,15 +21,15 @@ namespace web
 		{
 			errorCodes.push_back(errorCode);
 
-			data += format("SSL error code '{}'", errorCode);
+			data += std::format("SSL error code '{}'", errorCode);
 
 			if (const char* error = ERR_error_string(errorCode, nullptr))
 			{
-				data += format(" with description '{}' in file '{}' on line '{}'", error, file, line);
+				data += std::format(" with description '{}' in file '{}' on line '{}'", error, file, line);
 			}
 		}
 
-		void SSLException::getSSLError(int line, string_view file)
+		void SSLException::getSSLError(int line, std::string_view file)
 		{
 			if (ssl)
 			{
@@ -44,7 +42,7 @@ namespace web
 
 				errorCodes.push_back(errorCode);
 
-				data += format("SSL error code '{}' in file '{}' on line '{}'", errorCode, file, line);
+				data += std::format("SSL error code '{}' in file '{}' on line '{}'", errorCode, file, line);
 			}
 
 			while (unsigned long errorCode = ERR_get_error())
@@ -58,15 +56,15 @@ namespace web
 			}
 		}
 
-		SSLException::SSLException(int line, string_view file) :
+		SSLException::SSLException(int line, std::string_view file) :
 			WebException(line, file),
 			ssl(nullptr),
-			returnCode((numeric_limits<int>::min)())
+			returnCode((std::numeric_limits<int>::min)())
 		{
 			this->getSSLError(line, file);
 		}
 
-		SSLException::SSLException(int line, string_view file, SSL*& ssl, int returnCode) :
+		SSLException::SSLException(int line, std::string_view file, SSL*& ssl, int returnCode) :
 			WebException(line, file),
 			ssl(&ssl),
 			returnCode(returnCode)
@@ -74,7 +72,7 @@ namespace web
 			this->getSSLError(line, file);
 		}
 
-		SSLException::SSLException(int line, string_view file, int returnCode) :
+		SSLException::SSLException(int line, std::string_view file, int returnCode) :
 			WebException(line, file),
 			ssl(nullptr),
 			returnCode(returnCode)
@@ -87,7 +85,7 @@ namespace web
 			return static_cast<bool>(ssl);
 		}
 
-		const vector<unsigned long>& SSLException::getErrorCodes() const
+		const std::vector<unsigned long>& SSLException::getErrorCodes() const
 		{
 			return errorCodes;
 		}

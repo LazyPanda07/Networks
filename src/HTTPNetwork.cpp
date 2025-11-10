@@ -4,13 +4,11 @@
 #include <charconv>
 #include <cstring>
 
-using namespace std;
-
 static bool insensetiveSearching(char first, char second);
 
-static bool endsWith(string_view test, string_view suffix);
+static bool endsWith(std::string_view test, std::string_view suffix);
 
-static string_view getHeaderValue(string_view::const_iterator startHeader, size_t headerSize, string_view http);
+static std::string_view getHeaderValue(std::string_view::const_iterator startHeader, size_t headerSize, std::string_view http);
 
 class ReadOnlyContainerWrapper : public web::utility::ContainerWrapper
 {
@@ -34,28 +32,10 @@ namespace web
 
 	int HTTPNetwork::sendRawData(const char* data, int size, bool& endOfStream, int flags)
 	{
-		try
-		{
-#ifdef NETWORKS_LOGGING
-			clog << format("Socket state: {}", getClientSocket()) << endl;
-#endif
-
-			return Network::sendBytes(data, size, endOfStream, flags);
-		}
-#ifdef NETWORKS_LOGGING
-		catch (const exceptions::WebException& e)
-		{
-			this->log(e.what());
-#else
-		catch (const exceptions::WebException&)
-		{
-#endif
-
-			throw;
-		}
+		return Network::sendBytes(data, size, endOfStream, flags);
 	}
 
-	int HTTPNetwork::receiveData(utility::ContainerWrapper & data, bool& endOfStream, int flags)
+	int HTTPNetwork::receiveData(utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
 		int totalSize = 0;
 		int lastPacket = 0;
@@ -80,7 +60,7 @@ namespace web
 			case web::LargeBodyHandler::WaitBehavior::wait:
 				while (largeBodyHandler->isRunning())
 				{
-					this_thread::sleep_for(1s);
+					std::this_thread::sleep_for(1s);
 				}
 
 				break;
@@ -113,11 +93,11 @@ namespace web
 			}
 
 			totalSize += lastPacket;
-			string_view http(data.data(), totalSize);
+			std::string_view http(data.data(), totalSize);
 
 			if (bodySize == -1 && !chunked)
 			{
-				string_view::const_iterator contentLength = search
+				std::string_view::const_iterator contentLength = search
 				(
 					http.begin(), http.end(),
 					contentLengthHeader.begin(), contentLengthHeader.end(),
@@ -126,9 +106,9 @@ namespace web
 
 				if (contentLength != http.end())
 				{
-					string_view contentLengthValue = getHeaderValue(contentLength, contentLengthHeader.size(), http);
+					std::string_view contentLengthValue = getHeaderValue(contentLength, contentLengthHeader.size(), http);
 
-					from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
+					std::from_chars(contentLengthValue.data(), contentLengthValue.data() + contentLengthValue.size(), bodySize);
 
 					if (largeBodyHandler && bodySize >= static_cast<int64_t>(largeBodySizeThreshold))
 					{
@@ -138,12 +118,12 @@ namespace web
 					{
 						data.resize(static_cast<size_t>(totalSize) + static_cast<size_t>(bodySize));
 
-						http = string_view(data.data(), totalSize);
+						http = std::string_view(data.data(), totalSize);
 					}
 				}
 				else
 				{
-					string_view::const_iterator transferEncoding = search
+					std::string_view::const_iterator transferEncoding = search
 					(
 						http.begin(), http.end(),
 						transferEncodingHeader.begin(), transferEncodingHeader.end(),
@@ -152,7 +132,7 @@ namespace web
 
 					if (transferEncoding != http.end())
 					{
-						string_view transferEncodingValue = getHeaderValue(transferEncoding, transferEncodingHeader.size(), http);
+						std::string_view transferEncodingValue = getHeaderValue(transferEncoding, transferEncodingHeader.size(), http);
 
 						chunked = equal
 						(
@@ -166,15 +146,15 @@ namespace web
 
 			if (bodySize != -1)
 			{
-				size_t position = http.find(crlfcrlf);
+				size_t position = http.find(web::HttpParser::crlfcrlf);
 
-				if (position != string_view::npos)
+				if (position != std::string_view::npos)
 				{
-					position += crlfcrlf.size();
+					position += web::HttpParser::crlfcrlf.size();
 
 					if (largeBodyDetected)
 					{
-						string bodyData(data.data() + position, totalSize - position);
+						std::string bodyData(data.data() + position, totalSize - position);
 
 						std::memset(data.data() + position, 0, bodyData.size());
 
@@ -192,20 +172,22 @@ namespace web
 					}
 				}
 			}
-			else if (endsWith(http, crlfcrlf))
+			else if (endsWith(http, web::HttpParser::crlfcrlf))
 			{
 				if (chunked)
 				{
-					isFindEnd = endsWith(http, "0"s.append(crlfcrlf));
+					using namespace std::string_literals;
+
+					isFindEnd = endsWith(http, "0"s.append(web::HttpParser::crlfcrlf));
 				}
 				else if (bodySize != -1)
 				{
-					isFindEnd = (bodySize > 0 && http.find(crlfcrlf) != http.rfind(crlfcrlf)) ||
-						(!bodySize && http.find(crlfcrlf) != string_view::npos);
+					isFindEnd = (bodySize > 0 && http.find(web::HttpParser::crlfcrlf) != http.rfind(web::HttpParser::crlfcrlf)) ||
+						(!bodySize && http.find(web::HttpParser::crlfcrlf) != std::string_view::npos);
 				}
 				else
 				{
-					isFindEnd = http.find(crlfcrlf) != string_view::npos;
+					isFindEnd = http.find(web::HttpParser::crlfcrlf) != std::string_view::npos;
 				}
 			}
 		}
@@ -233,16 +215,16 @@ bool insensetiveSearching(char first, char second)
 	return tolower(first) == tolower(second);
 }
 
-bool endsWith(string_view test, string_view suffix)
+bool endsWith(std::string_view test, std::string_view suffix)
 {
 	return test.size() >= suffix.size() &&
 		test.compare(test.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
 
-string_view getHeaderValue(string_view::const_iterator startHeader, size_t headerSize, string_view http)
+std::string_view getHeaderValue(std::string_view::const_iterator startHeader, size_t headerSize, std::string_view http)
 {
-	size_t headerValuePosition = distance(http.begin(), startHeader) + headerSize + web::HTTPNetwork::crlf.size();
-	size_t valueSize = http.find(web::HTTPNetwork::crlf, distance(http.begin(), startHeader)) - headerValuePosition;
+	size_t headerValuePosition = std::distance(http.begin(), startHeader) + headerSize + web::constants::crlf.size();
+	size_t valueSize = http.find(web::constants::crlf, std::distance(http.begin(), startHeader)) - headerValuePosition;
 
 	return http.substr(headerValuePosition, valueSize);
 }
@@ -266,7 +248,7 @@ ReadOnlyContainerWrapper::ReadOnlyContainerWrapper(char* data, int size) :
 		{
 			if (newSize > size)
 			{
-				throw runtime_error("Can't resize ReadOnlyContainerWrapper");
+				throw std::runtime_error("Can't resize ReadOnlyContainerWrapper");
 			}
 		},
 		[data, size](size_t index) -> char&

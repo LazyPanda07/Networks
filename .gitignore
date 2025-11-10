@@ -35,12 +35,10 @@
 bin/
 out/
 build/
+Networks/
 
 # VS folder
 .vs/
-
-# gtest
-gtest/
 
 # OpenSSL libs
 !crypto.lib

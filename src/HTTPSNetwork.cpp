@@ -1,9 +1,6 @@
 #include "HTTPSNetwork.h"
 
 #include <algorithm>
-#include <charconv>
-
-using namespace std;
 
 namespace web
 {
@@ -17,7 +14,7 @@ namespace web
 		return SSL_read(ssl, data, count);
 	}
 
-	void HTTPSNetwork::throwException(int line, string_view file) const
+	void HTTPSNetwork::throwException(int line, std::string_view file) const
 	{
 		throw exceptions::SSLException(line, file);
 	}
