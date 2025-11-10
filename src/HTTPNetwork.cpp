@@ -97,7 +97,7 @@ namespace web
 
 			if (bodySize == -1 && !chunked)
 			{
-				std::string_view::const_iterator contentLength = search
+				std::string_view::const_iterator contentLength = std::search
 				(
 					http.begin(), http.end(),
 					contentLengthHeader.begin(), contentLengthHeader.end(),
@@ -123,7 +123,7 @@ namespace web
 				}
 				else
 				{
-					std::string_view::const_iterator transferEncoding = search
+					std::string_view::const_iterator transferEncoding = std::search
 					(
 						http.begin(), http.end(),
 						transferEncodingHeader.begin(), transferEncodingHeader.end(),
@@ -134,7 +134,7 @@ namespace web
 					{
 						std::string_view transferEncodingValue = getHeaderValue(transferEncoding, transferEncodingHeader.size(), http);
 
-						chunked = equal
+						chunked = std::equal
 						(
 							transferEncodingValue.begin(), transferEncodingValue.end(),
 							transferEncodingChunked.begin(), transferEncodingChunked.end(),

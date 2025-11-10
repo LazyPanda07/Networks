@@ -5,6 +5,7 @@ set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
 set(LIBS Networks HTTP JSON SocketStreams ssl crypto)
 set(BASE_TCP_SERVER_VERSION 1.16.1)
 set(GTEST_VERSION 1.17.0)
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
 
 project(Tests)
 
@@ -69,8 +70,8 @@ target_link_libraries(
 	gtest_main
 )
 
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_BINARY_DIR}/bin)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 
 if(EXISTS ${SHARED_OBJECT})
-    install(FILES ${SHARED_OBJECT} DESTINATION ${CMAKE_BINARY_DIR}/bin)
+    install(FILES ${SHARED_OBJECT} DESTINATION bin)
 endif()
