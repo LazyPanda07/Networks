@@ -1,7 +1,5 @@
 #include "HttpsNetwork.h"
 
-#include <algorithm>
-
 namespace web
 {
 	int HttpsNetwork::sendBytesImplementation(const char* data, int count, int flags)

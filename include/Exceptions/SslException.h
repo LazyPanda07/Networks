@@ -7,38 +7,35 @@
 #include "WebException.h"
 #include "NetworksUtility.h"
 
-namespace web
+namespace web::exceptions
 {
-	namespace exceptions
+	class NETWORKS_API SslException : public web::exceptions::WebException
 	{
-		class NETWORKS_API SslException : public web::exceptions::WebException
-		{
-		private:
-			std::vector<unsigned long> errorCodes;
-			int returnCode;
-			SSL** ssl;
+	private:
+		std::vector<unsigned long> errorCodes;
+		int returnCode;
+		SSL** ssl;
 
-		private:
-			void appendErrorMessage(unsigned long errorCode);
+	private:
+		void appendErrorMessage(unsigned long errorCode);
 
-			void getSSLError(int line, std::string_view file);
+		void getSSLError(int line, std::string_view file);
 
-		public:
-			SslException(int line, std::string_view file);
+	public:
+		SslException(int line, std::string_view file);
 
-			SslException(int line, std::string_view file, SSL*& ssl, int returnCode);
+		SslException(int line, std::string_view file, SSL*& ssl, int returnCode);
 
-			SslException(int line, std::string_view file, int returnCode);
+		SslException(int line, std::string_view file, int returnCode);
 
-			SslException(int line, std::string_view file, int returnCode, int errorCode);
+		SslException(int line, std::string_view file, int returnCode, int errorCode);
 
-			bool hasSSL() const;
+		bool hasSSL() const;
 
-			const std::vector<unsigned long>& getErrorCodes() const;
+		const std::vector<unsigned long>& getErrorCodes() const;
 
-			int getReturnCode() const;
+		int getReturnCode() const;
 
-			~SslException();
-		};
-	}
+		~SslException();
+	};
 }

@@ -62,7 +62,7 @@ namespace web
 
 		this->onParseHeaders();
 
-		runThread = async(std::launch::async, &LargeBodyHandler::loadLoop, this, initialData);
+		runThread = std::async(std::launch::async, &LargeBodyHandler::loadLoop, this, initialData);
 	}
 
 	bool LargeBodyHandler::isRunning() const

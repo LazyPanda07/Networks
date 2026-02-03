@@ -212,13 +212,12 @@ namespace web
 
 bool insensetiveSearching(char first, char second)
 {
-	return tolower(first) == tolower(second);
+	return std::tolower(static_cast<uint8_t>(first)) == std::tolower(static_cast<uint8_t>(second));
 }
 
 bool endsWith(std::string_view test, std::string_view suffix)
 {
-	return test.size() >= suffix.size() &&
-		test.compare(test.size() - suffix.size(), suffix.size(), suffix) == 0;
+	return test.size() >= suffix.size() && test.compare(test.size() - suffix.size(), suffix.size(), suffix) == 0;
 }
 
 std::string_view getHeaderValue(std::string_view::const_iterator startHeader, size_t headerSize, std::string_view http)
