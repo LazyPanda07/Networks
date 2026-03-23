@@ -7,7 +7,7 @@ set(LIBRARY_TYPE STATIC)
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
-project(Networks VERSION 1.22.7)
+project(Networks VERSION 1.23.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
@@ -26,12 +26,12 @@ if (UNIX)
 		endif()
 	endif()
 
-	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.a")
+	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib FILES_MATCHING PATTERN "*.a")
 else ()
 	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
 	set(LIBS ${LIBS} crypt32)
 
-	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib/vendor/OpenSSL FILES_MATCHING PATTERN "*.lib")
+	install(DIRECTORY ${OPENSSL_LIB_PATH}/ DESTINATION lib FILES_MATCHING PATTERN "*.lib")
 endif ()
 
 if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
@@ -81,5 +81,5 @@ install(
 )
 
 install(DIRECTORY include DESTINATION .)
-install(DIRECTORY vendor/OpenSSL/include/ DESTINATION include/vendor/OpenSSL/)
+install(DIRECTORY vendor/OpenSSL/include/ DESTINATION include)
 install(DIRECTORY vendor/OpenSSL/license/ DESTINATION license)
