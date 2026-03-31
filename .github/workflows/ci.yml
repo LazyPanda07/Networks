@@ -19,7 +19,7 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -35,7 +35,7 @@ jobs:
           cmake --install .
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
@@ -51,7 +51,7 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -64,7 +64,7 @@ jobs:
           cmake --install .
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
@@ -80,7 +80,7 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -93,7 +93,7 @@ jobs:
           cmake --install .
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_LinuxARM
@@ -108,12 +108,12 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
   
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
         path: Networks
@@ -148,12 +148,12 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
         path: Networks
@@ -185,12 +185,12 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_LinuxARM
         path: Networks
@@ -222,12 +222,12 @@ jobs:
         shared: [[ON, DLL], [OFF, ""]]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
         
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
         path: Networks
@@ -255,7 +255,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         submodules: recursive
 
@@ -267,7 +267,7 @@ jobs:
 
     - name: Download artifacts
       if: ${{ env.CURRENT_BRANCH == 'main' }}
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       
     - name: Setup Windows build list
       run: echo "WINDOWS_BUILD_LIST="$(ls | grep Windows)"" >> ${GITHUB_ENV}
