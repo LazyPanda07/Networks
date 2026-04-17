@@ -85,7 +85,8 @@ jobs:
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure linux-aarch64 -fPIC no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
+          # ./Configure linux-aarch64 -fPIC no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
+          ./Configure linux-aarch64 -fPIC no-asm no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
           make -j $(nproc)
           make install
           
