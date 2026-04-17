@@ -129,10 +129,8 @@ jobs:
           cmake --install .
 
     - name: Tests
-      working-directory: Tests
-      run: |
-          cd build/bin
-          .\Tests ${{ secrets.GITHUB_TOKEN }}
+      working-directory: Tests/build/bin
+      run: .\Tests ${{ secrets.GITHUB_TOKEN }}
 
 
   linux-tests:
@@ -166,10 +164,8 @@ jobs:
           cmake --install .
 
     - name: Tests
-      working-directory: Tests
-      run: |
-          cd build/bin
-          LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
+      working-directory: Tests/build/bin
+      run: LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
   
 
   linux-aarch64-tests:
@@ -201,10 +197,8 @@ jobs:
           cmake --install .
 
     - name: Tests
-      working-directory: Tests
-      run: |
-          cd build/bin
-          LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
+      working-directory: Tests/build/bin
+      run: LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
 
 
   memory-leak-tests:
