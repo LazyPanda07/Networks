@@ -73,7 +73,9 @@ jobs:
 
 
   linux-aarch64-build:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
+    container:
+      image: lazypanda07/ubuntu_cxx20:aarch64
     
     steps:
     - name: Get OpenSSL
@@ -81,11 +83,16 @@ jobs:
       with:
         repository: openssl/openssl
         ref: ${{ env.OPEN_SSL_TAG }}
-    
+        
+    - name: Install ar
+      run: |
+          sudo apt update
+          sudo apt install -y binutils
+
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
-          ./Configure linux-aarch64 -fPIC no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
+          ./Configure linux-aarch64 no-shared no-docs no-legacy --prefix=/opt/install-dir/OpenSSL
           make -j $(nproc)
           make install
           
