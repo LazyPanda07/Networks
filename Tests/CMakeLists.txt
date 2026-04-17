@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.27.0)
 
 set(CMAKE_CXX_STANDARD 20)
-set(OPENSSL_LIB_PATH ../vendor/OpenSSL/lib)
+set(PLATFORM_NAME "")
 set(LIBS Networks HTTP JSON SocketStreams ssl crypto)
 set(BASE_TCP_SERVER_VERSION 1.16.1)
 set(GTEST_VERSION 1.17.0)
@@ -30,12 +30,12 @@ if (UNIX)
 	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/lib/libNetworks.so)
 
 	if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
-		set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/LinuxARM)	
+		set(PLATFORM_NAME LinuxARM)	
 	else()
-		set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Linux)	
+		set(PLATFORM_NAME Linux)	
 	endif()
 else ()
-	set(OPENSSL_LIB_PATH ${OPENSSL_LIB_PATH}/Windows)
+	set(PLATFORM_NAME Windows)
 	set(LIBS ${LIBS} crypt32)
 	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/dll/Networks.dll)
 endif (UNIX)
@@ -59,7 +59,7 @@ target_include_directories(
 target_link_directories(
 	${PROJECT_NAME} PUBLIC
 	../Networks/lib
-	${OPENSSL_LIB_PATH}
+	../vendor/OpenSSL/${PLATFORM_NAME}/lib
 )
 
 target_link_libraries(
