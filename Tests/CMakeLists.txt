@@ -48,12 +48,12 @@ add_executable(
 
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
-	../include/
-	../HTTP/include/
-	../HTTP/JSON/include/
-	../SocketStreams/include/
-	../vendor/OpenSSL/include/
-	${basetcpserver_SOURCE_DIR}/src
+	../include
+	../HTTP/include
+	../HTTP/JSON/include
+	../SocketStreams/include
+	../vendor/OpenSSL/${PLATFORM_NAME}/include
+	${basetcpserver_SOURCE_DIR}/include
 )
 
 target_link_directories(
