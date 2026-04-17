@@ -5,7 +5,7 @@ on: workflow_dispatch
 
 
 env:
-  OPEN_SSL_TAG: openssl-3.6.1
+  OPEN_SSL_TAG: openssl-4.0.0
   android-api-version: 35
 
 
@@ -73,9 +73,7 @@ jobs:
 
 
   linux-aarch64-build:
-    runs-on: ubuntu-latest
-    container:
-      image: lazypanda07/ubuntu_cxx20:aarch64
+    runs-on: ubuntu-24.04-arm
     
     steps:
     - name: Get OpenSSL
@@ -83,12 +81,7 @@ jobs:
       with:
         repository: openssl/openssl
         ref: ${{ env.OPEN_SSL_TAG }}
-        
-    - name: Install ar
-      run: |
-          sudo apt update
-          sudo apt install -y binutils
-
+    
     - name: Build
       run: |
           mkdir -p install-dir/OpenSSL
