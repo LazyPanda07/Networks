@@ -71,9 +71,7 @@ jobs:
 
 
   linux-aarch64-build:
-    runs-on: ubuntu-latest
-    container:
-      image: lazypanda07/ubuntu_cxx20:aarch64
+    runs-on: ubuntu-24.04-arm
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -175,10 +173,8 @@ jobs:
   
 
   linux-aarch64-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     needs: linux-aarch64-build
-    container:
-      image: lazypanda07/ubuntu_cxx20:aarch64
     strategy:
       matrix:
         configuration: [Debug, Release]
@@ -200,7 +196,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_TOOLCHAIN_FILE=../../toolchain-aarch64.cmake -G "Ninja" ..
+          cmake -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -208,7 +204,7 @@ jobs:
       working-directory: Tests
       run: |
           cd build/bin
-          LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} qemu-aarch64 ./Tests ${{ secrets.GITHUB_TOKEN }}
+          LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
 
 
   memory-leak-tests:
