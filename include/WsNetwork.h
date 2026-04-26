@@ -10,8 +10,11 @@ namespace web
 	 */
 	class NETWORKS_API WsNetwork : public Network
 	{
-	private:
+	protected:
 		bool isClient;
+
+	protected:
+		WsNetwork(bool isClient);
 
 	public:
 		/// @brief Server side constructor

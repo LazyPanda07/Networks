@@ -4,6 +4,7 @@
 #include <bitset>
 #include <bit>
 #include <random>
+#include <cstring>
 
 class Frame
 {
@@ -97,6 +98,13 @@ public:
 
 namespace web
 {
+	WsNetwork::WsNetwork(bool isClient) :
+		Network(nullptr),
+		isClient(isClient)
+	{
+
+	}
+
 	WsNetwork::WsNetwork(SOCKET clientSocket) :
 		Network(clientSocket),
 		isClient(false)

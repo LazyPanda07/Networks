@@ -41,6 +41,8 @@ namespace web
 		HttpsNetwork(std::string_view ip, std::string_view port = httpsPort, T timeout = 30s, std::string_view hostName = "");
 
 		virtual ~HttpsNetwork();
+
+		friend class WssNetwork;
 	};
 }
 
@@ -50,16 +52,14 @@ namespace web
 	HttpsNetwork::HttpsNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout) :
 		HttpNetwork(clientSocket, timeout),
 		ssl(ssl),
-		context(context),
-		isClientSide(false)
+		context(context)
 	{
 
 	}
 
 	template<Timeout T>
 	HttpsNetwork::HttpsNetwork(std::string_view ip, std::string_view port, T timeout, std::string_view hostName) :
-		HttpNetwork(ip, port, timeout),
-		isClientSide(true)
+		HttpNetwork(ip, port, timeout)
 	{
 		SSL_library_init();
 		SSL_load_error_strings();
@@ -75,11 +75,17 @@ namespace web
 
 		if (!ssl)
 		{
+			SSL_CTX_free(context);
+
 			throw exceptions::SslException(__LINE__, __FILE__);
 		}
 
 		if (!SSL_set_fd(ssl, static_cast<int>(this->getClientSocket())))
 		{
+			SSL_CTX_free(context);
+
+			SSL_free(ssl);
+
 			throw exceptions::SslException(__LINE__, __FILE__);
 		}
 
@@ -95,7 +101,11 @@ namespace web
 			}
 			else if (returnCode == 0)
 			{
-				throw exceptions::SslException(__LINE__, __FILE__, ssl, returnCode);
+				exceptions::SslException exception(__LINE__, __FILE__, ssl, returnCode);
+
+				SSL_CTX_free(context);
+
+				throw exception;
 			}
 			else if (returnCode == -1)
 			{
@@ -106,7 +116,11 @@ namespace web
 					continue;
 				}
 
-				throw exceptions::SslException(__LINE__, __FILE__, returnCode, errorCode);
+				exceptions::SslException exception(__LINE__, __FILE__, returnCode, errorCode);
+
+				SSL_CTX_free(context);
+
+				throw exception;
 			}
 		}
 	}

@@ -19,7 +19,7 @@ namespace web
 
 	HttpsNetwork::~HttpsNetwork()
 	{
-		if (isClientSide)
+		if (isClientSide && context)
 		{
 			SSL_CTX_free(context);
 		}
