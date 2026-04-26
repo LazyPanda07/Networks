@@ -59,6 +59,8 @@ namespace web
 		int receiveRawData(char* data, int size, bool& endOfStream, int flags = 0) override;
 
 		virtual ~HttpNetwork() = default;
+
+		friend class WsNetwork;
 	};
 }
 

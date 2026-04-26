@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.27.0)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(PLATFORM_NAME "")
 set(LIBS HTTP JSON SocketStreams crypto ssl)
 set(LIBRARY_TYPE STATIC)
@@ -39,6 +39,8 @@ add_library(
 	${PROJECT_NAME} ${LIBRARY_TYPE}
 	src/HttpNetwork.cpp
 	src/HttpsNetwork.cpp
+	src/WsNetwork.cpp
+	src/WssNetwork.cpp
 	src/NetworksUtility.cpp
 	src/Exceptions/SslException.cpp
 	src/LargeBodyHandler.cpp
