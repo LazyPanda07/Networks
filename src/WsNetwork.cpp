@@ -99,7 +99,6 @@ public:
 namespace web
 {
 	WsNetwork::WsNetwork(bool isClient) :
-		Network(nullptr),
 		isClient(isClient)
 	{
 
@@ -120,10 +119,12 @@ namespace web
 	}
 
 	WsNetwork::WsNetwork(HttpNetwork&& httpNetwork, bool isClient) noexcept :
-		Network(std::move(httpNetwork.handle)),
 		isClient(isClient)
 	{
+		clientSocket = httpNetwork.clientSocket;
+		buffers = std::move(httpNetwork.buffers);
 
+		httpNetwork.clientSocket = INVALID_SOCKET;
 	}
 
 	int WsNetwork::sendData(const web::utility::ContainerWrapper& data, bool& endOfStream, int flags)

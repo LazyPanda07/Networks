@@ -40,6 +40,14 @@ namespace web
 		template<Timeout T = std::chrono::seconds>
 		HttpsNetwork(std::string_view ip, std::string_view port = httpsPort, T timeout = 30s, std::string_view hostName = "");
 
+		HttpsNetwork(const HttpsNetwork&) = delete;
+
+		HttpsNetwork(HttpsNetwork&& other) noexcept;
+
+		HttpsNetwork& operator =(const HttpsNetwork&) = delete;
+
+		HttpsNetwork& operator =(HttpsNetwork&& other) noexcept;
+
 		virtual ~HttpsNetwork();
 
 		friend class WssNetwork;

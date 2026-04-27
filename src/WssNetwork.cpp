@@ -99,10 +99,13 @@ namespace web
 	WssNetwork::WssNetwork(HttpsNetwork&& httpsNetwork, bool isClient) :
 		WsNetwork(isClient)
 	{
-		handle = std::move(httpsNetwork.handle);
+		clientSocket = httpsNetwork.clientSocket;
+		buffers = std::move(httpsNetwork.buffers);
 
 		ssl = httpsNetwork.ssl;
 		context = httpsNetwork.context;
+
+		httpsNetwork.clientSocket = INVALID_SOCKET;
 
 		httpsNetwork.ssl = nullptr;
 		httpsNetwork.context = nullptr;

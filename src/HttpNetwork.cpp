@@ -20,6 +20,30 @@ public:
 
 namespace web
 {
+	HttpNetwork::HttpNetwork() :
+		largeBodySizeThreshold(0)
+	{
+
+	}
+
+	HttpNetwork::HttpNetwork(HttpNetwork&& other) noexcept
+	{
+		(*this) = std::move(other);
+	}
+
+	HttpNetwork& HttpNetwork::operator =(HttpNetwork&& other) noexcept
+	{
+		clientSocket = other.clientSocket;
+		buffers = std::move(other.buffers);
+
+		largeBodyHandler = std::move(other.largeBodyHandler);
+		largeBodySizeThreshold = other.largeBodySizeThreshold;
+		
+		other.clientSocket = INVALID_SOCKET;
+
+		return *this;
+	}
+
 	void HttpNetwork::setLargeBodySizeThreshold(size_t largeBodySizeThreshold)
 	{
 		this->largeBodySizeThreshold = largeBodySizeThreshold;

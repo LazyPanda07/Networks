@@ -24,9 +24,12 @@ namespace web
 
 		static inline constexpr std::string_view httpPort = "80";
 
-	private:
+	protected:
 		std::unique_ptr<LargeBodyHandler> largeBodyHandler;
 		size_t largeBodySizeThreshold;
+
+	protected:
+		HttpNetwork();
 
 	public:
 		/// @brief Server side constructor
@@ -38,6 +41,14 @@ namespace web
 		/// @param port Remote port to connect to
 		template<Timeout T = std::chrono::seconds>
 		HttpNetwork(std::string_view ip, std::string_view port = httpPort, T timeout = 30s, size_t largeBodySizeThreshold = 0);
+
+		HttpNetwork(const HttpNetwork&) = delete;
+
+		HttpNetwork(HttpNetwork&& other) noexcept;
+
+		HttpNetwork& operator =(const HttpNetwork&) = delete;
+
+		HttpNetwork& operator =(HttpNetwork&& other) noexcept;
 
 		void setLargeBodySizeThreshold(size_t largeBodySizeThreshold);
 
