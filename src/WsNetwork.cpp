@@ -402,12 +402,12 @@ char* FrameParser::receiveBuild(int& bytes)
 		case 126:
 			bytes = sizeof(uint16_t);
 
-			return reinterpret_cast<char*>(currentFrame->additionalPayloadSize.emplace<uint16_t>());
+			return reinterpret_cast<char*>(&currentFrame->additionalPayloadSize.emplace<uint16_t>());
 
 		case 127:
 			bytes = sizeof(uint64_t);
 
-			return reinterpret_cast<char*>(currentFrame->additionalPayloadSize.emplace<uint64_t>());
+			return reinterpret_cast<char*>(&currentFrame->additionalPayloadSize.emplace<uint64_t>());
 
 		default:
 			if (currentFrame->hasMask())
