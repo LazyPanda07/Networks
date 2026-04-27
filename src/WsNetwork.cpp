@@ -248,7 +248,7 @@ Frame::Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const st
 
 			additionalPayloadSize.emplace<uint16_t>(static_cast<uint16_t>(payload.size()));
 
-			actualFullHeaderSize = sizeof(uint16_t);
+			actualFullHeaderSize += sizeof(uint16_t);
 		}
 		else
 		{
@@ -256,7 +256,7 @@ Frame::Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const st
 
 			additionalPayloadSize.emplace<uint64_t>(static_cast<uint64_t>(payload.size()));
 
-			actualFullHeaderSize = sizeof(uint64_t);
+			actualFullHeaderSize += sizeof(uint64_t);
 		}
 	}
 	else
