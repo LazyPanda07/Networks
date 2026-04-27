@@ -67,7 +67,8 @@ namespace web
 
 	template<Timeout T>
 	HttpsNetwork::HttpsNetwork(std::string_view ip, std::string_view port, T timeout, std::string_view hostName) :
-		HttpNetwork(ip, port, timeout)
+		HttpNetwork(ip, port, timeout),
+		isClientSide(true)
 	{
 		SSL_library_init();
 		SSL_load_error_strings();
