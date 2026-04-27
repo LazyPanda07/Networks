@@ -430,9 +430,9 @@ char* FrameParser::receiveBuild(int& bytes)
 		return reinterpret_cast<char*>(currentFrame->mask.data());
 
 	case FrameParser::ParseState::payload:
-		bytes = static_cast<int>(currentFrame->payload.size());
+		bytes = static_cast<int>(currentFrame->getPayloadSize());
 
-		currentFrame->payload.resize(currentFrame->getPayloadSize());
+		currentFrame->payload.resize(bytes);
 		buildState = ParseState::finish;
 
 		return reinterpret_cast<char*>(currentFrame->payload.data());
