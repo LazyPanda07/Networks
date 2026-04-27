@@ -2,8 +2,6 @@
 
 #include "WsNetwork.h"
 
-#include <openssl/ssl.h>
-
 #include "HttpsNetwork.h"
 
 namespace web

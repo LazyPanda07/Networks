@@ -354,7 +354,7 @@ uint64_t Frame::getPayloadSize() const
 		return std::byteswap(std::get<uint16_t>(additionalPayloadSize));
 
 	default:
-		return static_cast<uint64_t>(baseHeader[1] | 127);
+		return static_cast<uint64_t>(baseHeader[1] & 127);
 	}
 }
 
