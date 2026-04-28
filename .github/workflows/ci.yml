@@ -237,6 +237,9 @@ jobs:
       with:
         submodules: recursive
         
+    - name: Install simple-websocket-server
+      run: python3 -m pip install simple-websocket-server
+
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
@@ -257,7 +260,7 @@ jobs:
       with:
         path: Tests/build/bin
         name: Tests
-        pre-execute: export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$(pwd)
+        pre-execute: export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$(pwd); python3 -u web_socket_server.py & sleep 1
         args: ${{ secrets.GITHUB_TOKEN }}
         
 
