@@ -60,7 +60,8 @@ namespace web
 	HttpsNetwork::HttpsNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout) :
 		HttpNetwork(clientSocket, timeout),
 		ssl(ssl),
-		context(context)
+		context(context),
+		isClientSide(false)
 	{
 
 	}

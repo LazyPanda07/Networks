@@ -37,6 +37,7 @@ namespace web
 		other.clientSocket = INVALID_SOCKET;
 		other.ssl = nullptr;
 		other.context = nullptr;
+		other.largeBodySizeThreshold = 0;
 
 		return *this;
 	}

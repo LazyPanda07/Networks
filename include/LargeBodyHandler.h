@@ -1,6 +1,7 @@
 #pragma once
 
 #include <future>
+#include <atomic>
 
 #include "NetworksUtility.h"
 #include "ContainerWrapper.h"

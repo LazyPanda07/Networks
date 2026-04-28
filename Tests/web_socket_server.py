@@ -7,4 +7,7 @@ class Echo(WebSocket):
 
 
 server = WebSocketServer("127.0.0.1", 5050, Echo)
+
+open("web_socket_server_ready.txt", "w").close()
+
 server.serve_forever()

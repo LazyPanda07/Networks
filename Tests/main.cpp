@@ -1,6 +1,7 @@
 #include <string>
 #include <chrono>
 #include <format>
+#include <filesystem>
 
 #include <gtest/gtest.h>
 #include <openssl/ssl.h>
@@ -275,6 +276,13 @@ int main(int argc, char** argv)
 	while (!isRunning)
 	{
 		std::cout << "Wait server..." << std::endl;
+
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+
+	while (!std::filesystem::exists("web_socket_server_ready.txt"))
+	{
+		std::cout << "Wait WebSocket server..." << std::endl;
 
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}

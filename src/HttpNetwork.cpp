@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <charconv>
 #include <cstring>
+#include <thread>
 
 static bool insensetiveSearching(char first, char second);
 
