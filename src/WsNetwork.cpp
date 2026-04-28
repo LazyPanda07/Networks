@@ -81,7 +81,7 @@ private:
 	std::vector<Frame> frames;
 	size_t totalPayloadSize;
 	Frame* currentFrame;
-	ParseState buildState;
+	ParseState parseState;
 
 private:
 	void addFrame();
@@ -167,7 +167,7 @@ namespace web
 
 	int WsNetwork::receiveData(web::utility::ContainerWrapper& data, bool& endOfStream, int flags)
 	{
-		FrameParser builder;
+		FrameParser parser;
 		std::vector<Frame> frames;
 		int size;
 		int totalSize = 0;
@@ -175,17 +175,25 @@ namespace web
 
 		endOfStream = false;
 
-		while (char* ptr = builder.receiveBuild(size))
+		while (char* ptr = parser.receiveBuild(size))
 		{
-			totalSize += this->receiveBytes(ptr, size, endOfStream, flags);
+			int receiveSize = 0;
 
-			if (endOfStream)
+			do
 			{
-				return totalSize;
+				receiveSize += this->receiveBytes(ptr + receiveSize, size - receiveSize, endOfStream, flags);
+
+				if (endOfStream)
+				{
+					return totalSize + receiveSize;
+				}
 			}
+			while (receiveSize != size);
+
+			totalSize += size;
 		}
 
-		data.resize(builder.get(frames));
+		data.resize(parser.get(frames));
 
 		for (const Frame& frame : frames)
 		{
@@ -348,10 +356,10 @@ uint64_t Frame::getPayloadSize() const
 	switch (additionalPayloadSize.index())
 	{
 	case 0:
-		return std::byteswap(std::get<uint16_t>(additionalPayloadSize));
+		return static_cast<uint64_t>(std::byteswap(std::get<uint16_t>(additionalPayloadSize)));
 
 	case 1:
-		return std::byteswap(std::get<uint16_t>(additionalPayloadSize));
+		return std::byteswap(std::get<uint64_t>(additionalPayloadSize));
 
 	default:
 		return static_cast<uint64_t>(baseHeader[1] & 127);
@@ -380,17 +388,17 @@ void FrameParser::addFrame()
 
 FrameParser::FrameParser() :
 	totalPayloadSize(0),
-	buildState(ParseState::baseHeader)
+	parseState(ParseState::baseHeader)
 {
 	this->addFrame();
 }
 
 char* FrameParser::receiveBuild(int& bytes)
 {
-	switch (buildState)
+	switch (parseState)
 	{
 	case FrameParser::ParseState::baseHeader:
-		buildState = ParseState::additionalPayloadSize;
+		parseState = ParseState::additionalPayloadSize;
 
 		bytes = static_cast<int>(currentFrame->baseHeader.size());
 
@@ -412,11 +420,11 @@ char* FrameParser::receiveBuild(int& bytes)
 		default:
 			if (currentFrame->hasMask())
 			{
-				buildState = ParseState::mask;
+				parseState = ParseState::mask;
 			}
 			else
 			{
-				buildState = ParseState::payload;
+				parseState = ParseState::payload;
 			}
 
 			return this->receiveBuild(bytes);
@@ -425,7 +433,7 @@ char* FrameParser::receiveBuild(int& bytes)
 	case FrameParser::ParseState::mask:
 		bytes = static_cast<int>(currentFrame->mask.size());
 
-		buildState = ParseState::payload;
+		parseState = ParseState::payload;
 
 		return reinterpret_cast<char*>(currentFrame->mask.data());
 
@@ -433,7 +441,7 @@ char* FrameParser::receiveBuild(int& bytes)
 		bytes = static_cast<int>(currentFrame->getPayloadSize());
 
 		currentFrame->payload.resize(bytes);
-		buildState = ParseState::finish;
+		parseState = ParseState::finish;
 
 		return reinterpret_cast<char*>(currentFrame->payload.data());
 
@@ -449,7 +457,7 @@ char* FrameParser::receiveBuild(int& bytes)
 
 		this->addFrame();
 
-		buildState = ParseState::baseHeader;
+		parseState = ParseState::baseHeader;
 
 		return this->receiveBuild(bytes);
 

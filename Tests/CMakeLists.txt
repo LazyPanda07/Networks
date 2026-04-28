@@ -5,6 +5,7 @@ set(PLATFORM_NAME "")
 set(LIBS Networks HTTP JSON SocketStreams ssl crypto)
 set(BASE_TCP_SERVER_VERSION 1.17.2)
 set(GTEST_VERSION 1.17.0)
+set(UTILITY_LIBRARY_VERSION 0.12.0)
 set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
 
 project(Tests)
@@ -17,13 +18,19 @@ FetchContent_Declare(
     GIT_TAG v${BASE_TCP_SERVER_VERSION}
 )
 FetchContent_Declare(
-	gtest
+	UtilityLibrary
+	GIT_REPOSITORY https://github.com/LazyPanda07/UtilityLibrary.git
+	GIT_TAG v${UTILITY_LIBRARY_VERSION}
+)
+FetchContent_Declare(
+	GTest
 	GIT_REPOSITORY https://github.com/google/googletest.git
 	GIT_TAG v${GTEST_VERSION}
 )
 
 FetchContent_MakeAvailable(BaseTCPServer)
-FetchContent_MakeAvailable(gtest)
+FetchContent_MakeAvailable(UtilityLibrary)
+FetchContent_MakeAvailable(GTest)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
@@ -66,11 +73,13 @@ target_link_libraries(
 	${PROJECT_NAME} PUBLIC
 	${LIBS}
 	BaseTCPServer
-	gtest
-	gtest_main
+	UtilityLibrary
+	GTest::gtest
+	GTest::gtest_main
 )
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES web_socket_server.py DESTINATION bin)
 
 if(EXISTS ${SHARED_OBJECT})
     install(FILES ${SHARED_OBJECT} DESTINATION bin)

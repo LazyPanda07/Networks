@@ -23,7 +23,7 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Enable NMake
+    - name: Enable CL
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
     - name: Build
@@ -110,13 +110,16 @@ jobs:
       with:
         submodules: recursive
   
+    - name: Install simple-websocket-server
+      run: python -m pip install simple-websocket-server
+
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
         name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
         path: Networks
         
-    - name: Enable NMake
+    - name: Enable CL
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
     - name: Build tests
@@ -130,7 +133,10 @@ jobs:
 
     - name: Tests
       working-directory: Tests/build/bin
-      run: .\Tests ${{ secrets.GITHUB_TOKEN }}
+      shell: cmd
+      run: |
+        start python -u web_socket_server.py
+        .\Tests ${{ secrets.GITHUB_TOKEN }}
 
 
   linux-tests:
@@ -147,6 +153,9 @@ jobs:
     - uses: actions/checkout@v6
       with:
         submodules: recursive
+
+    - name: Install simple-websocket-server
+      run: python3 -m pip install simple-websocket-server
 
     - name: Download artifacts
       uses: actions/download-artifact@v8
@@ -165,7 +174,9 @@ jobs:
 
     - name: Tests
       working-directory: Tests/build/bin
-      run: LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python3 -u web_socket_server.py & sleep 1
+        LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
   
 
   linux-aarch64-tests:
@@ -180,6 +191,9 @@ jobs:
     - uses: actions/checkout@v6
       with:
         submodules: recursive
+
+    - name: Install simple-websocket-server
+      run: python3 -m pip install simple-websocket-server
 
     - name: Download artifacts
       uses: actions/download-artifact@v8
@@ -198,7 +212,9 @@ jobs:
 
     - name: Tests
       working-directory: Tests/build/bin
-      run: LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        python3 -u web_socket_server.py & sleep 1
+        LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH} ./Tests ${{ secrets.GITHUB_TOKEN }}
 
 
   memory-leak-tests:
