@@ -7,7 +7,7 @@ set(LIBRARY_TYPE STATIC)
 option(BUILD_SHARED_LIBS "" OFF)
 option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
-project(Networks VERSION 1.26.4)
+project(Networks VERSION 1.27.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
