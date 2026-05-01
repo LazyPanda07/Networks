@@ -39,7 +39,7 @@ namespace web::web_socket
 		using FullHeader = std::array<uint8_t, fullHeaderMaxSize>;
 
 	public:
-		static web::web_socket::Frame::Mask generateMask();
+		static Mask generateMask();
 
 	private:
 		BaseHeader baseHeader;
@@ -52,7 +52,7 @@ namespace web::web_socket
 	public:
 		Frame();
 
-		Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const std::optional<Mask>& mask = std::nullopt);
+		Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const std::optional<Mask>& mask = std::nullopt, bool masked = false);
 
 		void encode();
 
@@ -68,9 +68,13 @@ namespace web::web_socket
 
 		const std::vector<uint8_t>& getPayload() const;
 
+		std::vector<uint8_t> getUnmaskedPayload() const;
+
 		const FullHeader& getFullHeader() const;
 
 		int getActualFullHeaderSize() const;
+
+		Mask getMask() const;
 
 		~Frame() = default;
 

@@ -1,7 +1,5 @@
 #include "WebSocket/WsNetwork.h"
 
-#include <cstring>
-
 class FrameParser
 {
 private:
@@ -135,22 +133,7 @@ namespace web::web_socket
 
 	int WsNetwork::sendRawData(const char* data, int size, bool& endOfStream, int flags)
 	{
-		int totalSend = 0;
-
-		do
-		{
-			int lastPacket = this->sendRawData(data + totalSend, size - totalSend, endOfStream, flags);
-
-			if (endOfStream)
-			{
-				return totalSend;
-			}
-
-			totalSend += lastPacket;
-		}
-		while (totalSend != size);
-
-		return totalSend;
+		return this->sendBytes(data, size, endOfStream, flags);
 	}
 
 	int WsNetwork::receiveRawData(char* data, int size, bool& endOfStream, int flags)
@@ -159,7 +142,7 @@ namespace web::web_socket
 
 		do
 		{
-			int lastPacket = this->receiveRawData(data + totalReceive, size - totalReceive, endOfStream, flags);
+			int lastPacket = this->receiveBytes(data + totalReceive, size - totalReceive, endOfStream, flags);
 
 			if (endOfStream)
 			{
@@ -176,7 +159,7 @@ namespace web::web_socket
 
 namespace streams
 {
-	IOSocketStream& operator >>(IOSocketStream& stream, std::vector<web::web_socket::Frame>& frame)
+	IOSocketStream& operator >>(IOSocketStream& stream, std::vector<web::web_socket::Frame>& frames)
 	{
 		if (!dynamic_cast<const web::web_socket::WsNetwork*>(&stream.getNetwork()))
 		{
@@ -191,7 +174,7 @@ namespace streams
 			std::streamsize lastPacket = stream.read(ptr, static_cast<std::streamsize>(bytes)).gcount();
 		}
 
-		parser.get(frame);
+		parser.get(frames);
 
 		return stream;
 	}
@@ -209,12 +192,12 @@ namespace streams
 
 		if (network->getIsClient())
 		{
-			mask = web::web_socket::Frame::generateMask();
+			mask = frame.getMask();
 		}
 
 		const std::vector<uint8_t>& payload = frame.getPayload();
 		std::string_view tempPayload(reinterpret_cast<const char*>(payload.data()), payload.size());
-		web::web_socket::Frame resultFrame(frame.isFinal(), frame.getFrameOpcode(), tempPayload, mask);
+		web::web_socket::Frame resultFrame(frame.isFinal(), frame.getFrameOpcode(), tempPayload, mask, true);
 		const web::web_socket::Frame::FullHeader& fullHeader = resultFrame.getFullHeader();
 		std::vector<uint8_t> bytes(resultFrame.getActualFullHeaderSize() + payload.size());
 

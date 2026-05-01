@@ -3,6 +3,8 @@
 #include <bitset>
 #include <bit>
 #include <random>
+#include <cstring>
+#include <ctime>
 
 namespace web::web_socket
 {
@@ -32,7 +34,7 @@ namespace web::web_socket
 
 	}
 
-	Frame::Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const std::optional<Mask>& mask) :
+	Frame::Frame(bool isFinal, OpcodeType opcode, std::string_view payload, const std::optional<Mask>& mask, bool masked) :
 		baseHeader({}),
 		additionalPayloadSize(nullptr),
 		mask(mask ? *mask : Mask()),
@@ -81,8 +83,11 @@ namespace web::web_socket
 
 		baseHeader[1] = static_cast<uint8_t>(byteData.to_ulong());
 
-		this->encode();
-
+		if (!masked)
+		{
+			this->encode();
+		}
+		
 		std::memcpy(fullHeader.data(), baseHeader.data(), baseHeader.size());
 
 		size_t offset = baseHeader.size();
@@ -171,6 +176,18 @@ namespace web::web_socket
 		return payload;
 	}
 
+	std::vector<uint8_t> Frame::getUnmaskedPayload() const
+	{
+		std::vector<uint8_t> result(payload);
+
+		for (size_t i = 0; i < payload.size(); i++)
+		{
+			result[i] ^= mask[i % mask.size()];
+		}
+
+		return result;
+	}
+
 	const Frame::FullHeader& Frame::getFullHeader() const
 	{
 		return fullHeader;
@@ -179,5 +196,10 @@ namespace web::web_socket
 	int Frame::getActualFullHeaderSize() const
 	{
 		return actualFullHeaderSize;
+	}
+
+	Frame::Mask Frame::getMask() const
+	{
+		return mask;
 	}
 }

@@ -273,7 +273,7 @@ TEST(WebSocket, Echo)
 
 	web::web_socket::Frame& echoFrame = echoFrames.front();
 
-	ASSERT_EQ(sendFrame.getPayload(), echoFrame.getPayload());
+	ASSERT_EQ(sendFrame.getUnmaskedPayload(), echoFrame.getPayload());
 	ASSERT_EQ(sendFrame.getFrameOpcode(), echoFrame.getFrameOpcode());
 }
 

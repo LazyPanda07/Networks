@@ -51,7 +51,7 @@ namespace web::web_socket
 
 namespace streams
 {
-	IOSocketStream& operator >>(IOSocketStream& stream, std::vector<web::web_socket::Frame>& frame);
+	IOSocketStream& operator >>(IOSocketStream& stream, std::vector<web::web_socket::Frame>& frames);
 
 	IOSocketStream& operator <<(IOSocketStream& stream, const web::web_socket::Frame& frame);
 }
