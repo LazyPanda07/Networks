@@ -7,12 +7,17 @@
 #include "Network.h"
 #include "LargeBodyHandler.h"
 
-namespace web
+namespace web::web_socket
+{
+	class WsNetwork;
+}
+
+namespace web::http
 {
 	/// <summary>
 	/// Network functions for HTTP
 	/// </summary>
-	class NETWORKS_API HttpNetwork : public web::Network
+	class HttpNetwork : public web::Network
 	{
 	public:
 		static constexpr uint16_t averageHTTPRequestSize = 1500;
@@ -71,11 +76,11 @@ namespace web
 
 		virtual ~HttpNetwork() = default;
 
-		friend class WsNetwork;
+		friend class web_socket::WsNetwork;
 	};
 }
 
-namespace web
+namespace web::http
 {
 	template<Timeout T>
 	HttpNetwork::HttpNetwork(SOCKET clientSocket, T timeout, size_t largeBodySizeThreshold) :

@@ -9,7 +9,7 @@
 
 namespace web::exceptions
 {
-	class NETWORKS_API SslException : public web::exceptions::WebException
+	class SslException : public web::exceptions::WebException
 	{
 	private:
 		std::vector<unsigned long> errorCodes;

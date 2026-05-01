@@ -1,8 +1,8 @@
-#include "WssNetwork.h"
+#include "WebSocket/WssNetwork.h"
 
 #include "Exceptions/SslException.h"
 
-namespace web
+namespace web::web_socket
 {
 	int WssNetwork::sendBytesImplementation(const char* data, int count, int flags)
 	{
@@ -96,7 +96,7 @@ namespace web
 		}
 	}
 
-	WssNetwork::WssNetwork(HttpsNetwork&& httpsNetwork, bool isClient) :
+	WssNetwork::WssNetwork(http::HttpsNetwork&& httpsNetwork, bool isClient) :
 		WsNetwork(isClient)
 	{
 		clientSocket = httpsNetwork.clientSocket;

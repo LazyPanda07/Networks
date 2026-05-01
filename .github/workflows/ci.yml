@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -30,7 +29,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -38,7 +37,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
+        name: ${{ matrix.configuration }}_Windows
 
 
   linux-build:
@@ -48,7 +47,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -59,7 +57,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -67,7 +65,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
+        name: ${{ matrix.configuration }}_Linux
 
 
   linux-aarch64-build:
@@ -75,7 +73,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -86,7 +83,7 @@ jobs:
       run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DSHARED_NETWORKS=${{ matrix.shared[0] }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DCMAKE_INSTALL_PREFIX=install-dir -G "Ninja" ..
           cmake --build . -j
           cmake --install .
 
@@ -94,7 +91,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         path: build/install-dir
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_LinuxARM
+        name: ${{ matrix.configuration }}_LinuxARM
 
 
   windows-tests:
@@ -103,7 +100,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -116,7 +112,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Windows
+        name: ${{ matrix.configuration }}_Windows
         path: Networks
         
     - name: Enable CL
@@ -147,7 +143,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -160,7 +155,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
+        name: ${{ matrix.configuration }}_Linux
         path: Networks
         
     - name: Build tests
@@ -185,7 +180,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -203,7 +197,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_LinuxARM
+        name: ${{ matrix.configuration }}_LinuxARM
         path: Networks
         
     - name: Build tests
@@ -230,7 +224,6 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
-        shared: [[ON, DLL], [OFF, ""]]
 
     steps:
     - uses: actions/checkout@v6
@@ -243,7 +236,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v8
       with:
-        name: ${{ matrix.configuration }}${{ matrix.shared[1] }}_Linux
+        name: ${{ matrix.configuration }}_Linux
         path: Networks
         
     - name: Build tests
@@ -292,11 +285,11 @@ jobs:
 
     - name: Create Linux zip
       if: ${{ env.CURRENT_BRANCH == 'main' }}
-      run: zip -r linux.zip Release_Linux ReleaseDLL_Linux
+      run: zip -r linux.zip Release_Linux
 
     - name: Create Linux ARM zip
       if: ${{ env.CURRENT_BRANCH == 'main' }}
-      run: zip -r linux_aarch64.zip Release_LinuxARM ReleaseDLL_LinuxARM
+      run: zip -r linux_aarch64.zip Release_LinuxARM
 
     - name: Publish
       if: ${{ env.CURRENT_BRANCH == 'main' }}

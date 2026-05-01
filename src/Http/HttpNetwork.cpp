@@ -1,4 +1,4 @@
-#include "HttpNetwork.h"
+#include "Http/HttpNetwork.h"
 
 #include <algorithm>
 #include <charconv>
@@ -19,7 +19,7 @@ public:
 	~ReadOnlyContainerWrapper() = default;
 };
 
-namespace web
+namespace web::http
 {
 	HttpNetwork::HttpNetwork() :
 		largeBodySizeThreshold(0)

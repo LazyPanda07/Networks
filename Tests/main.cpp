@@ -9,8 +9,8 @@
 #include <HttpBuilder.h>
 #include <HttpParser.h>
 #include <IOSocketStream.h>
-#include <HttpsNetwork.h>
-#include <WsNetwork.h>
+#include <Http/HttpsNetwork.h>
+#include <WebSocket/WsNetwork.h>
 #include <Base64.h>
 
 std::string token;
@@ -21,7 +21,7 @@ TEST(HTTPS, GithubAPI)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpsNetwork>("api.github.com", "443");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -53,7 +53,7 @@ TEST(HTTPS, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpsNetwork>("api.github.com", "443");
 		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -84,7 +84,7 @@ TEST(HTTPS, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpsNetwork>("api.github.com", "443");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpsNetwork>("api.github.com", "443");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -116,7 +116,7 @@ TEST(HTTP, GithubAPIBuilder)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpNetwork>("127.0.0.1", "8080");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpNetwork>("127.0.0.1", "8080");
 		web::HttpBuilder request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -146,7 +146,7 @@ TEST(HTTP, GithubAPIParser)
 {
 	try
 	{
-		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::HttpNetwork>("127.0.0.1", "8080");
+		streams::IOSocketStream stream = streams::IOSocketStream::createStream<web::http::HttpNetwork>("127.0.0.1", "8080");
 		std::string request = web::HttpBuilder()
 			.getRequest()
 			.parameters("repos/LazyPanda07/Networks/branches")
@@ -191,7 +191,7 @@ TEST(WebSocket, UpgradeConnection)
 		};
 
 	std::string randomBytes = utility::conversion::encodeBase64(getRandomBytes());
-	webSocketStream = std::make_unique<streams::IOSocketStream>(streams::IOSocketStream::createStream<web::HttpNetwork>("127.0.0.1", "5050", std::chrono::seconds(0)));
+	webSocketStream = std::make_unique<streams::IOSocketStream>(streams::IOSocketStream::createStream<web::http::HttpNetwork>("127.0.0.1", "5050", std::chrono::seconds(0)));
 	std::string request = web::HttpBuilder()
 		.getRequest()
 		.headers
@@ -224,7 +224,7 @@ TEST(WebSocket, UpgradeConnection)
 		ASSERT_EQ(utility::conversion::encodeBase64(output), parser.getHeaders().at("Sec-WebSocket-Accept"));
 	}
 
-	webSocketStream = std::make_unique<streams::IOSocketStream>(streams::IOSocketStream::createStream<web::WsNetwork>(std::move(webSocketStream->getNetwork<web::HttpNetwork>()), true));
+	webSocketStream = std::make_unique<streams::IOSocketStream>(streams::IOSocketStream::createStream<web::web_socket::WsNetwork>(std::move(webSocketStream->getNetwork<web::http::HttpNetwork>()), true));
 }
 
 TEST(WebSocket, Echo)
@@ -261,6 +261,20 @@ TEST(WebSocket, Echo)
 
 		ASSERT_EQ(randomText, response);
 	}
+
+	web::web_socket::Frame sendFrame(true, web::web_socket::Frame::OpcodeType::text, "Hello, World!", web::web_socket::Frame::generateMask());
+	std::vector<web::web_socket::Frame> echoFrames;
+
+	(*webSocketStream) << sendFrame;
+
+	(*webSocketStream) >> echoFrames;
+
+	ASSERT_EQ(echoFrames.size(), 1);
+
+	web::web_socket::Frame& echoFrame = echoFrames.front();
+
+	ASSERT_EQ(sendFrame.getPayload(), echoFrame.getPayload());
+	ASSERT_EQ(sendFrame.getFrameOpcode(), echoFrame.getFrameOpcode());
 }
 
 int main(int argc, char** argv)

@@ -1,6 +1,6 @@
-#include "HttpsNetwork.h"
+#include "Http/HttpsNetwork.h"
 
-namespace web
+namespace web::http
 {
 	int HttpsNetwork::sendBytesImplementation(const char* data, int count, int flags)
 	{

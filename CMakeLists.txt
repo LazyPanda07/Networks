@@ -3,11 +3,8 @@ cmake_minimum_required(VERSION 3.27.0)
 set(CMAKE_CXX_STANDARD 23)
 set(PLATFORM_NAME "")
 set(LIBS HTTP JSON SocketStreams crypto ssl)
-set(LIBRARY_TYPE STATIC)
-option(BUILD_SHARED_LIBS "" OFF)
-option(SHARED_NETWORKS "Build shared Networks with static linked dependencies" OFF)
 
-project(Networks VERSION 1.27.1)
+project(Networks VERSION 1.28.0)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
@@ -30,17 +27,13 @@ else()
 	set(LIBS ${LIBS} crypt32)
 endif()
 
-if (${BUILD_SHARED_LIBS} OR ${SHARED_NETWORKS})
-	add_definitions(-DNETWORKS_DLL)
-	set(LIBRARY_TYPE SHARED)
-endif ()
-
 add_library(
 	${PROJECT_NAME} ${LIBRARY_TYPE}
-	src/HttpNetwork.cpp
-	src/HttpsNetwork.cpp
-	src/WsNetwork.cpp
-	src/WssNetwork.cpp
+	src/Http/HttpNetwork.cpp
+	src/Http/HttpsNetwork.cpp
+	src/WebSocket/WsNetwork.cpp
+	src/WebSocket/WssNetwork.cpp
+	src/WebSocket/Frame.cpp
 	src/NetworksUtility.cpp
 	src/Exceptions/SslException.cpp
 	src/LargeBodyHandler.cpp
@@ -69,14 +62,12 @@ target_link_directories(
 	vendor/OpenSSL/${PLATFORM_NAME}/lib
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${LIBS})
-
-install(
-	TARGETS ${PROJECT_NAME} 
-	ARCHIVE DESTINATION lib
-	LIBRARY DESTINATION lib
-	RUNTIME DESTINATION dll
+target_link_libraries(
+	${PROJECT_NAME} PUBLIC 
+	${LIBS}
 )
+
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
 
 install(DIRECTORY include DESTINATION .)
 install(DIRECTORY vendor/OpenSSL/${PLATFORM_NAME}/lib/ DESTINATION lib)

@@ -1,0 +1,11 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Dependencies/">
+    <Project Path="HTTP/HTTP.vcxproj" Id="cd88b391-b7b9-47d5-af8d-153fcb2b5a2b" />
+    <Project Path="HTTP/JSON/JSON.vcxproj" Id="f6b57139-d9f3-4b02-aa92-4e1f417649da" />
+    <Project Path="SocketStreams/SocketStreams.vcxproj" Id="8bb9f3bd-68f4-403a-acc6-f85c75f5d14f" />
+  </Folder>
+  <Project Path="Networks.vcxproj" Id="e3c5b070-57f3-4e11-9701-fdcc108aecb3" />
+</Solution>

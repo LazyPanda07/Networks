@@ -1,14 +1,18 @@
 #pragma once
 
-#include "NetworksUtility.h"
-#include "HttpNetwork.h"
+#include "Http/HttpNetwork.h"
 
-namespace web
+#include <IOSocketStream.h>
+
+#include "NetworksUtility.h"
+#include "WebSocket/Frame.h"
+
+namespace web::web_socket
 {
 	/**
 	 * @brief WebSocket network
 	 */
-	class NETWORKS_API WsNetwork : public Network
+	class WsNetwork : public Network
 	{
 	protected:
 		bool isClient;
@@ -29,7 +33,9 @@ namespace web
 		 * @brief Upgrade HTTP to WebSocket
 		 * @param httpNetwork 
 		 */
-		WsNetwork(HttpNetwork&& httpNetwork, bool isClient) noexcept;
+		WsNetwork(http::HttpNetwork&& httpNetwork, bool isClient) noexcept;
+
+		bool getIsClient() const;
 
 		int sendData(const utility::ContainerWrapper& data, bool& endOfStream, int flags = 0) override;
 
@@ -41,4 +47,11 @@ namespace web
 
 		virtual ~WsNetwork() = default;
 	};
+}
+
+namespace streams
+{
+	IOSocketStream& operator >>(IOSocketStream& stream, std::vector<web::web_socket::Frame>& frame);
+
+	IOSocketStream& operator <<(IOSocketStream& stream, const web::web_socket::Frame& frame);
 }

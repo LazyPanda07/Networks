@@ -2,11 +2,11 @@
 
 #include "WsNetwork.h"
 
-#include "HttpsNetwork.h"
+#include "Http/HttpsNetwork.h"
 
-namespace web
+namespace web::web_socket
 {
-	class NETWORKS_API WssNetwork : public WsNetwork
+	class WssNetwork : public WsNetwork
 	{
 	private:
 		SSL* ssl;
@@ -32,7 +32,7 @@ namespace web
 		 * @brief Upgrade HTTPs to WebSocket
 		 * @param httpNetwork
 		 */
-		WssNetwork(HttpsNetwork&& httpsNetwork, bool isClient);
+		WssNetwork(http::HttpsNetwork&& httpsNetwork, bool isClient);
 
 		~WssNetwork();
 	};

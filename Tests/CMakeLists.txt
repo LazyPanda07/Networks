@@ -34,7 +34,6 @@ FetchContent_MakeAvailable(GTest)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
-	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/lib/libNetworks.so)
 
 	if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "aarch64")
 		set(PLATFORM_NAME LinuxARM)
@@ -44,7 +43,6 @@ if (UNIX)
 else ()
 	set(PLATFORM_NAME Windows)
 	set(LIBS ${LIBS} crypt32)
-	set(SHARED_OBJECT ${PROJECT_SOURCE_DIR}/../Networks/dll/Networks.dll)
 endif (UNIX)
 
 add_executable(
@@ -53,20 +51,16 @@ add_executable(
 	server.cpp
 )
 
+find_library(OpenSSL PATHS ../Networks/)
+
 target_include_directories(
 	${PROJECT_NAME} PUBLIC
-	../include
-	../HTTP/include
-	../HTTP/JSON/include
-	../SocketStreams/include
-	../vendor/OpenSSL/${PLATFORM_NAME}/include
-	${basetcpserver_SOURCE_DIR}/include
+	../Networks/include
 )
 
 target_link_directories(
 	${PROJECT_NAME} PUBLIC
 	../Networks/lib
-	../vendor/OpenSSL/${PLATFORM_NAME}/lib
 )
 
 target_link_libraries(
@@ -80,7 +74,3 @@ target_link_libraries(
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES web_socket_server.py DESTINATION bin)
-
-if(EXISTS ${SHARED_OBJECT})
-    install(FILES ${SHARED_OBJECT} DESTINATION bin)
-endif()

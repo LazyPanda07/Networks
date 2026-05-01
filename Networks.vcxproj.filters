@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\HttpNetwork.cpp">
+    <ClCompile Include="src\Http\HttpNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\HttpsNetwork.cpp">
+    <ClCompile Include="src\Http\HttpsNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\Exceptions\SslException.cpp">
@@ -30,18 +30,21 @@
     <ClCompile Include="src\LargeBodyHandler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\WsNetwork.cpp">
+    <ClCompile Include="src\WebSocket\WsNetwork.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\WssNetwork.cpp">
+    <ClCompile Include="src\WebSocket\WssNetwork.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WebSocket\Frame.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\HttpNetwork.h">
+    <ClInclude Include="include\Http\HttpNetwork.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\HttpsNetwork.h">
+    <ClInclude Include="include\Http\HttpsNetwork.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="include\Exceptions\SslException.h">
@@ -53,10 +56,13 @@
     <ClInclude Include="include\LargeBodyHandler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\WsNetwork.h">
+    <ClInclude Include="include\WebSocket\WsNetwork.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="include\WssNetwork.h">
+    <ClInclude Include="include\WebSocket\WssNetwork.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WebSocket\Frame.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

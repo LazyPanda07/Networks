@@ -6,9 +6,14 @@
 
 #include "Exceptions/SslException.h"
 
-namespace web
+namespace web::web_socket
 {
-	class NETWORKS_API HttpsNetwork : public HttpNetwork
+	class WssNetwork;
+}
+
+namespace web::http
+{
+	class HttpsNetwork : public HttpNetwork
 	{
 	public:
 		static inline constexpr std::string_view httpsPort = "443";
@@ -50,11 +55,11 @@ namespace web
 
 		virtual ~HttpsNetwork();
 
-		friend class WssNetwork;
+		friend class web_socket::WssNetwork;
 	};
 }
 
-namespace web
+namespace web::http
 {
 	template<Timeout T>
 	HttpsNetwork::HttpsNetwork(SOCKET clientSocket, SSL* ssl, SSL_CTX* context, T timeout) :

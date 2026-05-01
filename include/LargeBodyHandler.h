@@ -10,8 +10,11 @@
 namespace web
 {
 	class Network;
+}
 
-	class NETWORKS_API LargeBodyHandler
+namespace web
+{
+	class LargeBodyHandler
 	{
 	public:
 		enum class WaitBehavior
