@@ -78,6 +78,6 @@ namespace web::web_socket
 
 		~Frame() = default;
 
-		friend class FrameParser;
+		friend class ::FrameParser;
 	};
 }

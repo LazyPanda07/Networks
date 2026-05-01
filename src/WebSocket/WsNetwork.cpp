@@ -1,5 +1,7 @@
 #include "WebSocket/WsNetwork.h"
 
+#include <cstring>
+
 class FrameParser
 {
 private:
