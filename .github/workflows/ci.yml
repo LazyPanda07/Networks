@@ -273,22 +273,18 @@ jobs:
       run: echo "VERSION=$($($($(Select-String -Path .\src\NetworksUtility.cpp -Pattern version) -split '( = )')[3].TrimEnd(';')).Trim('\"'))" >> $Env:GITHUB_ENV
 
     - name: Download artifacts
-      if: ${{ env.CURRENT_BRANCH == 'main' }}
       uses: actions/download-artifact@v8
       
     - name: Setup Windows build list
       run: echo "WINDOWS_BUILD_LIST="$(ls | grep Windows)"" >> ${GITHUB_ENV}
       
     - name: Create Windows zip
-      if: ${{ env.CURRENT_BRANCH == 'main' }}
       run: zip -r windows.zip ${{ env.WINDOWS_BUILD_LIST }}
 
     - name: Create Linux zip
-      if: ${{ env.CURRENT_BRANCH == 'main' }}
       run: zip -r linux.zip Release_Linux
 
     - name: Create Linux ARM zip
-      if: ${{ env.CURRENT_BRANCH == 'main' }}
       run: zip -r linux_aarch64.zip Release_LinuxARM
 
     - name: Publish
