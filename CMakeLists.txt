@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(PLATFORM_NAME "")
 set(LIBS HTTP JSON SocketStreams crypto ssl)
 
-project(Networks VERSION 1.28.0)
+project(Networks VERSION 1.28.1)
 
 if (UNIX)
 	add_definitions(-D__LINUX__)
